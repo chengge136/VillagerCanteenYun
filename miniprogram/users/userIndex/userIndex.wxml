@@ -1,0 +1,74 @@
+<view class="main">
+  <view class="slides">
+    <swiper autoplay indicator-dots cicular indicator-active-color="pink" indicator-color="#FFFFFF">
+      <!--swiper-item进行循环-->
+      <swiper-item wx:for="{{swiperList}}" wx:key="{{index}}">
+        <navigator>
+          <image mode="widthFix" src="{{item}}"></image>
+        </navigator>
+      </swiper-item>
+    </swiper>
+  </view>
+
+  <!--首页导航-->
+<view class="nav_wrap">
+<scroll-view class="nav" scroll-x>
+<view bindtap="activeNav" data-index="{{index}}" class="nav_item {{index===currentIndexNav?'active':''}}" wx:for="{{navList}}" wx:key="{{index}}">
+{{item}}
+</view>
+</scroll-view>
+</view>
+
+
+  <!--优惠套餐选取-->
+  <view class="discount">
+
+    <view style="color:#FF7211;">
+      <i class="fa fa-bookmark-o fa"></i>
+      <text style="font-size:30rpx;"> 老人优惠套餐</text>
+    </view>
+
+    <view class="dis_bottom">
+      <image mode="widthFix" src="../../images/3.jpg"></image>
+
+      <view class="text1">
+        <view>
+          <text style="font-size: 35rpx;font-weight:bold;">老人实惠套餐</text>
+        </view>
+        <view>
+          <text>享受餐补\n\n\n</text>
+        </view>
+        <view>
+          <text style="font-size: 30rpx;background-color:#FEF4E9">猪肉、土豆、白菜 </text>
+        </view>
+      </view>
+      <view class="text2">
+      <view><text style="background-color:#3FBBFE;color:#FFFFFE">站点自提</text></view>
+      <view><text style="font-size:30">明天饭点前送达</text></view> 
+      </view>
+    </view>
+  </view>
+
+
+  <view class="self-select">
+    <view style="color:#FF7211;">
+      <i class="fa fa-bookmark-o fa"></i>
+      <text style="font-size:30rpx;"> 额外加菜专区</text>
+    </view>
+
+  <view class="video_wrap">
+    <navigator url="../detail/detail?id={{item.id}}" class="video_item" wx:for="{{videosList}}" wx:key="{{index}}">
+      <!--1-视频图片容器-->
+      <view class="video_img">
+        <image mode="widthFix" src="{{item}}"></image>
+      </view>
+      <!--2-视频标题-->
+      <view class="video_title">
+      <view><text style="font-size: 35rpx;">麻辣香锅</text></view>
+      <view><text style="color:red">￥ 68.0</text></view>
+      </view>
+    </navigator>
+  </view>
+</view>
+
+</view>

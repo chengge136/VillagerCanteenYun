@@ -1,0 +1,77 @@
+{
+	"miniprogramRoot": "miniprogram/",
+	"cloudfunctionRoot": "cloudfunctions/",
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"enhance": true
+	},
+	"appid": "wx0596103febd1cc45",
+	"projectname": "VillagerCanteenYun",
+	"libVersion": "2.8.1",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 0,
+			"list": [
+				{
+					"id": 0,
+					"name": "users/userIndex/userIndex",
+					"pathName": "users/userIndex/userIndex",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "users/userCart/userCart",
+					"pathName": "users/userCart/userCart",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "users/userOrders/userOrders",
+					"pathName": "users/userOrders/userOrders",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "users/myInfo/myInfo",
+					"pathName": "users/myInfo/myInfo",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "users/orderDetail/orderDetail",
+					"pathName": "users/orderDetail/orderDetail",
+					"scene": null
+				}
+			]
+		}
+	}
+}

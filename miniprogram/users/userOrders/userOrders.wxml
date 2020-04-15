@@ -1,0 +1,29 @@
+<view class="title_a">
+<view><text>村民食堂（碧湖镇）</text></view>
+<view><text>新订单</text></view>
+</view>
+
+<view class="neworder">
+<view class="left" style="font-size:30rpx;color:#A6A4A4">
+<text>2020-04-13 10:35</text>
+<text>套餐、麻婆豆腐等</text>
+</view>
+<view class="right">
+<text style="font-size:35rpx;color:red">实付：￥11.5</text>
+</view>
+</view>
+
+<view class="title_a" style="background-color: #5579ED;">
+<view><text>村民食堂（碧湖镇）</text></view>
+<view><text>已完成</text></view>
+</view>
+<view class="neworder" style="background-color: #EFFFD3;">
+<view class="left" style="font-size:30rpx;color:#A6A4A4">
+<text>2020-04-13 10:35</text>
+<text>小龙虾、茶叶蛋等</text>
+</view>
+<view class="right">
+<text style="font-size:35rpx;color:#F46B6B">实付：￥8.0</text>
+</view>
+</view>
+

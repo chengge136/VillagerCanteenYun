@@ -1,0 +1,91 @@
+
+page{
+  padding: 10rpx;
+}
+
+ /* 轮播图*/
+
+ .slides swiper{
+   height:250rpx;
+ }
+  .slides navigator{
+   height:100%;
+   width:100%;
+ }
+   .slides image{
+   height:100%;
+   width:100%;
+ }
+
+ /* 首页导航 */
+.nav{
+  white-space: nowrap;
+  padding:5rpx 0;
+
+}
+.nav_item{
+  /* 一行显示 */
+  display: inline-block;
+  padding: 20rpx 45rpx;
+  font-size: 35rpx;
+  margin-top: 10rpx;
+}
+.nav_item.active{
+  border-bottom: 5rpx solid #FF88AB;
+  background-color: #FEF4E9;
+}
+
+
+ 
+ /* 视频列表 */
+ .video_wrap{
+   display:flex; 
+   flex-wrap:wrap; /* 换行 */
+   padding: 5rpx; /* 边距 */
+   justify-content: space-between; /* 在成员元素之间留空白 */
+ }
+ .video_item{
+   width:48%;  /* 元素宽度 */
+   margin-bottom:20rpx;  
+   margin-top:20rpx; 
+ }
+ .video_img{
+   position: relative;/* 相对定位 */
+ }
+ .video_img image{
+   width: 100%;
+   border-radius: 15rpx;/* 相对定位 */
+ }
+
+ .video_title{
+   flex-direction:column;
+ }
+ .discount{
+   margin-top:20rpx; 
+   margin-bottom:20rpx; 
+ }
+
+.dis_bottom{
+   display:flex; 
+   flex-wrap:wrap; /* 换行 */
+   padding: 5rpx; /* 边距 */
+   height: 280rpx;
+   justify-content: space-between; /* 在成员元素之间留空白 */
+   border: 2px solid #D8D8D8;
+  
+}
+.dis_bottom image{
+  width: 30%;
+  margin-left: 10rpx;
+  margin-top: 10rpx;
+}
+
+.text1{
+  flex-direction:column;
+}
+
+.text2{
+  flex-direction:column;
+  position: relative;
+  right: 15rpx;
+}

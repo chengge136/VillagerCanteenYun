@@ -1,0 +1,72 @@
+page{
+  background-color:#F8F8F8; 
+}
+.personalMe{
+   display:flex; /* 伸缩盒子，调整其子元素在不同的屏幕大小中能够用最适合的方法填充合适的空间 */
+   flex-wrap:wrap; /* 换行 */
+   padding: 5rpx; /* 边距 */
+   justify-content: space-between; /* 在成员元素之间留空白 */
+   margin: 10rpx 10rpx 20rpx 10rpx;
+   height: 220rpx;
+   background-color:#FFFFFE;
+}
+.personalMe>.left{
+  display:flex;
+  flex-direction:column;
+  justify-content: space-between;
+  padding:10rpx;
+  margin-left:30rpx; 
+}
+.personalMe>.right{
+  padding-right:20rpx;
+}
+
+.count{
+     display:flex; /* 伸缩盒子，调整其子元素在不同的屏幕大小中能够用最适合的方法填充合适的空间 */
+   flex-wrap:wrap; /* 换行 */
+   padding: 5rpx; /* 边距 */
+   justify-content: space-between; /* 在成员元素之间留空白 */
+   margin: 10rpx 10rpx 10rpx 10rpx;
+   height: 100rpx;
+}
+.count>.left{
+  display:flex;
+  flex-direction:column;
+  justify-content: space-between;
+  padding:10rpx;
+  background-color: #FFFFFE;
+  width:45%;
+}
+.count>.right{
+  display:flex;
+  flex-direction:column;
+  justify-content: space-between;
+  padding:10rpx;
+  background-color: #FFFFFE;
+  width:45%;
+}
+.text1{
+  font-size:30rpx;
+  font-weight:bold;
+}
+.text2{
+  font-size:30rpx;
+  color: red;
+  position: relative;
+  left:20rpx;
+}
+.button{
+  display:flex;
+  justify-content: space-between;
+  background-color: #FFFFFE;
+  padding: 20rpx;
+  margin-top: 20rpx;
+  height: 60rpx;
+
+}
+.button i{
+  color: #65B7E7;
+}
+.button text{
+  color:#A6A4A4;
+}

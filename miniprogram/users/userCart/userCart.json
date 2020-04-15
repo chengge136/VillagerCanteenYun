@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "van-submit-bar": "../../vant/submit-bar/index",
+    "van-card": "../../vant/card/index",
+    "van-button": "../../vant/button/index"
+  }
+}

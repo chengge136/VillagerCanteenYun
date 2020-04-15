@@ -1,0 +1,45 @@
+.title_a{
+  background-color: #FF9500;
+  height: 50rpx;
+  display:flex;
+  justify-content: space-between;
+  padding:20rpx;
+  margin: 0rpx 10rpx 0rpx 10rpx;
+  border-top-left-radius:15rpx;
+  border-top-right-radius:15rpx;
+
+}
+.title_a text{
+  font-size:35rpx;
+  font-weight:bold;
+  color:#FFFFFE;
+}
+
+.neworder{
+   display:flex; /* 伸缩盒子，调整其子元素在不同的屏幕大小中能够用最适合的方法填充合适的空间 */
+   flex-wrap:wrap; /* 换行 */
+   padding: 5rpx; /* 边距 */
+   justify-content: space-between; /* 在成员元素之间留空白 */
+   margin: 0rpx 10rpx 20rpx 10rpx;
+   background-color: #FFECD0;
+   height: 220rpx;
+   border-bottom-right-radius:15rpx;
+   border-bottom-left-radius:15rpx;
+}
+
+
+.left{
+  display:flex;
+  flex-direction:column;
+  flex-wrap:wrap;
+  justify-content: space-between;
+  padding:10rpx;
+}
+.right{
+  display:flex;
+  flex-direction:column;
+  flex-wrap:wrap;
+  justify-content: space-between;
+  padding:10rpx;
+  margin: 10rpx;
+}
