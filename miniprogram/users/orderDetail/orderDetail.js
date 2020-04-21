@@ -16,6 +16,17 @@ Page({
   },
   cancelorder:function(){
     console.log('cancel')
+    wx.showModal({
+      title: '提示',
+      content: '确认取消订单？',
+      success(res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

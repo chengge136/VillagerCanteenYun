@@ -1,4 +1,5 @@
 // users/userIndex/UserIndex.js
+const db = wx.cloud.database();
 Page({
 
   /**
@@ -13,15 +14,7 @@ Page({
     //首页导航栏数据
     navList: ['点餐','购物车','订单','个人中心'],
     currentIndexNav:0,
-    videosList:[
-      "../../images/1.jpg",
-      "../../images/2.jpg",
-      "../../images/3.jpg",
-      "../../images/1.jpg",
-      "../../images/2.jpg",
-      "../../images/3.jpg"
-     
-    ]
+    menulists: []
 
   },
 
@@ -29,7 +22,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this;
+    const _ = db.command;
+    db.collection('menu').where(
+      {
+        type: _.eq(2)
+      }
+    ).get({
+      success: function (res) {
+        console.log(res.data)
+        that.setData({
+          menulists: res.data
+        })
+      }
+    })
   },
   //点击首页导航按钮
   activeNav(e) {

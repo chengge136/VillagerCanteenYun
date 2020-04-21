@@ -1,0 +1,22 @@
+<view class="div">
+<view class="personalMe">
+<text>张小白</text>
+<text>1822322231</text>
+</view>
+<van-divider contentPosition="center">伴侣信息</van-divider>
+
+
+<view>
+  <van-cell-group>
+  <van-field value="{{ partnername }}" bind:input="partnerName" required clearable label="伴侣姓名" placeholder="请输入伴侣的姓名" />
+    <van-field value="{{ partnerphone }}" bind:input="partnerPhone" required clearable label="伴侣电话" placeholder="请输入伴侣的手机号码" />
+    <van-field value="{{ sfzid }}" bind:input="sfzId" clearable label="伴侣二代身份证号码（选填）" placeholder="请输入伴侣二代身份证号码" />
+</van-cell-group>
+</view>
+
+<view class="submit">
+<van-button type="info" round  size="large">提交</van-button>
+</view>
+
+</view>
+

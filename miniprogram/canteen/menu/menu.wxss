@@ -1,0 +1,7 @@
+.button{
+  margin-top: 100rpx;
+}
+.item text{
+  font-size: 28rpx;
+  color:#A6A4A4;
+}

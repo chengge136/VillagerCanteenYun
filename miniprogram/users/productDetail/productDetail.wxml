@@ -1,0 +1,35 @@
+<view wx:if="{{!imagePath==''}}">
+<view class="image">
+<image bindtap="imgYu" mode="widthFix" data-src="{{imagePath}}" src="{{imagePath}}"></image>
+</view>
+</view>
+
+
+
+<van-cell-group>
+  <van-field required clearable value="{{ name }}" disabled label="菜品名称" />
+  <van-field required clearable value="{{ price }} 元" disabled label="菜品价格" />
+</van-cell-group>
+
+
+<van-goods-action>
+  <van-goods-action-icon
+    icon="chat-o"
+    text="客服"
+    bind:click="cusServer"
+  />
+  <van-goods-action-icon
+    icon="cart-o"
+    text="购物车"
+    bind:click="userCart"
+  />
+  <van-goods-action-button
+    text="加入购物车"
+    type="warning"
+    bind:click="addToCart"
+  />
+  <van-goods-action-button
+    text="立即购买"
+    bind:click="buyNow"
+  />
+</van-goods-action>

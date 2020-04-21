@@ -23,14 +23,14 @@
 </view>
 
 <view>
-<view class="button">
+<view class="button" bindtap="partner">
 <view>
 <i class="fa fa-heart-o fa"></i>
 <text>  伴侣账号</text>
 </view>
 <view><text>... </text></view>
 </view>
-<view class="button">
+<view class="button" bindtap="recharge">
 <view>
 <i class="fa fa-money fa"></i>
 <text>  账户充值</text>

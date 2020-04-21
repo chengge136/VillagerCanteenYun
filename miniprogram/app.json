@@ -2,12 +2,20 @@
   "pages": [
     "pages/authorized/authorized",
     "pages/logIn/logIn",
+    "pages/register/register",    
     "users/userIndex/userIndex",
+    "users/productDetail/productDetail",
     "users/userCart/userCart",
     "users/userOrders/userOrders",
     "users/myInfo/myInfo",
     "users/orderDetail/orderDetail",
-    "users/recharge/recharge"
+    "users/recharge/recharge",
+    "users/partner/partner",
+    "canteen/canteenIndex/canteenIndex",
+    "canteen/menu/menu",
+    "canteen/addmenu/addmenu",
+    "canteen/modifymenu/modifymenu"
+    
   
   ],
   "window": {

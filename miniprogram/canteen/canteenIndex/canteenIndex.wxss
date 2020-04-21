@@ -1,0 +1,42 @@
+.header{
+  display: flex;
+  flex-direction: column;
+  height: 120rpx;
+  justify-content: space-between;
+  margin: 20rpx 0rpx 20rpx 50rpx;
+}
+.action{
+  display: flex;
+  flex-direction: row;
+  flex-wrap:wrap;
+  justify-content: space-between;
+  margin: 30rpx;
+  padding: 30rpx;
+}
+
+.item{
+  display: flex;
+  flex-direction: column;
+  height: 250rpx;
+  justify-content: space-between;
+  border: 3rpx solid #ddd;
+  width: 250rpx;
+  padding: 30rpx;
+
+}
+.item .logo{ 
+  margin-left:50rpx; 
+  background-color:#FEFAFB;
+  border-radius: 50%;
+  width:80px;
+  height:80px;
+  border:2px solid #ddd;
+
+
+}
+.item i{
+  position: relative;
+  left:38rpx;
+  top:38rpx;
+
+}

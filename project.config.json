@@ -45,30 +45,38 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 1,
+					"name": "pages/logIn/logIn",
+					"pathName": "pages/logIn/logIn",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 2,
+					"name": "canteen/canteenIndex/canteenIndex",
+					"pathName": "canteen/canteenIndex/canteenIndex",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 3,
+					"name": "canteen/menu/menu",
+					"pathName": "canteen/menu/menu",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 4,
+					"name": "users/productDetail/productDetail",
+					"pathName": "users/productDetail/productDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 5,
 					"name": "users/userCart/userCart",
 					"pathName": "users/userCart/userCart",
 					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "users/userOrders/userOrders",
-					"pathName": "users/userOrders/userOrders",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "users/myInfo/myInfo",
-					"pathName": "users/myInfo/myInfo",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "users/orderDetail/orderDetail",
-					"pathName": "users/orderDetail/orderDetail",
 					"scene": null
 				}
 			]

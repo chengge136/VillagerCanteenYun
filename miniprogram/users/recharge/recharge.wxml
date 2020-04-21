@@ -1,2 +1,33 @@
-<!--users/recharge/recharge.wxml-->
-<text>users/recharge/recharge.wxml</text>
+<view class="div">
+<view class="personalMe">
+<text>张小白</text>
+<text>1822322231</text>
+</view>
+<van-divider contentPosition="center">选择充值金额</van-divider>
+
+<view class="nav_wrap_1">
+<view><van-button bind:click="select_a" plain color="{{color_a}}" type="default" size="normal">10 元</van-button></view>
+<view><van-button bind:click="select_b" plain color="{{color_b}}" type="default" size="normal">20 元</van-button></view>
+<view><van-button bind:click="select_c" plain color="{{color_c}}" type="default" size="normal">50 元</van-button></view>
+<view><van-button bind:click="select_d" plain color="{{color_d}}" type="default" size="normal">100元</van-button></view>
+<view><van-button bind:click="select_e" plain color="{{color_e}}" type="default" size="normal">200元</van-button></view>
+</view>
+<view class="pay">
+<text>支付金额（元）:</text>
+<text style="font-size:35rpx;color:red;">{{amount}}</text>
+</view>
+
+</view>
+
+<view class="div">
+<view class="pay">
+<text>支付方式:</text>
+<text>微信</text>
+</view>
+
+<view class="submit">
+<van-button type="info" round  size="large">立即充值</van-button>
+</view>
+
+</view>
+

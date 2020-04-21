@@ -1,0 +1,21 @@
+<van-cell-group>
+  <van-field required clearable value="{{ name }}" disabled placeholder="输入菜品名称" label="菜品名称" />
+  <van-field required clearable type="digit" value="{{ price }}" placeholder="输入菜品价格" label="菜品价格" bind:change="inputPrice" />
+
+</van-cell-group>
+
+<view wx:if="{{!imagePath==''}}">
+<view class="image">
+<image bindtap="imgYu" mode="widthFix" data-src="{{imagePath}}" src="{{imagePath}}"></image>
+</view>
+</view>
+
+
+<view class="buttongroup">
+<view class="button2">
+<button type="warn" size="{{default}}" bindtap="removeitem"> 删除此菜品 </button>
+</view>
+<view class="button2">
+<button type="primary" size="{{default}}" bindtap="modifyprice"> 修改价格 </button>
+</view>
+</view>

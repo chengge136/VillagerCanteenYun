@@ -19,8 +19,10 @@
     <button type="primary" disabled='{{disabled}}' bindtap="submit">登录</button>
   </view>
 
-    <view class="register">
-    <text>还没有账号？用户注册</text>
+  <view class="register">
+    <view bindtap="register">没有账号？<text style="color:#1AAD19">用户注册</text></view>   
+    <view><text>仅限普通用户，老年用户请联系所在区站长帮忙注册</text></view>
   </view>
+
     </view>
 </view>

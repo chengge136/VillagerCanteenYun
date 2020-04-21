@@ -1,31 +1,18 @@
+<view class="item" wx:for="{{carts}}" wx:key="{{index}}">
 <van-card
-  num="{{num1}}"
+  num="{{item.quantity}}"
   tag="实惠"
-  price="8.00"
-  origin-price="10.00"
+  price="{{item.price}}"
   desc="享受政府补贴"
-  title="老人实惠套餐"
-  thumb="../../images/3.jpg"
+  title="{{item.name}}"
+  thumb="{{item.imagePath}}"
 >
   <view slot="footer">
-    <van-button size="mini" bind:click="add">加一份</van-button>
-    <van-button size="mini" bind:click="remove">删除</van-button>
+    <van-button size="mini" data-id="{{item.id}}" bind:click="add">加一份</van-button>
+    <van-button size="mini" data-id="{{item.id}}" bind:click="remove">删除</van-button>
   </view>
 </van-card>
-
-<van-card
-  num="1"
-  tag="加菜"
-  price="4.50"
-  desc="额外加菜"
-  title="麻婆豆腐"
-  thumb="../../images/1.jpg"
->
-  <view slot="footer">
-    <van-button size="mini">加一份</van-button>
-    <van-button size="mini">删除</van-button>
-  </view>
-</van-card>
+</view>
 
 <view class="notlink"> 
     <view ><text>备注（选填）</text></view>
@@ -34,5 +21,5 @@
 
 
 <view>
-  <van-submit-bar price="{{ 3050 }}" button-text="提交订单" bind:submit="onSubmit" tip="订单支持送达站点" />
+  <van-submit-bar price="{{ totalMoney }}" button-text="提交订单" bind:submit="onSubmit"/>
 </view>

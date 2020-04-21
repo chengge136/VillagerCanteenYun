@@ -5,6 +5,12 @@ Page({
    * 页面的初始数据
    */
   data: {
+    amount: 0,
+    color_a:'',
+    color_b:'',
+    color_c:'',
+    color_d:'',
+    color_e:''
 
   },
 
@@ -14,6 +20,74 @@ Page({
   onLoad: function (options) {
 
   },
+  select_a() {
+    console.log('10');
+    this.setData(
+      {
+        amount: 10,
+        color_a:'#1989FA',
+        color_b: '',
+        color_c: '',
+        color_d: '',
+        color_e: ''
+      }
+    )
+  },
+  select_b() {
+    console.log('20');
+    this.setData(
+      {
+        amount: 20,
+        color_a: '',
+        color_b: '#1989FA',
+        color_c: '',
+        color_d: '',
+        color_e: ''
+      }
+    )
+  },
+  select_c() {
+    console.log('50');
+    this.setData(
+      {
+        amount: 50,
+        color_a: '',
+        color_b: '',
+        color_c: '#1989FA',
+        color_d: '',
+        color_e: ''
+      }
+    )
+  },
+  select_d() {
+    console.log('100');
+    this.setData(
+      {
+        amount: 100,
+        color_a: '',
+        color_b: '',
+        color_c: '',
+        color_d: '#1989FA',
+        color_e: ''
+      }
+    )
+
+  },
+  select_e() {
+    console.log('200');
+    this.setData(
+      {
+        amount: 200,
+        color_a: '',
+        color_b: '',
+        color_c: '',
+        color_d: '',
+        color_e: '#1989FA'
+      }
+    )
+
+  },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成

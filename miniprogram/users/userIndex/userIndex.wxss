@@ -35,31 +35,6 @@ page{
   background-color: #FEF4E9;
 }
 
-
- 
- /* 视频列表 */
- .video_wrap{
-   display:flex; 
-   flex-wrap:wrap; /* 换行 */
-   padding: 5rpx; /* 边距 */
-   justify-content: space-between; /* 在成员元素之间留空白 */
- }
- .video_item{
-   width:48%;  /* 元素宽度 */
-   margin-bottom:20rpx;  
-   margin-top:20rpx; 
- }
- .video_img{
-   position: relative;/* 相对定位 */
- }
- .video_img image{
-   width: 100%;
-   border-radius: 15rpx;/* 相对定位 */
- }
-
- .video_title{
-   flex-direction:column;
- }
  .discount{
    margin-top:20rpx; 
    margin-bottom:20rpx; 
@@ -88,4 +63,8 @@ page{
   flex-direction:column;
   position: relative;
   right: 15rpx;
+}
+
+.item text{
+  font-size: 30rpx;
 }

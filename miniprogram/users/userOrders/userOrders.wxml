@@ -1,4 +1,4 @@
-<view class="title_a">
+<view class="title_a"  bindtap="testLink">
 <view><text>村民食堂（碧湖镇）</text></view>
 <view><text>新订单</text></view>
 </view>

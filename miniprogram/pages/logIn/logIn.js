@@ -17,11 +17,23 @@ Page({
   onLoad: function (options) {
    
   },
+  register(){
+    wx.navigateTo({
+      url: '../register/register',
+    })
+  },
   submit: function (e) {
     this.setData({ disabled: true });
-    if (this.data.no == '123' && this.data.pwd == '123') {
+    if (this.data.no == '111' && this.data.pwd == '111') {
       console.log('success');
-    } else {
+      wx.redirectTo({
+        url: '../../users/userIndex/userIndex',
+      })
+    } else if (this.data.no == '222' && this.data.pwd == '222'){
+      wx.redirectTo({
+        url: '../../canteen/canteenIndex/canteenIndex'
+      })
+    }else {
       wx.showToast({
         title: '账号密码错误',
         icon: 'none',

@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    
   },
 
   /**
@@ -13,6 +13,12 @@ Page({
    */
   onLoad: function (options) {
 
+  },
+  recharge(){
+    wx.navigateTo({ url: '../recharge/recharge' })
+  },
+  partner(){
+    wx.navigateTo({ url: '../partner/partner' })
   },
 
   /**

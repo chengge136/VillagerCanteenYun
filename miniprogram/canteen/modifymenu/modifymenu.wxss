@@ -1,0 +1,16 @@
+.image{
+  display:flex;
+  margin: 30rpx; /* 边距 */
+}
+
+.image image{
+  width: 60%;
+}
+.buttongroup{
+  display: flex;
+  justify-content:center; 
+  margin: 40rpx 20rpx 10rpx 20rpx;
+}
+.button2{
+  width:50%;
+}

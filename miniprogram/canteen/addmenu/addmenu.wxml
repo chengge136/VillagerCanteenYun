@@ -1,0 +1,26 @@
+<van-cell-group>
+  <van-field required clearable value="{{ name }}" placeholder="输入菜品名称" label="菜品名称" bind:change="inputName" />
+  <van-field required clearable type="digit" value="{{ price }}" placeholder="输入菜品价格" label="菜品价格" bind:change="inputPrice" />
+
+  <view class="icon2" bindtap="choose_image">
+    <i class="fa fa-image fa-2x" style="color:#C2C2C2;"></i>
+    <text>点击上传菜品照片</text>
+  </view>
+
+</van-cell-group>
+
+<view wx:if="{{!imagePath==''}}">
+  <view class="image">
+    <text>上传的图片</text>
+    <image bindtap="imgYu" mode="aspectFit" data-src="{{imagePath}}" src="{{imagePath}}"></image>
+  </view>
+  <view class="q-image-remover" bindtap="removeImage">
+    <i class="fa fa-remove" style="color:red;"></i>
+    <text>删除图片</text>
+  </view>
+</view>
+
+
+<view class="button">
+  <van-button type="info" block bind:click="add" disabled='{{disabled}}'>添加到菜单</van-button>
+</view>
