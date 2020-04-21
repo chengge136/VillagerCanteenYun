@@ -83,61 +83,18 @@ Page({
           title: "添加购物车",
           icon: "success",
           durantion: 2000
-        })
+        });
+        setTimeout(function () {
+          wx.navigateBack({
+            delta: 1
+          })
+        }, 2000) //延迟时间
       }
     })
   },
   buyNow(){
     console.log("立即购买");
   },
-
-  modifyprice: function () {
-    var that = this;
-    wx.showModal({
-      title: '提示',
-      content: '修改价格为 ' + that.data.price + ' 元？',
-      success(res) {
-        if (res.confirm) {
-          console.log('id', that.data.id)
-          wx.cloud.callFunction({
-            name: 'modifyprice',
-            data: {
-              id: that.data.id,
-              price: parseInt(that.data.price)
-            },
-            success: res => {
-              wx.showToast({
-                title: '修改成功',
-                icon: 'success',
-                duration: 2000,
-                success: function () {
-                  setTimeout(function () {
-                    wx.redirectTo({
-                      url: '../menu/menu'
-                    })
-                  }, 1000) //延迟时间
-                }
-              })
-            },
-            fail: err => {
-              // handle error
-              console.log(err)
-            }
-          })
-        } else if (res.cancel) {
-          console.log('用户点击取消')
-        }
-      }
-    })
-
-  },
-  inputPrice: function (event) {
-    var that = this;
-    that.setData({
-      price: event.detail
-    })
-  },
-
   //图片点击事件
   imgYu: function (event) {
     console.log(event)
