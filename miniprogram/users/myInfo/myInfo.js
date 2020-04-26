@@ -5,14 +5,26 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
+    name:'',
+    address:'',
+    avatarUrl:'',
+    balance:0
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let that = this;
+    var userDetail = wx.getStorageSync('userDetail');
+    console.log('myinfo_userdetial:',userDetail)
+    that.setData({
+      name: userDetail.name,
+      address: userDetail.address,
+      avatarUrl: userDetail.avatarUrl,
+      balance: userDetail.balance
+    })
   },
   recharge(){
     wx.navigateTo({ url: '../recharge/recharge' })

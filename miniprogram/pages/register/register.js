@@ -1,17 +1,111 @@
 // pages/register/register.js
+const db = wx.cloud.database();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    openid:'',
+    nickName:'',
+    avatarUrl:'',
+    name: '',
+    address: '',
+    phone: '',
+    notlike: '',
+    password: '',
+    passwordConfirm: '',
+    disabled:false
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const _ = db.command;
+    let that=this;
+    var userInfo = wx.getStorageSync('userInfo');
+    var count = db.collection('wx_user').where({
+      openid: _.eq(userInfo.openid)
+    }).count({
+      success: function (res) {
+        if (res.total > 0) {
+          wx.showModal({
+            title: '提示',
+            content: '你已经注册过了，请直接登录',
+            showCancel: false,
+            success(res) {
+              if (res.confirm) {
+                setTimeout(function () {
+                  //要延时执行的代码
+                  wx.navigateBack({
+                    delta: 1
+                  })
+                }, 1000) //延迟时间
 
+              }
+            }
+          })
+        }else{
+          that.setData({
+            nickName: userInfo.nickName,
+            openid: userInfo.openid,
+            avatarUrl: userInfo.avatarUrl
+          })
+        }
+      }
+    })
+  },
+  register(){
+
+    var that=this;
+    if (that.data.address == '' || that.data.phone == '' || that.data.password == ''){
+      console.log('请填写完信息在提交！')
+    }else if (!(that.data.password == that.data.passwordConfirm)){
+      console.log('密码不一致！')
+    }else{
+      //提交注册
+      that.insertUser();
+      // console.log('time:',new Date().getTime())
+
+    }
+  },
+  insertUser: function () {
+    var that=this;
+    that.setData({
+      disabled:true
+    });
+    wx.cloud.callFunction({
+      name: 'normalregister',
+      data: {
+        openid: that.data.openid,
+        nickName: that.data.nickName,
+        avatarUrl: that.data.avatarUrl,
+        name: that.data.name,
+        address: that.data.address,
+        phone: that.data.phone,
+        notlike: that.data.notlike,
+        password: that.data.password,
+        sfzid: '',
+        balance: 0,
+        ctime: new Date().getTime()
+      },
+      complete: res => {
+        console.log('test result: ', res);
+        wx.showToast({
+          title: '注册成功',
+          icon: 'success',
+          duration: 2000,
+          success: function () {
+            setTimeout(function () {
+              wx.redirectTo({
+                url: '../logIn/logIn'
+              })
+            }, 1000)
+          }
+        })
+
+      }
+    })
   },
   
   /**
@@ -54,6 +148,42 @@ Page({
    */
   onReachBottom: function () {
 
+  },
+  inputName: function (event) {
+    var that = this;
+    that.setData({
+      name: event.detail
+    })
+  },
+  inputPhone: function (event) {
+    var that = this;
+    that.setData({
+      phone: event.detail
+    })
+  },
+  inputAddress: function (event) {
+    var that = this;
+    that.setData({
+      address: event.detail
+    })
+  },
+  inputNotlike: function (event) {
+    var that = this;
+    that.setData({
+      notlike: event.detail
+    })
+  },
+  inputPWD: function (event) {
+    var that = this;
+    that.setData({
+      password: event.detail
+    })
+  },
+  inputREPWD: function (event) {
+    var that = this;
+    that.setData({
+      passwordConfirm: event.detail
+    })
   },
 
   /**

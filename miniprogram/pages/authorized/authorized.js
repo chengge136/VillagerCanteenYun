@@ -5,46 +5,73 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    openid:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that=this;
+    var myopenid="";
+    wx.cloud.callFunction({
+      name: 'getOpenid',
+      success: function (res) {
+        myopenid = res.result.openid;
+        that.setData({
+          openid: res.result.openid
+        })
+      }
+    })
+
     // 查看是否授权
     wx.getSetting({
       success: function (res) {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+        if (res.authSetting['scope.userInfo']){
+        // 已经授权，可以直接调用 getUserInfo 获取头像昵称
           wx.getUserInfo({
             success: function (res) {
-              console.log(res.userInfo.nickName);
-              console.log(res.userInfo.avatarUrl);
-              setTimeout(function () {
-                wx.redirectTo({
-                  url: '../logIn/logIn?nickName=' + res.userInfo.nickName + '&avatarUrl=' + res.userInfo.avatarUrl,
-                })
-              }, 1000);
+              that.adduserinfoStorage(myopenid, res.userInfo.nickName, res.userInfo.avatarUrl);
             }
           });
         } 
       }
     });
+
   },
 
+  //添加用户信息到缓存
+  adduserinfoStorage(openid, nickName, avatarUrl){
+    var that = this
+    // var userInfo = wx.getStorageSync('userInfo')
+    var userInfo=[];
+    userInfo.push({
+      openid: openid,
+      nickName: nickName,
+      avatarUrl: avatarUrl
+    })
+    //重新加入用户数据，存入缓存
+    wx.setStorage({
+      key: 'userInfo',
+      data: userInfo[0],
+        success: function (res) {
+          setTimeout(function () {
+              wx.redirectTo({
+              url: '../logIn/logIn'
+            })
+          }, 1000);
+        }
+      })
+  },
   bindGetUserInfo: function (e) {
     if (e.detail.userInfo) {
       //用户按了允许授权按钮
       var that = this;
       // 获取到用户的信息了，打印到控制台上看下
-      console.log(e.detail.userInfo);
-      setTimeout(function () {
-        //要延时执行的代码
-        wx.redirectTo({
-          url: '../logIn/logIn?nickName=' + e.detail.userInfo.nickName + '&avatarUrl=' + e.detail.userInfo.avatarUrl,
-        })
-      }, 1000); //延迟时间
+      console.log(e.detail.userInfo);    
+      that.adduserinfoStorage(that.data.openid, e.detail.userInfo.nickName, e.detail.userInfo.avatarUrl); 
+
+
     } else {
       //用户按了拒绝按钮
       wx.showModal({

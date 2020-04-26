@@ -10,3 +10,20 @@ textarea {
   padding: 20rpx;
   font-size: 30rpx;
 }
+
+.J-shopping-cart-empty{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items:center;
+  color:#FF88AB;
+  font-size: 35rpx;
+  height: 300rpx;
+  margin-top:100rpx; 
+  
+}
+.button-primary{
+  border: 2rpx solid #FF88AB;
+  padding:10rpx 80rpx 10rpx 80rpx; 
+  width: 50%;
+}

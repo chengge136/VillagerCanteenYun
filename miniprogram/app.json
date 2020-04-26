@@ -25,5 +25,6 @@
     "navigationBarTitleText": "村民食堂",
     "navigationBarTextStyle": "black"
   },
+  "cloud": true,
   "sitemapLocation": "sitemap.json"
 }

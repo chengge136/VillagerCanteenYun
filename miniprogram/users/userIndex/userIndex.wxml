@@ -2,7 +2,7 @@
   <view class="slides">
     <swiper autoplay indicator-dots cicular indicator-active-color="pink" indicator-color="#FFFFFF">
       <!--swiper-item进行循环-->
-      <swiper-item wx:for="{{swiperList}}" wx:key="{{index}}">
+      <swiper-item wx:for="{{swiperList}}" wx:key="index">
         <navigator>
           <image mode="widthFix" src="{{item}}"></image>
         </navigator>
@@ -13,7 +13,7 @@
   <!--首页导航-->
   <view class="nav_wrap">
     <scroll-view class="nav" scroll-x>
-      <view bindtap="activeNav" data-index="{{index}}" class="nav_item {{index===currentIndexNav?'active':''}}" wx:for="{{navList}}" wx:key="{{index}}">
+      <view bindtap="activeNav" data-index="{{index}}" class="nav_item {{index===currentIndexNav?'active':''}}" wx:for="{{navList}}" wx:key="index">
         {{item}}
       </view>
     </scroll-view>
@@ -22,15 +22,13 @@
 
   <!--优惠套餐选取-->
   <view class="discount">
-
     <view style="color:#FF7211;">
       <i class="fa fa-bookmark-o fa"></i>
       <text style="font-size:30rpx;"> 老人优惠套餐</text>
     </view>
-
+  <navigator url="../productDetail/productDetail?id=17b0c7775e99574d004aacbd7e199916">
     <view class="dis_bottom">
-      <image mode="widthFix" src="../../images/3.jpg"></image>
-
+      <image mode="widthFix" src="../../images/tc.jpg"></image>
       <view class="text1">
         <view>
           <text style="font-size: 35rpx;font-weight:bold;">老人实惠套餐</text>
@@ -51,6 +49,7 @@
         </view>
       </view>
     </view>
+    </navigator>
   </view>
 </view>
 
@@ -60,7 +59,7 @@
 </view>
 
 <van-grid column-num="2">
-  <view class="item" wx:for="{{menulists}}" wx:key="{{index}}">
+  <view class="item" wx:for="{{menulists}}" wx:key="index">
     <navigator url="../productDetail/productDetail?id={{item._id}}">
       <van-grid-item use-slot>
         <image style="width: 100%; height: 150px;" src="{{item.img}}" />

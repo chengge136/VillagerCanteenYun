@@ -1,12 +1,12 @@
 <view class="personalMe">
 <view class="left">
-<text style="font-size:40rpx;font-weight:bold;">张小白</text>
-<text style="font-size:30rpx;color:#A6A4A4">碧湖镇上赵村</text>
+<text style="font-size:40rpx;font-weight:bold;">{{name}}</text>
+<text style="font-size:30rpx;color:#A6A4A4">{{address}}</text>
 <text style="font-size:30rpx;color:#A6A4A4">68岁</text>
 </view>
 
 <view class="right">
-<image src="../../images/3.jpg" style="width:80px;height:80px;border:1px solid #ddd;float:left;margin:20rpx 20rpx;border-radius: 50%;"></image>
+<image src="{{avatarUrl}}" style="width:80px;height:80px;border:1px solid #ddd;float:left;margin:20rpx 20rpx;border-radius: 50%;"></image>
 </view>
 </view>
 
@@ -18,7 +18,7 @@
 
 <view class="right">
 <view class="text1"><text>账户余额</text></view>
-<view class="text2"><text>￥189.50</text></view>
+<view class="text2"><text>￥{{balance}}</text></view>
 </view>
 </view>
 

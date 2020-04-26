@@ -11,7 +11,7 @@
 	},
 	"appid": "wx0596103febd1cc45",
 	"projectname": "VillagerCanteenYun",
-	"libVersion": "2.8.1",
+	"libVersion": "2.11.0",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {
@@ -67,15 +67,15 @@
 				},
 				{
 					"id": 4,
-					"name": "users/productDetail/productDetail",
-					"pathName": "users/productDetail/productDetail",
+					"name": "users/userCart/userCart",
+					"pathName": "users/userCart/userCart",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": 5,
-					"name": "users/userCart/userCart",
-					"pathName": "users/userCart/userCart",
+					"name": "pages/register/register",
+					"pathName": "pages/register/register",
 					"query": "",
 					"scene": null
 				}

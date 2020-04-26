@@ -93,7 +93,17 @@ Page({
     })
   },
   buyNow(){
-    console.log("立即购买");
+    
+    if (this.data.name =="套餐饭"){
+      console.log("立即购买");
+    }else{
+      wx.showToast({
+        title: "只有套餐支持立即下单",
+        icon: "none",
+        durantion: 2000
+      })
+    }
+    
   },
   //图片点击事件
   imgYu: function (event) {

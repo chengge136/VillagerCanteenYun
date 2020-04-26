@@ -7,7 +7,7 @@
   <view class="login-from">
 
     <view class="myno">
-      <input class="weui-input" name="no" bindinput="noinput" value='{{no}}' placeholder="请输入账号" />
+      <input class="weui-input" name="no" bindinput="noinput" value='{{no}}' placeholder="请输入手机号" />
     </view>
 
     <view class="mypwd">

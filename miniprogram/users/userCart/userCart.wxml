@@ -1,25 +1,32 @@
-<view class="item" wx:for="{{carts}}" wx:key="{{index}}">
-<van-card
-  num="{{item.quantity}}"
-  tag="实惠"
-  price="{{item.price}}"
-  desc="享受政府补贴"
-  title="{{item.name}}"
-  thumb="{{item.imagePath}}"
->
-  <view slot="footer">
-    <van-button size="mini" data-id="{{item.id}}" bind:click="add">加一份</van-button>
-    <van-button size="mini" data-id="{{item.id}}" bind:click="remove">删除</van-button>
+<view class="J-shopping-cart-empty" hidden="{{!isempty}}">
+  <i class="fa fa-shopping-cart fa-5x"></i>
+  <text style='color:black'>还未下单</text>
+  <navigator open-type="navigateBack" url="../userIndex/userIndex">
+    <a class="button-primary">
+      去下单
+    </a>
+  </navigator>
+</view>
+
+<view hidden="{{isempty}}">
+  <view class="item" wx:for="{{carts}}" wx:key="index">
+    <van-card num="{{item.quantity}}" tag="实惠" price="{{item.price}}" desc="享受政府补贴" title="{{item.name}}" thumb="{{item.imagePath}}">
+      <view slot="footer">
+        <van-button size="mini" data-id="{{item.id}}" bind:click="add">加一份</van-button>
+        <van-button size="mini" data-id="{{item.id}}" bind:click="remove">删除</van-button>
+      </view>
+    </van-card>
   </view>
-</van-card>
-</view>
 
-<view class="notlink"> 
-    <view ><text>备注（选填）</text></view>
-    <textarea class="textarea-bg"  maxlength="200" placeholder="可在此填写额外的忌口信息" bindinput="getDataBindTap" /> 
-</view>
+  <view class="notlink">
+    <view>
+      <text>备注（选填）</text>
+    </view>
+    <textarea class="textarea-bg" maxlength="200" placeholder="可在此填写额外的忌口信息" bindblur="inputComment" />
+  </view>
 
 
-<view>
-  <van-submit-bar price="{{ totalMoney }}" button-text="提交订单" bind:submit="onSubmit"/>
+  <view>
+    <van-submit-bar price="{{ totalMoney }}" disabled="{{disabled}}" button-text="提交订单" bind:submit="Submit" />
+  </view>
 </view>

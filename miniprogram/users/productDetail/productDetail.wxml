@@ -29,7 +29,7 @@
     bind:click="addToCart"
   />
   <van-goods-action-button
-    text="立即购买"
+    text="立即下单"
     bind:click="buyNow"
   />
 </van-goods-action>

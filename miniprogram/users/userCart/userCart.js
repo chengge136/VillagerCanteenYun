@@ -1,22 +1,43 @@
 // users/userCart/userCart.js
+var app = getApp();
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    disabled: false,
     carts: [], //数据 
-    iscart: false,
-    hidden: null,
-    isAllSelect: false,
-    totalMoney: 0
+    isempty: null,
+    totalMoney: 0,
+    balance:0,
+    comment:'',
+    about:'',
+    menus:''
+
+
+
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    var that=this;
+    var userDetail = wx.getStorageSync('userDetail');
+    console.log('用户余额有：', userDetail.balance)
+    that.setData({
+      balance: userDetail.balance
+    })
+  },
+  inputComment: function (e) {
+    var that = this;
+    console.log('comment',e.detail.value)
+    that.setData({
+      comment: e.detail.value
+    })
   },
   flash() {
     var arr = wx.getStorageSync('cartItems') || [];
@@ -28,16 +49,14 @@ Page({
       // 更新数据  
       this.setData({
         carts: arr,
-        iscart: true,
-        hidden: false,
+        isempty: false,
         totalMoney: sum * 100
       });
     }
   },
   add: function (event){
     var that=this;
-    console.log("add")
-    console.log(event.currentTarget.dataset.id);
+    console.log("add",event.currentTarget.dataset.id);
     var cartItems = wx.getStorageSync('cartItems') || []
     var exist = cartItems.find(function (ele) {
       return ele.id === event.currentTarget.dataset.id
@@ -49,18 +68,17 @@ Page({
       wx.setStorage({
         key: 'cartItems',
         data: cartItems,
-        success: function (res) {  
+        success: function (res) {
           wx.showToast({
             title: "加一份",
             icon: "success",
             durantion: 2000
           })
-          //刷新页面     
+          //刷新页面
           that.flash();
         }
       })
     }
-
   },
 
   remove: function (event) {
@@ -78,7 +96,7 @@ Page({
     console.log("remove")
     wx.showModal({
       title: '提示',
-      content: '确认删除 ' + goodname+' 吗？',
+      content: '确认不要 ' + goodname+' 了吗？',
       success(res) {
         if (res.confirm) {
           console.log('用户点击确定')
@@ -110,7 +128,6 @@ Page({
                  that.flash();
               }
             })
-
           }
         } else if (res.cancel) {
           console.log('用户点击取消')
@@ -132,29 +149,98 @@ Page({
   onShow: function () {
     // 获取产品展示页保存的缓存数据（购物车的缓存数组，没有数据，则赋予一个空数组）  
     var arr = wx.getStorageSync('cartItems') || [];
-    console.info("缓存数据：" + arr);
+    console.log('菜品样式有：',arr.length)
     // 有数据的话，就遍历数据，计算总金额 和 总数量  
     if (arr.length > 0) {
-      var sum=0
+      var sum=0;
+      var about='';
+      var menus='';
       for (var i = 0; i < arr.length; i++) {
         sum += arr[i].price * arr[i].quantity
+        about += arr[i].name+' '
+        menus += arr[i].name +'-'+ arr[i].price +'-'+ arr[i].quantity+';'
       };
       // 更新数据  
       this.setData({
         carts: arr,
-        iscart: true,
-        hidden: false,
-        totalMoney: sum*100
+        isempty: false,
+        totalMoney: sum*100,
+        about: about,
+        menus: menus
       });
-      console.log('合计：',sum)
+      console.log('about', about)
+      console.log('menus', menus)
 
-      console.info("缓存数据：" + this.data.carts);
     } else {
       this.setData({
-        iscart: false,
-        hidden: true,
+        isempty: true,
       });
     }
+  },
+  Submit(){
+
+    var that = this
+    var total = that.data.totalMoney * 0.01;
+    var newbalance = that.data.balance - total;
+    //判断余额是否够
+    if(3>5){//是否有等待商家确定的订单
+      wx.showToast({
+        title: '订单正在准备，请勿重复提交',
+        icon: 'none',
+        duration: 2000
+      })
+      that.setData({ disabled: true });
+      //跳转到订单页面
+      /*
+      wx.redirectTo({
+        url: '../userOrders/userOrders',
+      })
+      */
+
+    }else if (newbalance<0){
+      console.log("账户余额不足，请先充值！")
+      that.setData({ disabled: true });
+      wx.showToast({
+        title: '账户余额不足，请先充值！',
+        icon:'none',
+        duration:2000
+      })
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '确认提交订单了吗？',
+        success(res) {
+          if (res.confirm) {
+            that.setData({ disabled: true });
+            console.log("生成订单，还剩下余额：", newbalance)
+            var cartItems = wx.getStorageSync('cartItems') || [];
+            // 1,扣款,存入新的余额信息，更改缓存
+            var userDetail = wx.getStorageSync('userDetail');
+            console.log('当前余额：', userDetail.balance)
+            userDetail.balance = newbalance;
+            wx.setStorage({
+              key: 'userDetail',
+              data: userDetail,
+              success: function (res) {
+                var userDetail = wx.getStorageSync('userDetail');
+                console.log('userDetail:', userDetail);
+                //2，更改数据库 --> a：修改账户余额，b：新增订单数据
+                app.modifyBalance(newbalance);
+                app.createOrder(that.data.about, that.data.menus, that.data.comment, total);
+              }
+            }) 
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+    }
+  },
+  modifyBalance(newbance){
+
+  },
+  createOrder(){
+    
   },
 
   /**

@@ -1,12 +1,13 @@
 // pages/authorized/authorized.js
+const db = wx.cloud.database();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    isBindExpert:true,
     disabled: false,
+    openid:'',
     no: '',
     pwd: ''
   },
@@ -15,7 +16,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
+    var arr = wx.getStorageSync('userInfo');
+    console.log('login page of the nickName:',arr.nickName)
+    this.setData({
+      openid: arr.openid
+    })
   },
   register(){
     wx.navigateTo({
@@ -23,24 +28,68 @@ Page({
     })
   },
   submit: function (e) {
-    this.setData({ disabled: true });
-    if (this.data.no == '111' && this.data.pwd == '111') {
-      console.log('success');
-      wx.redirectTo({
-        url: '../../users/userIndex/userIndex',
+     
+    var that = this;
+    that.setData({ disabled: true });
+    const _ = db.command;
+    db.collection('wx_user').where({
+      openid: _.eq(that.data.openid)
+    })
+      .get().then(res => {
+        console.log('balance', res.data[0].balance)
+
+        if (res.data.length==0){
+          wx.showToast({
+            title: '账号不存在，请先注册',
+            icon: 'none',
+            duration: 2000
+          })
+          that.setData({ disabled: false });
+        }else{
+          //### 判断账户与密码 ###
+          //if (that.data.no == res.data[0].phone && that.data.pwd == res.data[0].password){
+          if (that.data.no == '123' && that.data.pwd == '123') {
+            //### 把用户的注册信息存入缓存 ###
+            var userDetail=[];
+            userDetail.push({
+              name: res.data[0].name,
+              address: res.data[0].address,
+              notlike: res.data[0].notlike,
+              phone: res.data[0].phone,
+              balance: res.data[0].balance,
+              avatarUrl: res.data[0].avatarUrl
+            }) 
+
+            wx.setStorage({
+              key: 'userDetail',
+              data: userDetail[0],
+              success: function (res) {
+                var userDetail = wx.getStorageSync('userDetail');
+                console.log('userDetail:', userDetail);
+                console.log('name:', userDetail.name);
+
+                wx.redirectTo({
+                  url: '../../users/userIndex/userIndex'
+                })
+              }
+            }) 
+
+
+
+
+          }else{
+            wx.showToast({
+              title: '账号密码不对',
+              icon: 'none',
+              duration: 2000
+            })
+            that.setData({ disabled: false });
+          }
+        }
+        
       })
-    } else if (this.data.no == '222' && this.data.pwd == '222'){
-      wx.redirectTo({
-        url: '../../canteen/canteenIndex/canteenIndex'
-      })
-    }else {
-      wx.showToast({
-        title: '账号密码错误',
-        icon: 'none',
-        duration: 2000
-      })
-      this.setData({ disabled: false });
-    }
+
+
   },
 
   bindGetUserInfo: function (e) {
