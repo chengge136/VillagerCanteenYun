@@ -1,4 +1,13 @@
 //app.js
+var app = getApp();
+// 初始化 cloud
+wx.cloud.init();
+//1、引用数据库
+const db = wx.cloud.database({
+  //这个是环境ID,不是环境名称
+  env: 'yxk-kappa-hlb24'
+})
+  
 App({
   onLaunch: function () {
     
@@ -21,6 +30,24 @@ App({
   test(openid,newblance) {
 
   },
+  // 时间戳转为日期时间
+  formatDate: function (now) {
+
+    var year = now.getFullYear();
+    var month = now.getMonth() + 1;
+    var date = now.getDate();
+    var hour = now.getHours();
+    var minute = now.getMinutes();
+    var second = now.getSeconds();
+    return year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
+  },
+  getDate: function (now) {
+
+    var year = now.getFullYear();
+    var month = now.getMonth() + 1;
+    var date = now.getDate();
+    return year + "-" + month + "-" + date;
+  },
   modifyBalance: function (newbalance) {
     var userInfo = wx.getStorageSync('userInfo');
     console.log('modifyBalance - openid', userInfo.openid)
@@ -41,6 +68,7 @@ App({
     wx.cloud.callFunction({
       name: 'createOrder',
       data: {
+        approvedid:'',
         username: userDetail.name,
         addr: userDetail.address,
         about: about,

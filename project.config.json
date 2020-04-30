@@ -60,22 +60,22 @@
 				},
 				{
 					"id": 3,
-					"name": "canteen/menu/menu",
-					"pathName": "canteen/menu/menu",
+					"name": "users/userOrders/userOrders",
+					"pathName": "users/userOrders/userOrders",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": 4,
-					"name": "users/userCart/userCart",
-					"pathName": "users/userCart/userCart",
+					"name": "canteen/orderslist/orderslist",
+					"pathName": "canteen/orderslist/orderslist",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": 5,
-					"name": "pages/register/register",
-					"pathName": "pages/register/register",
+					"name": "canteen/newOrder/newOrder",
+					"pathName": "canteen/newOrder/newOrder",
 					"query": "",
 					"scene": null
 				}

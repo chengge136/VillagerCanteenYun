@@ -1,32 +1,44 @@
-// canteen/canteenIndex/canteenIndex.js
+// canteen/orderslist/orderslist.js
+const db = wx.cloud.database();
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    completedorders:[],
+    completedorder:[
+      {approvedid:123,
+      time:12,
+      total:122},
+      {
+        approvedid: 123,
+        time: 44,
+        total: 333
+      }
+    ]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
+    const _ = db.command;
 
-  },
-  menu(){
-    wx.navigateTo({
-      url: '../menu/menu',
-    })
-  },
-  verifylist(){
-    wx.navigateTo({
-      url: '../newOrder/newOrder',
-    })
-  },
-  approvedlists(){
-    wx.navigateTo({
-      url: '../orderslist/orderslist',
+    db.collection('approvedlists').orderBy('approvedid', 'desc').get({
+      success: function (res) {
+        console.log(res.data)
+
+        for (var index in res.data) {
+          res.data[index].ctime = app.formatDate(new Date(res.data[index].ctime));
+        }   
+ 
+        that.setData({
+          completedorders: res.data
+        })
+      }
     })
   },
 

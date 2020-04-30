@@ -2,7 +2,7 @@
 <view class="left">
 <text style="font-size:40rpx;font-weight:bold;">{{name}}</text>
 <text style="font-size:30rpx;color:#A6A4A4">{{address}}</text>
-<text style="font-size:30rpx;color:#A6A4A4">68岁</text>
+<text style="font-size:30rpx;color:#A6A4A4" wx:if="{{age!=''}}">{{age}}岁</text>
 </view>
 
 <view class="right">
@@ -13,7 +13,7 @@
 <view class="count">
 <view class="left">
 <view class="text1"><text>已完成订单</text></view>
-<view class="text2"><text>117</text></view>
+<view class="text2"><text>{{completecount}}</text></view>
 </view>
 
 <view class="right">

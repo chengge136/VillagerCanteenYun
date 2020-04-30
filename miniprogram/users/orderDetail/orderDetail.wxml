@@ -1,27 +1,29 @@
 <view class="title">
 <view><text style="font-size:40rpx;font-weight:bold">等待商家接单</text></view>
-<view><van-button bind:click="cancelorder" type="default" size="small">取消订单</van-button></view>
+<view wx:if="{{!isapproved}}"><van-button bind:click="cancelorder" type="default" size="small">取消订单</van-button></view>
 </view>
 
 
 
 <view class="div">
 <view class="title_a">
-<view style="display: flex;justify-content: space-between;"><text>2020年4月14日 13:52</text><text style="color:red">新订单</text></view>
-<view><text>订单号: 201012321221</text></view>
+<view wx:if="{{!isapproved}}" style="display: flex;justify-content: space-between;"><text>{{ctime}}</text><text style="color:red">新订单</text></view>
+<view wx:if="{{isapproved}}" style="display: flex;justify-content: space-between;"><text>{{ctime}}</text><text style="color:red">已完成</text></view>
+<view><text>订单号: {{id}}</text></view>
 <view><text>支付方式: 余额扣除</text></view>
 <view><text>配送方式: 站点自提</text></view>
 </view>
 <van-divider contentPosition="center">菜单</van-divider>
-<view class="menu">
-<view class="menu-item"><text>套餐</text><text>x1</text><text>4.5</text></view>
-<view class="menu-item"><text>麻婆豆腐</text><text>x1</text><text>3.5</text></view>
-<view class="menu-item"><text>茶叶蛋</text><text>x1</text><text>2.0</text></view>
+<view class="menu" wx:for="{{menus}}" wx:key="index">
+<view class="menu-item"><text>{{item.name}}</text><text>x{{item.number}}</text><text>￥{{item.price}}</text></view>
 </view>
 <van-divider contentPosition="center">其他</van-divider>
 <view class="other">
-<view>忌口：不放辣</view>
-<view style="text-align:right">总计：<text style="font-size:40rpx;color:red">￥9.00</text></view>
-<view>碧湖镇上赵村村民站点</view>
+<view>忌口：{{notlike}}</view>
+<view>备注：{{comment}}</view>
+<view style="text-align:right">总计：<text style="font-size:40rpx;color:red">￥{{total}}</text></view>
+<view>{{username}}</view>
+<view>{{addr}}</view>
+<view>电话：{{phone}}</view>
 </view>
 </view>

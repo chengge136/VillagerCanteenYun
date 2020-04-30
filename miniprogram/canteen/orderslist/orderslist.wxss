@@ -1,0 +1,29 @@
+.title_a{
+  height: 50rpx;
+  display:flex;
+  justify-content: space-between;
+  padding:20rpx;
+  margin: 0rpx 10rpx 0rpx 10rpx;
+  border-top-left-radius:15rpx;
+  border-top-right-radius:15rpx;
+}
+.title_a text{
+  font-size:35rpx;
+  font-weight:bold;
+  color:#FFFFFE;
+}
+
+.list{
+  height: 40rpx;
+  background-color: #EFFFD3;
+  display:flex;
+  justify-content: space-between;
+  padding:20rpx;
+  margin: 5rpx 10rpx 0rpx 10rpx;
+}
+.list text{
+  font-size:28rpx;
+  color:#A6A4A4
+}
+
+

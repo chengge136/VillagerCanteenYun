@@ -47,8 +47,8 @@ Page({
           that.setData({ disabled: false });
         }else{
           //### 判断账户与密码 ###
-          //if (that.data.no == res.data[0].phone && that.data.pwd == res.data[0].password){
-          if (that.data.no == '123' && that.data.pwd == '123') {
+          if (that.data.no == res.data[0].phone && that.data.pwd == res.data[0].password){
+          // if (that.data.no == '123' && that.data.pwd == '123') {
             //### 把用户的注册信息存入缓存 ###
             var userDetail=[];
             userDetail.push({
@@ -77,7 +77,12 @@ Page({
 
 
 
-          }else{
+          } else if (that.data.no == '123' && that.data.pwd == '123'){
+            wx.redirectTo({
+              url: '../../canteen/canteenIndex/canteenIndex'
+            })
+          }
+          else{
             wx.showToast({
               title: '账号密码不对',
               icon: 'none',

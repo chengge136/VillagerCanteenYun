@@ -1,0 +1,46 @@
+page{
+  background-color:#F8F8F8; 
+}
+
+.line_y{
+  display: flex;
+  flex-direction: column;
+  background-color:#FFFFFE;
+  padding: 10rpx;
+  margin: 20rpx;
+  justify-content: space-between;
+  height: 150rpx;
+
+}
+
+.text1{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size:30rpx;
+  font-weight:bold;
+}
+.text2{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size:35rpx;
+  color: red;
+  position: relative;
+  padding:20rpx;
+}
+
+
+.tc{
+  background-color:#FFFFFE;
+  padding: 10rpx;
+  margin: 20rpx;
+}
+.item{
+  font-size: 28rpx;
+  padding-left:20rpx; 
+  margin-top:10rpx; 
+}
+.button{
+  margin-top: 100rpx;
+}

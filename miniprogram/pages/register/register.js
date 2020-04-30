@@ -86,7 +86,7 @@ Page({
         notlike: that.data.notlike,
         password: that.data.password,
         sfzid: '',
-        balance: 0,
+        balance: 100,
         ctime: new Date().getTime()
       },
       complete: res => {

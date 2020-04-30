@@ -44,5 +44,5 @@ page{
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-between;
-  height: 220rpx;
+  height: 350rpx;
 }

@@ -1,4 +1,4 @@
-// canteen/canteenIndex/canteenIndex.js
+// canteen/orderslistdetail/orderslistdetail.js
 Page({
 
   /**
@@ -13,21 +13,6 @@ Page({
    */
   onLoad: function (options) {
 
-  },
-  menu(){
-    wx.navigateTo({
-      url: '../menu/menu',
-    })
-  },
-  verifylist(){
-    wx.navigateTo({
-      url: '../newOrder/newOrder',
-    })
-  },
-  approvedlists(){
-    wx.navigateTo({
-      url: '../orderslist/orderslist',
-    })
   },
 
   /**

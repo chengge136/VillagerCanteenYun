@@ -1,4 +1,5 @@
 // users/userCart/userCart.js
+const db = wx.cloud.database();
 var app = getApp();
 
 Page({
@@ -14,7 +15,8 @@ Page({
     balance:0,
     comment:'',
     about:'',
-    menus:''
+    menus:'',
+    phone:''
 
 
 
@@ -29,7 +31,8 @@ Page({
     var userDetail = wx.getStorageSync('userDetail');
     console.log('用户余额有：', userDetail.balance)
     that.setData({
-      balance: userDetail.balance
+      balance: userDetail.balance,
+      phone: userDetail.phone
     })
   },
   inputComment: function (e) {
@@ -182,67 +185,67 @@ Page({
     var that = this
     var total = that.data.totalMoney * 0.01;
     var newbalance = that.data.balance - total;
-    //判断余额是否够
-    if(3>5){//是否有等待商家确定的订单
-      wx.showToast({
-        title: '订单正在准备，请勿重复提交',
-        icon: 'none',
-        duration: 2000
-      })
-      that.setData({ disabled: true });
-      //跳转到订单页面
-      /*
-      wx.redirectTo({
-        url: '../userOrders/userOrders',
-      })
-      */
 
-    }else if (newbalance<0){
-      console.log("账户余额不足，请先充值！")
-      that.setData({ disabled: true });
-      wx.showToast({
-        title: '账户余额不足，请先充值！',
-        icon:'none',
-        duration:2000
-      })
-    }else{
-      wx.showModal({
-        title: '提示',
-        content: '确认提交订单了吗？',
-        success(res) {
-          if (res.confirm) {
-            that.setData({ disabled: true });
-            console.log("生成订单，还剩下余额：", newbalance)
-            var cartItems = wx.getStorageSync('cartItems') || [];
-            // 1,扣款,存入新的余额信息，更改缓存
-            var userDetail = wx.getStorageSync('userDetail');
-            console.log('当前余额：', userDetail.balance)
-            userDetail.balance = newbalance;
-            wx.setStorage({
-              key: 'userDetail',
-              data: userDetail,
-              success: function (res) {
-                var userDetail = wx.getStorageSync('userDetail');
-                console.log('userDetail:', userDetail);
-                //2，更改数据库 --> a：修改账户余额，b：新增订单数据
-                app.modifyBalance(newbalance);
-                app.createOrder(that.data.about, that.data.menus, that.data.comment, total);
+    const _ = db.command;
+    db.collection('order').where({
+      phone: _.eq(that.data.phone),
+      isapproved: _.eq(false)
+    }).count({
+      success: function (res) {
+        if (res.total > 0) {
+          wx.showModal({
+            title: '提示',
+            content: '已经提交了订单，请勿重复提交',
+            showCancel: false,
+            success(res) {
+              if (res.confirm) {
+                wx.navigateBack({
+                  delta: 1
+                })
               }
-            }) 
-          } else if (res.cancel) {
-            console.log('用户点击取消')
-          }
+            }
+          })
+        } else if (newbalance < 0) {
+          console.log("账户余额不足，请先充值！")
+          that.setData({ disabled: true });
+          wx.showToast({
+            title: '账户余额不足，请先充值！',
+            icon: 'none',
+            duration: 2000
+          })
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: '确认提交订单了吗？',
+            success(res) {
+              if (res.confirm) {
+                that.setData({ disabled: true });
+                console.log("生成订单，还剩下余额：", newbalance)
+                // 1,扣款,存入新的余额信息，更改缓存
+                var userDetail = wx.getStorageSync('userDetail');
+                console.log('当前余额：', userDetail.balance)
+                userDetail.balance = newbalance;
+                wx.setStorage({
+                  key: 'userDetail',
+                  data: userDetail,
+                  success: function (res) {
+                    var userDetail = wx.getStorageSync('userDetail');
+                    console.log('userDetail:', userDetail);
+                    //2，更改数据库 --> a：修改账户余额，b：新增订单数据
+                    app.modifyBalance(newbalance);
+                    app.createOrder(that.data.about, that.data.menus, that.data.comment, total);
+                  }
+                })
+              } else if (res.cancel) {
+                console.log('用户点击取消')
+              }
+            }
+          })
         }
-      })
-    }
-  },
-  modifyBalance(newbance){
+      }
+    })
 
   },
-  createOrder(){
-    
-  },
-
   /**
    * 生命周期函数--监听页面隐藏
    */

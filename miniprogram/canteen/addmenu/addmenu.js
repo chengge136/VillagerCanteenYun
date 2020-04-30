@@ -24,7 +24,7 @@ Page({
       data: {
         img: fileId,
         name: this.data.name,
-        price: parseInt(this.data.price)
+        price: this.data.price
       },
       success: res => {
         wx.showToast({

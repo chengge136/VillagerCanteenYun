@@ -1,4 +1,5 @@
 // users/myInfo/myInfo.js
+const db = wx.cloud.database();
 Page({
 
   /**
@@ -8,7 +9,9 @@ Page({
     name:'',
     address:'',
     avatarUrl:'',
-    balance:0
+    balance:0,
+    age:'26',
+    completecount:0
 
   },
 
@@ -17,6 +20,21 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
+    const _ = db.command;
+    var userDetail = wx.getStorageSync('userDetail');
+
+    db.collection('order').where({
+      phone: _.eq(userDetail.phone),
+      isapproved: _.eq(true)
+    }).count({
+      success: function (res) {
+        console.log('已经完成订单', res.total)
+        that.setData({
+          completecount: res.total
+        })
+      }
+    })
+
     var userDetail = wx.getStorageSync('userDetail');
     console.log('myinfo_userdetial:',userDetail)
     that.setData({

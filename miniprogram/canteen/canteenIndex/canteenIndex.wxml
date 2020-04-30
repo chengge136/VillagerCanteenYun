@@ -5,12 +5,12 @@
 
 <view class="action">
 
-<view class="item">
-<view><text style="">新订单</text></view>
+<view class="item" bindtap="verifylist">
+<view><text>新订单</text></view>
 <view class="logo"><i class="fa fa-sign-in fa-3x" style="color:#3175FF;"></i></view>
 <view><text>58</text></view>
 </view>
-<view class="item">
+<view class="item" bindtap="approvedlists">
 <view><text>本月完成订单</text></view>
 <view class="logo"><i class="fa fa-bar-chart fa-3x" style="color:#00B79E;"></i></view>
 <view><text>1231</text></view>

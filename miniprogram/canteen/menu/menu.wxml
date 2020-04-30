@@ -21,7 +21,7 @@
 />
 
   <van-grid column-num="3">
-  <view class="item"  wx:for="{{menulists}}" wx:key="{{index}}">
+  <view class="item"  wx:for="{{menulists}}" wx:key="index">
     <navigator url="../modifymenu/modifymenu?id={{item._id}}">
     <van-grid-item use-slot>
     <image

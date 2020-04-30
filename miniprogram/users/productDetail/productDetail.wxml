@@ -31,5 +31,6 @@
   <van-goods-action-button
     text="立即下单"
     bind:click="buyNow"
+    disabled="{{disabled}}"
   />
 </van-goods-action>

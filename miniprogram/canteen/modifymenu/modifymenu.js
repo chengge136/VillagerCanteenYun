@@ -87,7 +87,7 @@ Page({
             name: 'modifyprice',
             data: {
               id: that.data.id,
-              price: parseInt(that.data.price)
+              price: that.data.price
             },
             success: res => {
               wx.showToast({

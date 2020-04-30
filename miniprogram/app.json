@@ -14,9 +14,12 @@
     "canteen/canteenIndex/canteenIndex",
     "canteen/menu/menu",
     "canteen/addmenu/addmenu",
-    "canteen/modifymenu/modifymenu"
+    "canteen/modifymenu/modifymenu",
+    "canteen/newOrder/newOrder",
+    "canteen/orderslist/orderslist",
+    "canteen/orderslistdetail/orderslistdetail"
     
-  
+    
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
