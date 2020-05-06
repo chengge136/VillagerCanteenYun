@@ -1,0 +1,11 @@
+<view class="line_top">
+<text>客户名</text>
+<text>时间</text>
+<text>退回理由</text>
+</view>
+
+<view class="line_2" wx:for="{{refundlists}}" wx:key="index">
+<text>{{item.username}}</text>
+<text>{{item.ctime}}</text>
+<text>{{item.comment}}</text>
+</view>

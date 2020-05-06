@@ -63,6 +63,37 @@ App({
       }
     })
   },
+  refund: function (_id, reason) {
+    wx.cloud.callFunction({
+      name: 'refund',
+      data: {
+        _id: _id,
+        reason: reason
+      },
+      complete: res => {
+        console.log('refund success: ', res);
+        wx.navigateBack({
+          delta: 1
+        })
+
+      }
+    })
+  },
+  cancel: function (_id) {
+    wx.cloud.callFunction({
+      name: 'cancel',
+      data: {
+        _id: _id
+      },
+      complete: res => {
+        console.log('cancel success: ', res);
+        wx.navigateBack({
+          delta: 1
+        })
+
+      }
+    })
+  },
   createOrder: function (about, menus, comment, total){
     var userDetail = wx.getStorageSync('userDetail');
     wx.cloud.callFunction({

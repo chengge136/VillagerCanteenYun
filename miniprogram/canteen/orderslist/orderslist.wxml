@@ -4,11 +4,11 @@
 <text>营业额</text>
 </view>
 <view wx:for="{{completedorders}}" wx:key="index">
-<navigator url="../orderslistdetail/orderslistdetail?id={{item.approvedid}}">
+<navigator url="../orderslistdetail/orderslistdetail?approvedid={{item.approvedid}}">
 <view class="list">
 <text>{{item.approvedid}}</text>
 <text>{{item.ctime}}</text>
-<text style="color:red;">￥ 3000.9</text>
+<text style="color:red;">￥ {{item.total}}</text>
 </view>
 </navigator>
 </view>

@@ -1,1 +1,70 @@
-/* canteen/orderslistdetail/orderslistdetail.wxss */
+page{
+  background-color:#F8F8F8; 
+}
+.line_1{
+  display: flex;
+  background-color:#FFFFFE;
+  padding: 10rpx;
+  margin: 20rpx;
+  height: 50rpx;
+}
+.line_top{
+  display: flex;
+  justify-content: space-between;
+  background-color: #FF9500;
+  padding: 10rpx;
+  margin: 0rpx 10rpx 0rpx 10rpx;
+  border-top-left-radius:15rpx;
+  border-top-right-radius:15rpx;
+
+}
+.line_top text{
+  font-size:35rpx;
+  font-weight:bold;
+  color:#FFFFFE;
+}
+.line_2{
+  display: flex;
+  justify-content: space-between;
+  background-color:#FFFFFE;
+  padding: 10rpx;
+  margin: 0rpx 10rpx 10rpx 10rpx;
+  height: 50rpx;
+}
+
+.line_y{
+  display: flex;
+  flex-direction: column;
+  background-color:#FFFFFE;
+  padding: 10rpx;
+  margin: 20rpx;
+  justify-content: space-between;
+  height: 150rpx;
+}
+
+.text1{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size:30rpx;
+  font-weight:bold;
+}
+.text2{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size:35rpx;
+  color: red;
+  position: relative;
+  padding:20rpx;
+}
+.tc{
+  background-color:#FFFFFE;
+  padding: 10rpx;
+  margin: 20rpx;
+}
+.item{
+  font-size: 28rpx;
+  padding-left:20rpx; 
+  margin-top:10rpx; 
+}

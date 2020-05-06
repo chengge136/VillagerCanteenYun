@@ -1,3 +1,9 @@
+<view class="J-shopping-cart-empty" hidden="{{!isempty}}">
+  <i class="fa fa-shopping-cart fa-5x"></i>
+  <text style='color:black'>暂无新订单</text>
+</view>
+
+<view hidden="{{isempty}}">
 <view class="line_y">
 <view class="text1">
 <text>今日有效订单</text>
@@ -18,4 +24,5 @@
 
 <view class="button">
   <van-button type="info" block bind:click="approve" disabled='{{disabled}}'>审核通过</van-button>
+</view>
 </view>

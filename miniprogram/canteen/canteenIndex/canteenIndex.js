@@ -1,4 +1,5 @@
 // canteen/canteenIndex/canteenIndex.js
+const db = wx.cloud.database();
 Page({
 
   /**
@@ -12,6 +13,28 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
+    const _ = db.command;
+    
+    db.collection('menu').get({
+      success: function (res) {
+        var menulists = [];
+        for (var i = 0; i < res.data.length; i++) {
+          menulists.push({
+            name: res.data[i].name,
+          })
+        }
+        wx.setStorage({
+          key: 'menus',
+          data: menulists,
+          success: function (res) {
+            console.log('setStorage of menus: ',menulists.length)
+          }
+        })
+
+      }
+    })
+
 
   },
   menu(){
@@ -27,6 +50,11 @@ Page({
   approvedlists(){
     wx.navigateTo({
       url: '../orderslist/orderslist',
+    })
+  },
+  refundlists(){
+    wx.navigateTo({
+      url: '../refundlists/refundlists',
     })
   },
 

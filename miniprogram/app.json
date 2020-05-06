@@ -17,7 +17,8 @@
     "canteen/modifymenu/modifymenu",
     "canteen/newOrder/newOrder",
     "canteen/orderslist/orderslist",
-    "canteen/orderslistdetail/orderslistdetail"
+    "canteen/orderslistdetail/orderslistdetail",
+    "canteen/refundlists/refundlists"
     
     
   ],

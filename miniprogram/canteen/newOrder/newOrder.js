@@ -8,7 +8,8 @@ Page({
   data: {
     ordercount:0,
     total:0,
-    menulists:[]
+    menulists:[],
+    isempty: null
   },
 
   /**
@@ -19,52 +20,58 @@ Page({
     var menulists=[];
     const _ = db.command;
     //1，获取菜单名
-    db.collection('menu').get({
-      success: function (res) {
-        for (var i = 0; i < res.data.length; i++) {
-          menulists.push({
-            name: res.data[i].name,
-            count: 0
-          })
-        }
-                
-        //获取订单，每个菜品的数量
-        wx.cloud.callFunction({
-          // 要调用的云函数名称
-          name: 'getneworder',
-          // 传递给云函数的event参数
-          data: {
-            isapproved: false
-          }
-        }).then(res => {
-          // 返回所有还没通过的新订单
-          var menulist = res.result.data;
-          var ordercount = res.result.data.length;
-          var total = 0;
-          for (var i = 0; i < ordercount; i++) {
-            total += parseInt(menulist[i].total);
-            //处理每一条订单的菜品字段
-            var items = menulist[i].menus.split(";");
-            for (var j = 0; j < items.length - 1; j++) {
-              var item = items[j].split("-"); 
-              for (var k = 0; k < menulists.length;k++){
-                if (item[0] == menulists[k].name){
-                  menulists[k].count += parseInt(item[2]);
-                }
+    var menus = wx.getStorageSync('menus');
+    
+    for (var i = 0; i < menus.length; i++) {
+      menulists.push({
+        name: menus[i].name,
+        count: 0
+      })
+    }
+    wx.cloud.callFunction({
+      // 要调用的云函数名称
+      name: 'getneworder',
+      data: {
+        isapproved: false
+      }
+    }).then(res => {
+      // 返回所有还没通过的新订单
+      var menulist = res.result.data;
+      var ordercount = res.result.data.length;
+      var total = 0;
+      if (ordercount > 0) {
+        for (var i = 0; i < ordercount; i++) {
+          total += parseInt(menulist[i].total);
+          //处理每一条订单的菜品字段
+          var items = menulist[i].menus.split(";");
+          for (var j = 0; j < items.length - 1; j++) {
+            var item = items[j].split("-");
+            for (var k = 0; k < menulists.length; k++) {
+              if (item[0] == menulists[k].name) {
+                menulists[k].count += parseInt(item[2]);
               }
             }
           }
-          that.setData({
-            total: total,
-            ordercount: ordercount,
-            menulists: menulists
-          })
-          
-        }).catch(err => {
-          // handle error
+        }
+        that.setData({
+          total: total,
+          isempty: false,
+          ordercount: ordercount,
+          menulists: menulists
+        })
+
+      } else {
+        that.setData({
+          isempty: true
         })
       }
+
+
+    }).catch(err => {
+      // handle error
     })
+                
+        
   },
 
   approve: function () {

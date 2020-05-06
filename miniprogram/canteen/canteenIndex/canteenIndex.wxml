@@ -8,22 +8,18 @@
 <view class="item" bindtap="verifylist">
 <view><text>新订单</text></view>
 <view class="logo"><i class="fa fa-sign-in fa-3x" style="color:#3175FF;"></i></view>
-<view><text>58</text></view>
 </view>
 <view class="item" bindtap="approvedlists">
 <view><text>本月完成订单</text></view>
 <view class="logo"><i class="fa fa-bar-chart fa-3x" style="color:#00B79E;"></i></view>
-<view><text>1231</text></view>
 </view>
-<view class="item">
+<view class="item" bindtap="refundlists">
 <view><text>退回订单</text></view>
 <view class="logo"><i class="fa fa-question-circle-o fa-3x" style="color:#D41650;"></i></view>
-<view><text>2</text></view>
 </view>
 <view class="item" bindtap="menu">
 <view><text>菜单管理</text></view>
 <view class="logo"><i class="fa fa-book fa-3x" style="color:#FF9604;"></i></view>
-<view><text>5</text></view>
 </view>
 
 

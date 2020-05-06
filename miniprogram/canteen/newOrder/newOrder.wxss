@@ -44,3 +44,14 @@ page{
 .button{
   margin-top: 100rpx;
 }
+.J-shopping-cart-empty{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items:center;
+  color:#FF88AB;
+  font-size: 35rpx;
+  height: 300rpx;
+  margin-top:100rpx; 
+  
+}

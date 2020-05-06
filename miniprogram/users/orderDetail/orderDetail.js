@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    _id:'',
     id:'',
     addr: '',
     notlike: '',
@@ -16,7 +17,10 @@ Page({
     ctime: '',
     username:'',
     isapproved: false,
-    menus:[]
+    refundclick: false,
+    reason:'',
+    menus:[],
+    subtype:0
   },
 
   /**
@@ -24,10 +28,11 @@ Page({
    */
   onLoad: function (options) {
     var _id = options._id;
-    console.log('id',_id)
     var that = this;
+    that.setData({
+      _id: _id
+    });
     const _ = db.command;
-
     db.collection('order').where({
       _id: _.eq(_id)
     })
@@ -56,18 +61,15 @@ Page({
           ctime:app.formatDate(new Date(res.data[0].ctime)),
           isapproved: res.data[0].isapproved,
           id: res.data[0].ctime,
-          username: res.data[0].username
+          username: res.data[0].username,
+          subtype: res.data[0].subtype
         })
-
-
-
-
         
-
       })
 
   },
   cancelorder: function () {
+    var that=this;
     console.log('cancel')
     wx.showModal({
       title: '提示',
@@ -75,11 +77,42 @@ Page({
       success(res) {
         if (res.confirm) {
           console.log('用户点击确定')
+          app.cancel(that.data._id);
         } else if (res.cancel) {
           console.log('用户点击取消')
         }
       }
     })
+  },
+  //退回订单
+  refund(){
+    if(!this.data.refundclick){
+      this.setData({
+        refundclick: true
+      })
+    }else{
+      this.setData({
+        refundclick: false
+      })
+    }
+    
+  },
+  reasonIn: function (event) {
+    var that = this;
+    that.setData({
+      reason: event.detail
+    })
+  },
+  submitrefund(){
+    if (this.data.reason!=''){
+      console.log('reason:', this.data.reason);
+      app.refund(this.data._id, this.data.reason)
+    }else{
+      wx.showToast({
+        title: '请输入退款理由'
+      })
+    }
+    
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

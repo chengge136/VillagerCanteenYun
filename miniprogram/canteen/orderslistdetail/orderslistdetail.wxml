@@ -1,7 +1,47 @@
 <van-tabs active="a">
 <van-tab title="订单概览" name="a" >
+<view class="line_1">
+<view>
+<text>审批编号：</text>
+</view>
+<view style="font-size:30rpx;color:#A6A4A4;">
+<text>{{approvedid}}</text>
+</view>
+</view>
+
+
+<view class="line_y">
+<view class="text1">
+<text>本单订单总数</text>
+<text>订单总营业额</text>
+</view>
+<view class="text2">
+<text>{{ordercount}}</text>
+<text>{{total}}</text>
+</view>
+</view>
+
+<view class="tc">
+<view><text>菜品统计：</text></view>
+<view class="item" wx:for="{{menulists}}" wx:key="index">
+{{item.name}}：<text style="color:red;font-size:35rpx;"> {{item.count}} </text>份
+</view>
+</view>
 </van-tab>
 <van-tab title="订单列表" name="b">
+<view class="line_top">
+<text>客户名</text>
+<text>地址</text>
+<text>订单总价</text>
+</view>
+
+<view class="line_2" wx:for="{{menulist}}" wx:key="index">
+<text>{{item.username}}</text>
+<text>{{item.addr}}</text>
+<text>{{item.total}}</text>
+</view>
+
+
 </van-tab>
 </van-tabs>
 

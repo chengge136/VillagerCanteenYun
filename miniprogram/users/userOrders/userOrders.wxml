@@ -1,41 +1,58 @@
+<van-tabs active="a">
+<van-tab title="订单列表" name="a" >
 <view wx:if="{{neworderLength>0}}">
 <navigator url="../orderDetail/orderDetail?_id={{neworder._id}}">
 <view class="title_a">
 <view><text>村民食堂（碧湖镇）</text></view>
 <view><text>新订单</text></view>
 </view>
-
 <view class="neworder">
 <view class="left" style="font-size:30rpx;color:#A6A4A4">
 <text>{{neworder.ctime}}</text>
 <text>{{neworder.about}}等</text>
-</view>
-<view class="right">
 <text style="font-size:35rpx;color:red">实付：￥{{neworder.total}}</text>
 </view>
 </view>
 </navigator>
 </view>
-
 <view wx:if="{{ordersLength>0}}">
 <view  wx:for="{{completedorders}}" wx:key="index">
 <navigator url="../orderDetail/orderDetail?_id={{item._id}}">
 <view class="title_a" style="background-color: #5579ED;">
 <view><text>村民食堂（碧湖镇）</text></view>
-<view><text>已完成</text></view>
+<view wx:if="{{item.subtype==0}}"><text>已完成</text></view>
+<view wx:if="{{item.subtype==1}}"><text>申请退款</text></view>
 </view>
 <view class="neworder" style="background-color: #EFFFD3;">
 <view class="left" style="font-size:30rpx;color:#A6A4A4">
 <text>{{item.ctime}}</text>
 <text>{{item.about}}等</text>
-</view>
-<view class="right">
 <text style="font-size:35rpx;color:#F46B6B">实付：￥{{item.total}}</text>
 </view>
 </view>
 </navigator>
 </view>
 </view>
-
+</van-tab>
+<van-tab title="取消列表" name="b">
+<view wx:if="{{cancelorderLength>0}}">
+<view  wx:for="{{cancelorder}}" wx:key="index">
+<navigator url="../orderDetail/orderDetail?_id={{item._id}}">
+<view class="title_a">
+<view><text>村民食堂（碧湖镇）</text></view>
+<view><text>取消的订单</text></view>
+</view>
+<view class="neworder">
+<view class="left" style="font-size:30rpx;color:#A6A4A4">
+<text>{{item.ctime}}</text>
+<text>{{item.about}}等</text>
+<text style="font-size:35rpx;color:red">实付：￥{{item.total}}</text>
+</view>
+</view>
+</navigator>
+</view>
+</view>
+</van-tab>
+</van-tabs>
 
 

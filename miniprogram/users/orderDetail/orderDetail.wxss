@@ -7,7 +7,7 @@ page{
   justify-content: space-between;
   align-items: center;
   background-color: #FFFFFE; 
-  height: 130rpx;
+  
   margin: 20rpx;
   padding: 20rpx;
 }

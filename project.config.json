@@ -74,8 +74,8 @@
 				},
 				{
 					"id": 5,
-					"name": "canteen/newOrder/newOrder",
-					"pathName": "canteen/newOrder/newOrder",
+					"name": "canteen/orderslistdetail/orderslistdetail",
+					"pathName": "canteen/orderslistdetail/orderslistdetail",
 					"query": "",
 					"scene": null
 				}

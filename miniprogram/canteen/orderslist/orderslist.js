@@ -8,16 +8,6 @@ Page({
    */
   data: {
     completedorders:[],
-    completedorder:[
-      {approvedid:123,
-      time:12,
-      total:122},
-      {
-        approvedid: 123,
-        time: 44,
-        total: 333
-      }
-    ]
   },
 
   /**
