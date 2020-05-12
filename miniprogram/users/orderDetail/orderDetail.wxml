@@ -1,9 +1,14 @@
 <view class="title" wx:if="{{subtype==0}}">
 
-<view wx:if="{{!isapproved}}"><text style="font-size:40rpx;font-weight:bold">等待商家接单</text></view>
-<view wx:if="{{!isapproved}}"><van-button bind:click="cancelorder" type="default" size="small">取消订单</van-button></view>
-<view wx:if="{{isapproved}}"><text style="font-size:40rpx;font-weight:bold">已完成</text></view>
-<view wx:if="{{isapproved}}"><van-button bind:click="refund" type="default" size="small">申请退款</van-button></view>
+<view wx:if="{{!isapproved}}">
+<view><text style="font-size:40rpx;font-weight:bold">等待商家接单</text></view>
+<view wx:if="{{source==0}}"><van-button bind:click="cancelorder" type="default" size="small">取消订单</van-button></view>
+</view>
+
+<view wx:if="{{isapproved}}">
+<view><text style="font-size:40rpx;font-weight:bold">已完成</text></view>
+<view wx:if="{{source==0}}"><van-button bind:click="refund" type="default" size="small">申请退款</van-button></view>
+</view>
 
 <view wx:if="{{refundclick}}">
 <van-cell-group>
@@ -25,6 +30,27 @@
 </view>
 <view class="title" wx:if="{{subtype==1}}">
 <view><text style="font-size:40rpx;font-weight:bold">等待审核</text></view>
+<view style="display:flex;justify-content: space-between; width:60%;">
+<view wx:if="{{source==1}}"><van-button bind:click="refundagree" disabled="{{agreeclick}}" type="primary" size="small">同意退款</van-button></view>
+<view wx:if="{{source==1}}"><van-button bind:click="reject" type="danger" size="small">驳回</van-button></view>
+</view>
+<view wx:if="{{rejectclick}}">
+<van-cell-group>
+  <van-field
+    value="{{ rejectreason }}"
+    center
+    label="拒绝退款"
+    placeholder="请输入拒绝的理由"
+    border="{{ false }}"
+    use-button-slot
+    bind:input="rejectIn"
+  >
+    <van-button slot="button" size="small" type="primary" bind:click="submitreject"
+      >驳回</van-button
+    >
+  </van-field>
+</van-cell-group>
+</view>
 </view>
 <view class="title" wx:if="{{subtype==-1}}">
 <view><text style="font-size:40rpx;font-weight:bold">订单取消</text></view>
@@ -43,7 +69,8 @@
 <van-divider contentPosition="center">其他</van-divider>
 <view class="other">
 <view>忌口：{{notlike}}</view>
-<view>备注：{{comment}}</view>
+<view wx:if="{{source==0}}">备注：{{comment}}</view>
+<view wx:if="{{source==1}}">退款理由：<text style="color:red;font-weight:bold;">{{comment}}</text></view>
 <view style="text-align:right">总计：<text style="font-size:40rpx;color:red">￥{{total}}</text></view>
 <view>{{username}}</view>
 <view>{{addr}}</view>

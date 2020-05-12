@@ -1,0 +1,16 @@
+<view class="title_a" style="background-color: #5579ED;">
+<text>创建时间</text>
+<text>份数</text>
+<text>状态</text>
+</view>
+<view wx:for="{{batchorders}}" wx:key="index">
+<navigator url="../ordersdetail/ordersdetail?_id={{item._id}}">
+<view class="list">
+<text>{{item.ctime}}</text>
+<text>{{item.count}}</text>
+<text style="color:red;" wx:if="{{item.subtype=='待审批'}}">{{item.subtype}}</text>
+<text style="color:green;" wx:if="{{item.subtype=='已完成'}}">{{item.subtype}}</text>
+</view>
+</navigator>
+</view>
+

@@ -1,0 +1,55 @@
+page{
+  background-color:#F8F8F8; 
+}
+.title{
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #FFFFFE; 
+  margin: 20rpx;
+  padding: 20rpx;
+}
+
+.title_a{
+  margin: 20rpx;
+  background-color:#FFFFFE; 
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.title_a view{
+  height: 80rpx;
+}
+.title_a text{
+  color:#A6A4A4;
+  font-size: 30rpx;
+}
+
+.other{
+  margin: 20rpx;
+  background-color:#FFFFFE; 
+  padding: 20rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.other text{
+  font-size:40rpx;
+  color:red;
+}
+.userlist{
+  margin: 20rpx;
+  background-color:#FFFFFE; 
+  padding: 20rpx;
+}
+
+textarea {
+  border: 2rpx solid #A6A4A4;
+  width: 90%;
+  height: 120rpx;
+  margin-top: 10rpx;
+  padding: 20rpx;
+  font-size: 30rpx;
+}

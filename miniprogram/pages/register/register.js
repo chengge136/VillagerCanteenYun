@@ -1,5 +1,6 @@
 // pages/register/register.js
 const db = wx.cloud.database();
+import Notify from '../../vant/notify/notify';
 Page({
 
   /**
@@ -60,8 +61,10 @@ Page({
     var that=this;
     if (that.data.address == '' || that.data.phone == '' || that.data.password == ''){
       console.log('请填写完信息在提交！')
+      Notify({ type: 'warning', duration: 3000, message: '信息不全\n请填写完再提交！' });
     }else if (!(that.data.password == that.data.passwordConfirm)){
       console.log('密码不一致！')
+      Notify({ type: 'warning', duration: 3000, message: '两次密码不一致！' });
     }else{
       //提交注册
       that.insertUser();
@@ -86,8 +89,12 @@ Page({
         notlike: that.data.notlike,
         password: that.data.password,
         sfzid: '',
+        age:0,
+        active:true,
         balance: 100,
-        ctime: new Date().getTime()
+        ctime: new Date().getTime(),
+        insertbyph:'',
+        usertype:'0'
       },
       complete: res => {
         console.log('test result: ', res);

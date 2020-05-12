@@ -18,9 +18,13 @@ Page({
     username:'',
     isapproved: false,
     refundclick: false,
+    rejectclick:false,
+    agreeclick:false,
     reason:'',
+    rejectreason: '',
     menus:[],
-    subtype:0
+    subtype:0,
+    source:9
   },
 
   /**
@@ -28,9 +32,11 @@ Page({
    */
   onLoad: function (options) {
     var _id = options._id;
+    var source = options.source
     var that = this;
     that.setData({
-      _id: _id
+      _id: _id,
+      source: source
     });
     const _ = db.command;
     db.collection('order').where({
@@ -97,10 +103,29 @@ Page({
     }
     
   },
+  reject(){
+    if (!this.data.rejectclick) {
+      this.setData({
+        rejectclick: true,
+        agreeclick:true
+      })
+    } else {
+      this.setData({
+        rejectclick: false,
+        agreeclick: false
+      })
+    }
+  },
   reasonIn: function (event) {
     var that = this;
     that.setData({
       reason: event.detail
+    })
+  },
+  rejectIn: function (event) {
+    var that = this;
+    that.setData({
+      rejectreason: event.detail
     })
   },
   submitrefund(){
@@ -112,7 +137,24 @@ Page({
         title: '请输入退款理由'
       })
     }
-    
+  },
+  refundagree(){
+    wx.showModal({
+      title: '提示',
+      content: '确认要退款给用户？',
+      success(res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+
+
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+    //1，更改订单状态
+
+    //2，余额退回
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

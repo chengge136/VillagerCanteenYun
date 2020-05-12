@@ -1,0 +1,46 @@
+page{
+  background-color:#F8F8F8; 
+}
+.line_1{
+  display: flex;
+  background-color:#FFFFFE;
+  padding: 10rpx;
+  margin: 20rpx;
+}
+.notlink{
+  background-color:#FFFFFE;
+  height: 260rpx;
+  padding: 10rpx;
+  margin: 20rpx;
+}
+textarea {
+  border: 3rpx solid #A6A4A4;
+  width: 700rpx;
+  height: 120rpx;
+  margin-top: 10rpx;
+  padding: 20rpx;
+  font-size: 30rpx;
+}
+.weui-check__label{
+  display: flex;
+  padding: 10rpx;
+}
+
+.nav_wrap_1{
+  display: flex;
+  background-color:#FFFFFE;
+  flex-direction: row;
+  font-size: 35rpx;
+  flex-wrap:wrap;
+  margin: 0rpx 20rpx 20rpx 20rpx;
+}
+.nav_wrap_1 view{
+  margin: 20rpx;
+}
+.pay{
+  display: flex;
+  justify-content: space-between;
+  background-color:#FFFFFE;
+  padding: 10rpx;
+  margin: 0rpx 20rpx 20rpx 20rpx;
+}

@@ -1,0 +1,28 @@
+  <view class="line_1">勾选需要充值的用户，并选择充值金额</view>
+  <view class="line_1">
+    <checkbox-group bindchange="checkboxChange">
+      <label class="weui-check__label" wx:for="{{userlists}}" wx:key="index">
+        <view class="weui-cell__hd"><checkbox value="{{item.value}}" checked="{{item.checked}}" /></view>
+        <view class="weui-cell__bd">{{item.name}} - 余额：<text style="color:red;">{{item.balance}}</text></view>
+      </label>
+    </checkbox-group>
+  </view>
+
+<van-divider textColor="#1989FA" contentPosition="center">选择充值金额</van-divider>
+<view class="nav_wrap_1">
+<view><van-button bind:click="select_a" plain color="{{color_a}}" type="default" size="normal">10 元</van-button></view>
+<view><van-button bind:click="select_b" plain color="{{color_b}}" type="default" size="normal">20 元</van-button></view>
+<view><van-button bind:click="select_c" plain color="{{color_c}}" type="default" size="normal">50 元</van-button></view>
+<view><van-button bind:click="select_d" plain color="{{color_d}}" type="default" size="normal">100元</van-button></view>
+<view><van-button bind:click="select_e" plain color="{{color_e}}" type="default" size="normal">200元</van-button></view>
+</view>
+
+<view class="pay">
+<text>支付金额（元）:</text>
+<text style="font-size:35rpx;color:red;">{{amount}}</text>
+</view>
+<view class="pay">
+<text>支付方式:</text>
+<text>微信</text>
+</view>
+<button type="primary" size="{{default}}" disabled="{{submited}}" bindtap="bacthrecharge"> 立即充值 </button>

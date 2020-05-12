@@ -29,16 +29,20 @@
 </view>
 </van-tab>
 <van-tab title="订单列表" name="b">
+
 <view class="line_top">
 <text>客户名</text>
 <text>地址</text>
 <text>订单总价</text>
 </view>
-
-<view class="line_2" wx:for="{{menulist}}" wx:key="index">
+<view wx:for="{{menulist}}" wx:key="index">
+<navigator url="../../users/orderDetail/orderDetail?_id={{item._id}}&source=1">
+<view  class="line_2">
 <text>{{item.username}}</text>
 <text>{{item.addr}}</text>
 <text>{{item.total}}</text>
+</view>
+</navigator>
 </view>
 
 

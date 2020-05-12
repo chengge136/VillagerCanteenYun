@@ -1,7 +1,7 @@
 <van-tabs active="a">
 <van-tab title="订单列表" name="a" >
 <view wx:if="{{neworderLength>0}}">
-<navigator url="../orderDetail/orderDetail?_id={{neworder._id}}">
+<navigator url="../orderDetail/orderDetail?_id={{neworder._id}}&source=0">
 <view class="title_a">
 <view><text>村民食堂（碧湖镇）</text></view>
 <view><text>新订单</text></view>

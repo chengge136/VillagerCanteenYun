@@ -63,6 +63,18 @@ App({
       }
     })
   },
+  modifybatchBalance: function (selectedIds, sum) {
+    wx.cloud.callFunction({
+      name: 'modifybatchBalance',
+      data: {
+        selectedIds: selectedIds,
+        sum: sum
+      },
+      complete: res => {
+        console.log('batch update balance success: ', res);
+      }
+    })
+  },
   refund: function (_id, reason) {
     wx.cloud.callFunction({
       name: 'refund',
@@ -116,6 +128,31 @@ App({
         console.log('createOrder success: ', res);
         wx.redirectTo({
           url: '../userOrders/userOrders',
+        })
+      }
+    })
+  },
+  createbatchOrder: function (count, total, selecteduserstr, comment) {
+    var userDetail = wx.getStorageSync('userDetail');
+    wx.cloud.callFunction({
+      name: 'createbatchOrder',
+      data: {
+        approvedid: '',
+        username: userDetail.name,
+        phone: userDetail.phone,
+        addr: userDetail.address,
+        count: count,
+        total: total,
+        selecteduserstr: selecteduserstr,
+        comment: comment,
+        ctime: new Date().getTime(),
+        isapproved: false,
+        subtype: 0
+      },
+      complete: res => {
+        console.log('createbatchOrder success: ', res);
+        wx.redirectTo({
+          url: '../stationIndex/stationIndex',
         })
       }
     })

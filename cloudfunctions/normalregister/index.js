@@ -19,7 +19,11 @@ exports.main = async (event, context) => {
       password: event.password,
       sfzid: event.sfzid,
       balance: event.balance,
-      ctime: event.ctime
+      ctime: event.ctime,
+      age: event.age,
+      active: event.active,
+      insertbyph: event.insertbyph,
+      usertype: event.usertype
     }
   })
     .then(console.log)

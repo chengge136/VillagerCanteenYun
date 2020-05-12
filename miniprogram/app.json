@@ -18,7 +18,15 @@
     "canteen/newOrder/newOrder",
     "canteen/orderslist/orderslist",
     "canteen/orderslistdetail/orderslistdetail",
-    "canteen/refundlists/refundlists"
+    "canteen/refundlists/refundlists",
+    "stationmanager/stationIndex/stationIndex",
+    "stationmanager/batchBooking/batchBooking",
+    "stationmanager/orderslist/orderslist",
+    "stationmanager/ordersdetail/ordersdetail",
+    "stationmanager/batchrecharge/batchrecharge",
+    "stationmanager/usermanage/usermanage",
+    "stationmanager/userDetail/userDetail",
+    "manager/accountassign/accountassign"
     
     
   ],

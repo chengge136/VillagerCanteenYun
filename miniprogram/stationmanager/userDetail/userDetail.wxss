@@ -1,0 +1,11 @@
+.form{
+  margin:20rpx 0rpx 40rpx 0rpx; 
+}
+.button-sp-area{
+  display: flex;
+  justify-content: space-between;
+  margin:20rpx;
+}
+.button{
+width: 60%;
+}

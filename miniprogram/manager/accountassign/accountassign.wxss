@@ -1,0 +1,8 @@
+.submit{
+  position: relative;
+  top:40rpx;
+  margin-top:100rpx;
+  margin-bottom:100rpx;
+  height: 220rpx;
+
+}

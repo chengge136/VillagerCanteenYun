@@ -18,9 +18,6 @@ Page({
     menus:'',
     phone:''
 
-
-
-
   },
 
   /**

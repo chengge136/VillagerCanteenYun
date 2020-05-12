@@ -1,0 +1,30 @@
+.form{
+  margin:20rpx 0rpx 40rpx 0rpx; 
+}
+.info{
+  margin:20rpx 20rpx 40rpx 20rpx; 
+}
+
+.title_a{
+  height: 50rpx;
+  display:flex;
+  justify-content: space-between;
+  padding:20rpx;
+  margin: 0rpx 10rpx 0rpx 10rpx;
+  border-top-left-radius:15rpx;
+  border-top-right-radius:15rpx;
+
+}
+.title_a text{
+  font-size:35rpx;
+  font-weight:bold;
+  color:#FFFFFE;
+}
+.user{
+  height: 40rpx;
+  background-color: #EFFFD3;
+  display:flex;
+  justify-content: space-between;
+  padding:20rpx;
+  margin: 0rpx 10rpx 10rpx 10rpx;
+}

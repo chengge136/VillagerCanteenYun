@@ -39,7 +39,7 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "users/userIndex/userIndex",
+					"name": "用户首页",
 					"pathName": "users/userIndex/userIndex",
 					"query": "",
 					"scene": null
@@ -53,7 +53,7 @@
 				},
 				{
 					"id": 2,
-					"name": "canteen/canteenIndex/canteenIndex",
+					"name": "食堂首页",
 					"pathName": "canteen/canteenIndex/canteenIndex",
 					"query": "",
 					"scene": null
@@ -74,8 +74,15 @@
 				},
 				{
 					"id": 5,
-					"name": "canteen/orderslistdetail/orderslistdetail",
-					"pathName": "canteen/orderslistdetail/orderslistdetail",
+					"name": "站点首页",
+					"pathName": "stationmanager/stationIndex/stationIndex",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 6,
+					"name": "manager/accountassign/accountassign",
+					"pathName": "manager/accountassign/accountassign",
 					"query": "",
 					"scene": null
 				}

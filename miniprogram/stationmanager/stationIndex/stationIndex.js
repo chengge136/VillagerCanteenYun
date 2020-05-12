@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    address: ''
+    address:''
   },
 
   /**
@@ -31,7 +31,7 @@ Page({
           key: 'menus',
           data: menulists,
           success: function (res) {
-            console.log('setStorage of menus: ',menulists.length)
+            console.log('setStorage of menus: ', menulists.length)
           }
         })
 
@@ -40,24 +40,24 @@ Page({
 
 
   },
-  menu(){
+  batchcreateorders() {
     wx.navigateTo({
-      url: '../menu/menu',
+      url: '../batchBooking/batchBooking',
     })
   },
-  verifylist(){
-    wx.navigateTo({
-      url: '../newOrder/newOrder',
-    })
-  },
-  approvedlists(){
+  queryorders() {
     wx.navigateTo({
       url: '../orderslist/orderslist',
     })
   },
-  refundlists(){
+  bacthrecharge() {
     wx.navigateTo({
-      url: '../refundlists/refundlists',
+      url: '../batchrecharge/batchrecharge',
+    })
+  },
+  usersmanage() {
+    wx.navigateTo({
+      url: '../usermanage/usermanage',
     })
   },
 

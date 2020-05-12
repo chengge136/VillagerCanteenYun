@@ -4,8 +4,12 @@
 <text>退回理由</text>
 </view>
 
-<view class="line_2" wx:for="{{refundlists}}" wx:key="index">
+<view wx:for="{{refundlists}}" wx:key="index">
+<navigator url="../../users/orderDetail/orderDetail?_id={{item._id}}&source=1">
+<view class="line_2">
 <text>{{item.username}}</text>
 <text>{{item.ctime}}</text>
 <text>{{item.comment}}</text>
+</view>
+</navigator>
 </view>

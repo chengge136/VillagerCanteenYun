@@ -1,0 +1,19 @@
+<view>
+  <view class="line_1">勾选需要老年套餐的用户</view>
+  <view class="line_1">
+    <checkbox-group bindchange="checkboxChange">
+      <label class="weui-check__label" wx:for="{{userlists}}" wx:key="index">
+        <view class="weui-cell__hd"><checkbox value="{{item.value}}" checked="{{item.checked}}" /></view>
+        <view class="weui-cell__bd">{{item.name}}</view>
+      </label>
+    </checkbox-group>
+  </view>
+   <view class="notlink">
+    <view>
+      <text>备注（选填）</text>
+    </view>
+    <textarea maxlength="150" placeholder="可以在此填写额外的忌口信息" bindblur="inputComment" />
+   </view>
+   <button type="primary" size="{{default}}" disabled="{{submited}}" bindtap="bacthbooking"> 批量预订 </button>
+   <van-notify id="van-notify" />
+</view>

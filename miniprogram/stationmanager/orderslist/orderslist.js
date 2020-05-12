@@ -1,12 +1,13 @@
-// canteen/canteenIndex/canteenIndex.js
+// canteen/orderslist/orderslist.js
 const db = wx.cloud.database();
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    address: ''
+    batchorders: [],
   },
 
   /**
@@ -15,49 +16,24 @@ Page({
   onLoad: function (options) {
     var that = this;
     const _ = db.command;
-    var userDetail = wx.getStorageSync('userDetail');
-    that.setData({
-      address: userDetail.address
-    });
-    db.collection('menu').get({
+
+    db.collection('batchorders').orderBy('ctime', 'desc').get({
       success: function (res) {
-        var menulists = [];
-        for (var i = 0; i < res.data.length; i++) {
-          menulists.push({
-            name: res.data[i].name,
-          })
-        }
-        wx.setStorage({
-          key: 'menus',
-          data: menulists,
-          success: function (res) {
-            console.log('setStorage of menus: ',menulists.length)
+        console.log(res.data)
+
+        for (var index in res.data) {
+          res.data[index].ctime = app.formatDate(new Date(res.data[index].ctime));
+          if (res.data[index].isapproved){
+            res.data[index].subtype = '已完成';
+          }else{
+            res.data[index].subtype = '待审批';
           }
+        }
+
+        that.setData({
+          batchorders: res.data
         })
-
       }
-    })
-
-
-  },
-  menu(){
-    wx.navigateTo({
-      url: '../menu/menu',
-    })
-  },
-  verifylist(){
-    wx.navigateTo({
-      url: '../newOrder/newOrder',
-    })
-  },
-  approvedlists(){
-    wx.navigateTo({
-      url: '../orderslist/orderslist',
-    })
-  },
-  refundlists(){
-    wx.navigateTo({
-      url: '../refundlists/refundlists',
     })
   },
 

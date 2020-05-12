@@ -1,5 +1,5 @@
 <view class="header">
-<text style="font-size:40rpx;font-weight:bold;">碧湖镇村民食堂</text>
+<text style="font-size:40rpx;font-weight:bold;">{{address}}食堂</text>
 <text>欢迎您</text>
 </view>
 
