@@ -11,28 +11,81 @@
             <van-radio name="3">财务管理员</van-radio>
           </van-radio-group>
         </view>
-        <view wx:if="{{radio==2 || radio==3}}"><van-field value="{{ address }}" bind:input="inputAddress" required clearable label="食堂地址" placeholder="输入食堂名称地址，例如碧湖镇村民食堂"/></view>
-        <view wx:if="{{radio==1}}"><van-field value="{{ address }}" bind:input="inputAddress" required clearable label="站点地址" placeholder="请输入站点地址"/></view>
-      <van-field value="{{ password }}" bind:input="inputPWD" type="password" label="密码" placeholder="请输入密码" required clearable />
-    <van-field value="{{ repassword }}" bind:input="inputREPWD" type="password" label="再次输入密码" placeholder="请再次输入密码" required clearable />
+        <view wx:if="{{radio==2 || radio==3}}">
+          <van-field value="{{ address }}" bind:input="inputAddress" required clearable label="食堂地址" placeholder="输入食堂名称地址，例如碧湖镇村民食堂" />
+        </view>
+        <view wx:if="{{radio==1}}">
+          <van-field value="{{ address }}" bind:input="inputAddress" required clearable label="站点地址" placeholder="请输入站点地址" />
+        </view>
       </van-cell-group>
-  <view class="submit">
-  <van-button disabled="{{disabled}}" bind:click="register" type="info" round size="large">注册</van-button>
-</view>
-
+      <view class="info"><text style="color:red;">* </text>注册完成后，请告知用户，初次登录密码为<text style="color:red;">手机号后四位</text></view>
+      <view class="submit">
+        <van-button disabled="{{disabled}}" bind:click="register" type="info" round size="large">注册</van-button>
+      </view>
     </view>
-
-
   </van-tab>
   <van-tab title="站点管理员" name="1">
-
-
+    <view class="title_a" style="background-color: #F4CB20;">
+      <text>姓名</text>
+      <text>创建时间</text>
+    </view>
+    <view class="list" wx:for="{{station}}" wx:key="index">
+      <van-swipe-cell right-width="{{ 65 }}" async-close bind:close="onClose" data-name="{{item.name}}" data-id="{{item._id}}">
+        <view style="display:flex;flex-direction:row;justify-content: space-between;">
+          <text style="font-size:35rpx;color:#2C303C">{{item.name}}</text>
+          <text>{{item.ctime}}</text>
+        </view>
+        <view>
+          <text>地址: {{item.address}}</text>
+        </view>
+        <view>
+          <text>联系电话: {{item.phone}}</text>
+        </view>
+        <view slot="right">删除</view>
+      </van-swipe-cell>
+    </view>
   </van-tab>
   <van-tab title="食堂管理员" name="2">
-
+        <view class="title_a" style="background-color: #FD8C84;">
+      <text>姓名</text>
+      <text>创建时间</text>
+    </view>
+    <view class="list" wx:for="{{canteen}}" wx:key="index">
+      <van-swipe-cell right-width="{{ 65 }}" async-close bind:close="onClose" data-name="{{item.name}}" data-id="{{item._id}}">
+        <view style="display:flex;flex-direction:row;justify-content: space-between;">
+          <text style="font-size:35rpx;color:#2C303C">{{item.name}}</text>
+          <text>{{item.ctime}}</text>
+        </view>
+        <view>
+          <text>地址: {{item.address}}</text>
+        </view>
+        <view>
+          <text>联系电话: {{item.phone}}</text>
+        </view>
+        <view slot="right">删除</view>
+      </van-swipe-cell>
+    </view>
   </van-tab>
   <van-tab title="财务管理员" name="3">
-
+    <view class="title_a" style="background-color: #ACCAD6;">
+      <text>姓名</text>
+      <text>创建时间</text>
+    </view>
+    <view class="list" wx:for="{{finance}}" wx:key="index">
+      <van-swipe-cell right-width="{{ 65 }}" async-close bind:close="onClose" data-name="{{item.name}}" data-id="{{item._id}}">
+        <view style="display:flex;flex-direction:row;justify-content: space-between;">
+          <text style="font-size:35rpx;color:#2C303C">{{item.name}}</text>
+          <text>{{item.ctime}}</text>
+        </view>
+        <view>
+          <text>地址: {{item.address}}</text>
+        </view>
+        <view>
+          <text>联系电话: {{item.phone}}</text>
+        </view>
+        <view slot="right">删除</view>
+      </van-swipe-cell>
+    </view>
   </van-tab>
   <van-notify id="van-notify" />
 </van-tabs>

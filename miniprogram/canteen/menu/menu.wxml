@@ -1,41 +1,39 @@
-<van-tabs active="{{ active }}">
-  <van-tab title="套餐管理">
-
+<van-tabs active="2">
+  <van-tab title="套餐管理（中午）" name="0">
     <van-cell-group>
-      <van-field required clearable type="number" value="{{ price }}" placeholder="输入老人实惠套餐价格" label="实惠套餐价格" bind:change="inputPrice"/>
+      <van-field required clearable type="number" value="{{ pricelunch }}" input-align="right" placeholder="输入老人实惠套餐价格" label="套餐午餐价格" bind:change="inputPriceL" />
+      <van-field required clearable maxlength="20" value="{{ desclunch }}" input-align="right" placeholder="输入套餐描述，有哪些菜" label="套餐描述" bind:change="inputDescL" />
     </van-cell-group>
-<view class="button">
-<van-button type="info" block>更新</van-button>
-</view>
+    <view class="button">
+      <van-button type="info" bind:click="lunchupdate" block>更新</van-button>
+    </view>
+  </van-tab>
+    <van-tab title="套餐管理（晚餐）" name="1">
+    <van-cell-group>
+      <van-field required clearable type="number" value="{{ pricedinner }}" input-align="right" placeholder="输入老人实惠套餐价格" label="套餐晚餐价格" bind:change="inputPriceD" />
+      <van-field required clearable maxlength="20" value="{{ descdinner }}" input-align="right" placeholder="输入套餐描述，有哪些菜" label="套餐描述" bind:change="inputDescD" />
+    </van-cell-group>
+    <view class="button">
+      <van-button type="info" bind:click="dinnerupdate" block>更新</van-button>
+    </view>
   </van-tab>
 
-  <van-tab title="单个菜品">
-  
-  <van-nav-bar
-  title="菜品管理"
-  left-text="返回"
-  right-text="添加菜品"
-  left-arrow
-  bind:click-left="onClickLeft"
-  bind:click-right="onClickRight"
-/>
+  <van-tab title="单个菜品" name="2">
+    <van-nav-bar title="菜品管理" left-text="返回" right-text="添加菜品" left-arrow bind:click-left="onClickLeft" bind:click-right="onClickRight" />
 
-  <van-grid column-num="3">
-  <view class="item"  wx:for="{{menulists}}" wx:key="index">
-    <navigator url="../modifymenu/modifymenu?id={{item._id}}">
-    <van-grid-item use-slot>
-    <image
-      style="width: 100%; height: 90px;"
-      src="{{item.img}}"
-    />
-    <text>{{item.name}}\n（￥{{item.price}}）</text>
-  </van-grid-item>
+    <van-grid column-num="3">
+      <view class="item" wx:for="{{menulists}}" wx:key="index">
+        <navigator url="../modifymenu/modifymenu?id={{item._id}}">
+          <van-grid-item use-slot>
+            <image style="width: 100%; height: 90px;" src="{{item.img}}" />
+            <text>{{item.name}}\n（￥{{item.price}}）</text>
+          </van-grid-item>
 
-      
-    </navigator>
-  </view>
-  </van-grid>
 
-  
+        </navigator>
+      </view>
+    </van-grid>
+
+
   </van-tab>
 </van-tabs>

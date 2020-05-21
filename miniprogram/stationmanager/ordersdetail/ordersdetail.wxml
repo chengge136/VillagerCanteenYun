@@ -16,6 +16,7 @@
 <view>联系人: <text>{{username}}</text></view>
 <view>电话：<text>{{phone}}</text></view>
 <view>配送地点:<text> {{addr}}</text></view>
+<view>所定套餐:<text> {{selectedmenustr}}</text></view>
 </view>
 <view class="title_a">
 <view>备注：<text>{{comment}}</text></view>

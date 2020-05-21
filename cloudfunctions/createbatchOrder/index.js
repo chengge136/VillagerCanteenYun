@@ -16,6 +16,7 @@ exports.main = async (event, context) => {
       count: event.count,
       total: event.total,
       selecteduserstr: event.selecteduserstr,
+      selectedmenustr: event.selectedmenustr,
       comment: event.comment,
       ctime: event.ctime,
       isapproved: event.isapproved,

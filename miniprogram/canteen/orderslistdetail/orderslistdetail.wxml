@@ -23,9 +23,16 @@
 
 <view class="tc">
 <view><text>菜品统计：</text></view>
-<view class="item" wx:for="{{menulists}}" wx:key="index">
+<view class="item" wx:if="{{type==0}}" wx:for="{{menulists}}" wx:key="index">
 {{item.name}}：<text style="color:red;font-size:35rpx;"> {{item.count}} </text>份
 </view>
+
+<view class="item" wx:if="{{type==1}}">
+<view>套餐饭午饭：<text style="color:red;font-size:35rpx;"> {{noonquantity}} </text>份</view>
+<view>套餐饭午饭：<text style="color:red;font-size:35rpx;"> {{dinnerquantity}} </text>份</view>
+
+</view>
+
 </view>
 </van-tab>
 <van-tab title="订单列表" name="b">
@@ -35,8 +42,18 @@
 <text>地址</text>
 <text>订单总价</text>
 </view>
-<view wx:for="{{menulist}}" wx:key="index">
+<view wx:for="{{menulist}}" wx:key="index" wx:if="{{type==0}}">
 <navigator url="../../users/orderDetail/orderDetail?_id={{item._id}}&source=1">
+<view  class="line_2">
+<text>{{item.username}}</text>
+<text>{{item.addr}}</text>
+<text>{{item.total}}</text>
+</view>
+</navigator>
+</view>
+
+<view wx:for="{{menulist}}" wx:key="index" wx:if="{{type==1}}">
+<navigator url="../../stationmanager/ordersdetail/ordersdetail?_id={{item._id}}&source=1">
 <view  class="line_2">
 <text>{{item.username}}</text>
 <text>{{item.addr}}</text>

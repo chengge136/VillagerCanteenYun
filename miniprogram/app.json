@@ -26,7 +26,11 @@
     "stationmanager/batchrecharge/batchrecharge",
     "stationmanager/usermanage/usermanage",
     "stationmanager/userDetail/userDetail",
-    "manager/accountassign/accountassign"
+    "stationmanager/batchpaydetail/batchpaydetail",
+    "manager/managerindex/managerindex",
+    "manager/accountassign/accountassign",
+    "manager/deadline/deadline"
+    
     
     
   ],

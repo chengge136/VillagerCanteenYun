@@ -48,6 +48,18 @@ App({
     var date = now.getDate();
     return year + "-" + month + "-" + date;
   },
+  getcurrentDate:function(now){
+    var timestamp = Date.parse(new Date());
+    var date = new Date(timestamp);
+    //获取年份  
+    var Y = date.getFullYear();
+    //获取月份  
+    var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
+    //获取当日日期 
+    var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+
+    return Y + '年' + M + '月' + D + '日'  
+  },
   modifyBalance: function (newbalance) {
     var userInfo = wx.getStorageSync('userInfo');
     console.log('modifyBalance - openid', userInfo.openid)
@@ -69,6 +81,26 @@ App({
       data: {
         selectedIds: selectedIds,
         sum: sum
+      },
+      complete: res => {
+        console.log('batch update balance success: ', res);
+      }
+    })
+  },
+  createbatchpayrecord: function (selectedIds, selectednamestr, income, count) {
+    var userDetail = wx.getStorageSync('userDetail');
+    wx.cloud.callFunction({
+      name: 'createbatchpayrecord',
+      data: {
+        user_ids : selectedIds,
+        user_names: selectednamestr,
+        updatedby: userDetail.name,
+        addr: userDetail.address,
+        phone: userDetail.phone,
+        ctime: new Date().getTime(),
+        type:1,
+        income: income,
+        count:count
       },
       complete: res => {
         console.log('batch update balance success: ', res);
@@ -132,7 +164,7 @@ App({
       }
     })
   },
-  createbatchOrder: function (count, total, selecteduserstr, comment) {
+  createbatchOrder: function (count, total, selecteduserstr, comment, selectedmenustr) {
     var userDetail = wx.getStorageSync('userDetail');
     wx.cloud.callFunction({
       name: 'createbatchOrder',
@@ -144,6 +176,7 @@ App({
         count: count,
         total: total,
         selecteduserstr: selecteduserstr,
+        selectedmenustr: selectedmenustr,
         comment: comment,
         ctime: new Date().getTime(),
         isapproved: false,
@@ -152,7 +185,7 @@ App({
       complete: res => {
         console.log('createbatchOrder success: ', res);
         wx.redirectTo({
-          url: '../stationIndex/stationIndex',
+          url: '../orderslist/orderslist'
         })
       }
     })

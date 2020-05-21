@@ -1,12 +1,15 @@
 // canteen/canteenIndex/canteenIndex.js
 const db = wx.cloud.database();
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    address: ''
+    address: '',
+    timedate:''
+
   },
 
   /**
@@ -17,7 +20,8 @@ Page({
     const _ = db.command;
     var userDetail = wx.getStorageSync('userDetail');
     that.setData({
-      address: userDetail.address
+      address: userDetail.address,
+      timedate:app.getcurrentDate()
     });
     db.collection('menu').get({
       success: function (res) {

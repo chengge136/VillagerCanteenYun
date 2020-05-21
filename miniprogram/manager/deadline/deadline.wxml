@@ -1,0 +1,17 @@
+<view class="select">
+<text style="color:#F2571C;font-size: 35rpx;">设置前须知：</text>
+<text>1，填写各年龄段老人的套餐优惠减免程度</text>
+<text>2，站点批量提交的时间</text>
+<text>3，若无优惠填入0，没有时间限制填入0</text>
+</view>
+<van-cell-group	>
+  <van-field required clearable input-align="center" value="{{ cut_50 }}" placeholder="输入减免的金额（元）" label="50岁以上减免" bind:change="inputcut_50" maxlength="1"/>
+  <van-field required clearable input-align="center" value="{{ cut_60 }}" placeholder="输入减免的金额（元）" label="60岁以上减免" bind:change="inputcut_60" maxlength="1"/>
+  <van-field required clearable input-align="center" value="{{ cut_70 }}" placeholder="输入减免的金额（元）" label="70岁以上减免" bind:change="inputcut_70" maxlength="1"/>
+  <van-field required clearable input-align="center" value="{{ cut_80 }}" placeholder="输入减免的金额（元）" label="80岁以上减免" bind:change="inputcut_80" maxlength="1"/>
+  <van-field title-width="100" required clearable value="{{ deadline }}" placeholder="例如20，晚上八点后不可提交" label="站点下单截止时间" bind:change="deadlineset" maxlength="2"/>
+</van-cell-group>
+
+<view class="button">
+  <van-button type="info" block bind:click="save" disabled='{{disabled}}'>保存设置</van-button>
+</view>

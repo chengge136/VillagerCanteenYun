@@ -34,8 +34,8 @@ Page({
           success: function () {
             setTimeout(function () {
               //要延时执行的代码
-              wx.redirectTo({
-                url: '../menu/menu'
+              wx.navigateBack({
+                delta: 1
               })
             }, 1000) //延迟时间
           }

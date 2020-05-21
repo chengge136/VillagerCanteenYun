@@ -1,0 +1,15 @@
+.select{
+  margin: 20rpx;
+  height:180rpx;
+  display: flex;
+  font-size: 30rpx;
+  flex-direction: column;
+  justify-content: space-between;
+  color:#1989FA;
+  align-items:center;
+}
+
+
+.button{
+  margin-top: 200rpx;
+}

@@ -26,18 +26,19 @@
       <i class="fa fa-bookmark-o fa"></i>
       <text style="font-size:30rpx;"> 老人优惠套餐</text>
     </view>
-  <navigator url="../productDetail/productDetail?id=17b0c7775e99574d004aacbd7e199916">
+    <view wx:for="{{tclists}}" wx:key="index">
+  <navigator url="../productDetail/productDetail?id={{item._id}}">
     <view class="dis_bottom">
-      <image mode="widthFix" src="../../images/tc.jpg"></image>
+      <image mode="widthFix" src="{{item.img}}"></image>
       <view class="text1">
         <view>
-          <text style="font-size: 35rpx;font-weight:bold;">老人实惠套餐</text>
+          <text style="font-size: 35rpx;font-weight:bold;">{{item.name}}</text>
         </view>
         <view>
           <text>享受餐补\n\n\n</text>
         </view>
         <view>
-          <text style="font-size: 30rpx;background-color:#FEF4E9">猪肉、土豆、白菜 </text>
+          <text style="font-size: 30rpx;background-color:#FEF4E9">{{item.desc}}</text>
         </view>
       </view>
       <view class="text2">
@@ -50,6 +51,7 @@
       </view>
     </view>
     </navigator>
+    </view>
   </view>
 </view>
 

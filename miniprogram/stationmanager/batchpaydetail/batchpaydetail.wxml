@@ -1,0 +1,27 @@
+<view class="title">
+
+
+<view>
+<view><text style="font-size:40rpx;font-weight:bold">已完成</text></view>
+</view>
+</view>
+
+<view class="title_a">
+<view>充值站点: <text>{{addr}}</text></view>
+<view>充值时间: <text>{{ctime}}</text></view>
+<view>充值方式: <text>批量代充</text></view>
+<view>操作员: <text>{{updatedby}}</text></view>
+<view>联系电话：<text>{{phone}}</text></view>
+<view>充值额度:<text> {{income}}</text></view>
+</view>
+<view class="other">
+<view>人数：<text>{{count}}</text></view>
+<view style="text-align:right">总计：<text>￥{{total}}</text></view>
+</view>
+
+<view class="userlist">
+<van-divider contentPosition="center">充值名单</van-divider>
+<view>
+  <textarea auto-height="true" disabled="true" maxlength="-1" value="{{user_names}}" />
+</view>
+</view>

@@ -8,6 +8,7 @@ Page({
    */
   data: {
     completedorders:[],
+    completedtcorders:[]
   },
 
   /**
@@ -17,19 +18,34 @@ Page({
     var that = this;
     const _ = db.command;
 
-    db.collection('approvedlists').orderBy('approvedid', 'desc').get({
+    db.collection('approvedlists').orderBy('approvedid', 'desc').where({
+      type: _.eq(0),
+    }).get({
       success: function (res) {
-        console.log(res.data)
-
         for (var index in res.data) {
           res.data[index].ctime = app.formatDate(new Date(res.data[index].ctime));
         }   
- 
         that.setData({
           completedorders: res.data
         })
       }
     })
+
+    db.collection('approvedlists').orderBy('approvedid', 'desc').where({
+      type: _.eq(1),
+    }).get({
+      success: function (res) {
+        for (var index in res.data) {
+          res.data[index].ctime = app.formatDate(new Date(res.data[index].ctime));
+        }
+        that.setData({
+          completedtcorders: res.data
+        })
+      }
+    })
+
+
+
   },
 
   /**

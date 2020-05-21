@@ -94,7 +94,7 @@ Page({
         balance: 100,
         ctime: new Date().getTime(),
         insertbyph:'',
-        usertype:'0'
+        usertype:'0' //普通用户
       },
       complete: res => {
         console.log('test result: ', res);

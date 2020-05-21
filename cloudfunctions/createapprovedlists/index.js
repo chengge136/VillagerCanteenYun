@@ -12,8 +12,10 @@ exports.main = async (event, context) => {
       approvedid: event.approvedid,
       ordercount: event.ordercount,
       total: event.total,
+      usercount: event.usercount,
       menulists: event.menulists,
-      ctime: event.ctime
+      ctime: event.ctime,
+      type: event.type
     }
   })
     .then(console.log)

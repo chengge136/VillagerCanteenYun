@@ -15,6 +15,8 @@ Page({
     color_e: '',
     userlists: [],
     selectedIds: [],
+    batchpaylist:[],
+    selectednamestr:'',
     count:0,
     submited: false
 
@@ -46,23 +48,47 @@ Page({
         })
       }
     })
-
-    db.collection('menu').where({
-      name: _.eq('套餐饭'),
-    }).get({
+    var userDetail = wx.getStorageSync('userDetail');
+    db.collection('user_batchpay_record').orderBy('ctime','desc').where(
+      {
+        phone: _.eq(userDetail.phone)
+      }
+    ).get({
       success: function (res) {
-
+        console.log(res.data);
+        for (var index in res.data) {
+          res.data[index].ctime = app.formatDate(new Date(res.data[index].ctime));
+        }
         that.setData({
-          price: res.data[0].price
+          batchpaylist: res.data
         })
       }
     })
+
 
   },
 
   checkboxChange(e) {
     var that = this;
+    var usernames=[];
     console.log('checkbox发生change事件，携带value值为：', e.detail.value);
+    const _ = db.command;
+    db.collection('wx_user').where({
+      _id: _.in(e.detail.value)
+    })
+      .field({
+        name: true
+      }).get({
+        success: function (res) {
+          for (var i = 0; i < res.data.length; i++) {
+            usernames.push(res.data[i].name);
+          }
+          console.log('usernames', usernames.toString());
+          that.setData({
+            selectednamestr: usernames.toString()
+          })
+        }
+      })
     that.setData({
       selectedIds: e.detail.value,
       count: e.detail.value.length
@@ -153,6 +179,7 @@ Page({
             
             // 1,批量增加余额
             app.modifybatchBalance(that.data.selectedIds, that.data.amount);
+            app.createbatchpayrecord(that.data.selectedIds.toString(), that.data.selectednamestr, that.data.amount, that.data.count);
 
             wx.showLoading({
               title: '充值中',
@@ -160,9 +187,11 @@ Page({
 
             setTimeout(function () {
               wx.hideLoading();
-              wx.navigateBack({
-               delta: 1
-              })
+              that.onLoad();
+              that.setData({
+                submited: false
+              });
+              
             }, 3000)
 
 

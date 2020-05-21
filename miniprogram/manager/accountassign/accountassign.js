@@ -1,6 +1,7 @@
 // manager/accountassign/accountassign.js
 import Notify from '../../vant/notify/notify';
 const db = wx.cloud.database();
+var app = getApp();
 Page({
 
   /**
@@ -12,28 +13,112 @@ Page({
     name: '',
     phone: '',
     address: '',
-    password: '',
-    passwordConfirm: '',
-    disabled: false
+    disabled: false,
+    station:[],
+    canteen:[],
+    finance:[]
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that=this;
 
+    //获得站点管理员
+    wx.cloud.callFunction({
+      // 要调用的云函数名称
+      name: 'getwxusers',
+      data: {
+        usertype: "1"
+      }
+    }).then(res => {
+      // console.log(res.result.data);
+      for (var index in res.result.data) {
+        res.result.data[index].ctime = app.formatDate(new Date(res.result.data[index].ctime));
+      }
+
+      that.setData({
+        station: res.result.data
+      })
+    }).catch(err => {
+      // handle error
+    })
+
+    //获得食堂管理员
+    wx.cloud.callFunction({
+      // 要调用的云函数名称
+      name: 'getwxusers',
+      data: {
+        usertype: "2"
+      }
+    }).then(res => {
+      // console.log(res.result.data);
+      for (var index in res.result.data) {
+        res.result.data[index].ctime = app.formatDate(new Date(res.result.data[index].ctime));
+      }
+      that.setData({
+        canteen: res.result.data
+      })
+    }).catch(err => {
+      // handle error
+    })
+
+    //获得财务管理员
+    wx.cloud.callFunction({
+      // 要调用的云函数名称
+      name: 'getwxusers',
+      data: {
+        usertype: "3"
+      }
+    }).then(res => {
+      // console.log(res.result.data);
+      for (var index in res.result.data) {
+        res.result.data[index].ctime = app.formatDate(new Date(res.result.data[index].ctime));
+      }
+      that.setData({
+        finance: res.result.data
+      })
+    }).catch(err => {
+      // handle error
+    })
+  },
+  onClose(event) {
+    const { position, instance } = event.detail;
+    var name = event.currentTarget.dataset.name;
+    var id = event.currentTarget.dataset.id;
+    console.log(id);
+    switch (position) {
+      case 'cell':
+        instance.close();
+        break;
+      case 'right':
+        wx.showModal({
+          title: '提示',
+          content: '要删除 ' + name+' ？',
+          success(res) {
+            if (res.confirm) {
+              console.log('delete')
+              instance.close();
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
+        })
+        break;
+    }
   },
   register() {
 
     var that = this;
     const _ = db.command;
-    if (that.data.name == '' || that.data.phone == '' || that.data.password == '') {
+    if (that.data.name == '' || that.data.phone == '') {
       console.log('请填写完信息在提交！')
       Notify({ type: 'warning', duration: 3000, message: '信息不全\n请填写完再提交！' });
-    } else if (!(that.data.password == that.data.passwordConfirm)) {
-      console.log('密码不一致！')
-      Notify({ type: 'warning', duration: 3000, message: '两次密码不一致！' });
-    } else {
+    } else if (that.data.phone.length != 11){
+      Notify({ type: 'warning', duration: 3000, message: '手机号长度必须是11位！' });
+    }else {
       //检查此账户是否存在
       var count = db.collection('wx_user').where({
         phone: _.eq(that.data.phone)
@@ -67,7 +152,7 @@ Page({
         address: that.data.address,
         phone: that.data.phone,
         notlike: '',
-        password: that.data.password,
+        password: that.data.phone.substr(7, 4),
         sfzid: '',
         age: 0,
         active: true,
@@ -83,6 +168,7 @@ Page({
           icon: 'success',
           duration: 2000,
           success: function () {
+            that.onLoad();
             that.setData({
               acivetab: that.data.radio
             })
@@ -97,6 +183,7 @@ Page({
     this.setData({
       radio: event.detail,
     });
+    console.log("click");
   },
   inputName: function (event) {
     var that = this;
@@ -116,19 +203,6 @@ Page({
       address: event.detail
     })
   },
-  inputPWD: function (event) {
-    var that = this;
-    that.setData({
-      password: event.detail
-    })
-  },
-  inputREPWD: function (event) {
-    var that = this;
-    that.setData({
-      passwordConfirm: event.detail
-    })
-  },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

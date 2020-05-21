@@ -1,5 +1,6 @@
 {
   "usingComponents": {
+    "van-swipe-cell": "../../vant/swipe-cell/index",
     "van-tab": "../../vant/tab/index",
     "van-tabs": "../../vant/tabs/index",
     "van-button": "../../vant/button/index",
@@ -7,6 +8,5 @@
     "van-notify": "../../vant/notify/index",
     "van-radio": "../../vant/radio/index",
     "van-radio-group": "../../vant/radio-group/index"
-    
   }
 }

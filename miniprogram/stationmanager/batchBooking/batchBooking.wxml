@@ -1,14 +1,35 @@
+<view wx:if="{{noticenumber>0}}">
+<van-notice-bar
+  mode="closeable"
+  text="有 {{noticenumber}} 个用户余额已不足 20 元，无法完成正常下单，请检查提醒用户充值。"
+/>
+</view>
 <view>
-  <view class="line_1">勾选需要老年套餐的用户</view>
   <view class="line_1">
+  <view style="height:50rpx;margin:10rpx;">勾选需要明天配送的套餐</view>
+      <checkbox-group bindchange="selectmune">
+      <label class="weui-check__label" wx:for="{{menulists}}" wx:key="index">
+      <view style="display: flex;flex-direction:row;">
+        <view><checkbox value="{{item.value}}" checked="{{item.checked}}" /></view>
+        <view>{{item.name}}( ￥<text style="color:red;">{{item.price}}</text>)</view>
+      </view>
+      <view class="desc">套餐描述：<text>{{item.desc}}</text></view>
+      </label>
+    </checkbox-group>
+  </view>
+  <view class="line_1">
+  <view style="height:50rpx;margin:10rpx;">勾选需要老年套餐的用户</view>
     <checkbox-group bindchange="checkboxChange">
-      <label class="weui-check__label" wx:for="{{userlists}}" wx:key="index">
-        <view class="weui-cell__hd"><checkbox value="{{item.value}}" checked="{{item.checked}}" /></view>
-        <view class="weui-cell__bd">{{item.name}}</view>
+      <label class="check_label" wx:for="{{userlists}}" wx:key="index">
+        <view><checkbox value="{{item.value}}" checked="{{item.checked}}" /></view>
+        <view>{{item.name}},  余额：￥<text style="color:red;">{{item.balance}}</text></view>
       </label>
     </checkbox-group>
   </view>
    <view class="notlink">
+    <view>
+      <text>配送地点：{{addr}}</text>
+    </view>
     <view>
       <text>备注（选填）</text>
     </view>

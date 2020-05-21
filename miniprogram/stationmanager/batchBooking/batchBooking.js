@@ -9,13 +9,18 @@ Page({
    */
   data: {
     userlists: [],
+    menulists: [],
     selectedIds:[],
+    selectedmenu:[],
+    noticenumber:0,
+    menucount:0,
     count:0,
     total:0,
     isapproved:false,
     comment: '',
-    price:0,
-    submited:false
+    orderprice:0,
+    submited:false,
+    addr:''
 
   },
 
@@ -25,33 +30,55 @@ Page({
   onLoad: function (options) {
     var that = this;
     const _ = db.command;
-    var userlists=[];
-    db.collection('wx_user').where(
+    var menulists = [];
+    var userlists = [];
+    var noticeusers = [];
+
+    db.collection('menu').where(
       {
-        usertype: _.eq('0')
+        type: _.eq(1)
       }
     ).get({
       success: function (res) {
         console.log(res.data);
         for (var i = 0; i < res.data.length;i++){
-          userlists.push({
-            value: res.data[i]._id,
-            name: res.data[i].name
-          }) 
+          menulists.push({
+            value: res.data[i].name,
+            name: res.data[i].name,
+            price: res.data[i].price,
+            desc: res.data[i].desc
+          })
+          
         }
         that.setData({
-          userlists: userlists
+          menulists: menulists
         })
       }
     })
 
-    db.collection('menu').where({
-      name: _.eq('套餐饭'),
-    }).get({
+    var userDetail = wx.getStorageSync('userDetail');
+    that.setData({ addr: userDetail.address});
+    db.collection('wx_user').where(
+      {
+        address: _.eq(userDetail.address),
+        usertype: _.eq("0")
+      }
+    ).get({
       success: function (res) {
-
+        console.log(res.data);
+        for (var i = 0; i < res.data.length; i++) {
+          userlists.push({
+            value: res.data[i]._id,
+            name: res.data[i].name,
+            balance: res.data[i].balance
+          })
+          if (res.data[i].balance<20){
+            noticeusers.push(res.data[i].name);
+          }
+        }
         that.setData({
-          price: res.data[0].price
+          userlists: userlists,
+          noticenumber: noticeusers.length
         })
       }
     })
@@ -73,6 +100,35 @@ Page({
     })
     
   },
+  selectmune(e) {
+    var that = this;
+    const _ = db.command;
+    console.log('checkbox发生change事件，携带value值为：', e.detail.value);
+    db.collection('menu').where({
+      name: _.in(e.detail.value)
+    })
+      .field({
+        price: true
+      }).get({
+      success: function (res) {
+        var orderprice=0;
+        for (var i = 0; i < res.data.length; i++) {
+          orderprice += parseInt(res.data[i].price);
+
+        }
+        console.log('orderprice', orderprice);
+        that.setData({
+          orderprice: orderprice
+        })
+      }
+    })
+
+    that.setData({
+      selectedmenu: e.detail.value,
+      menucount: e.detail.value.length
+    })
+
+  },
   bacthbooking(){
    
 
@@ -81,7 +137,7 @@ Page({
     var insufficientlists=[];
     var selectedusers = [];
 
-    if(that.data.selectedIds.length>0){
+    if (that.data.count > 0 && that.data.menucount>0){
       //判断勾选的每个人余额是否够的
       db.collection('wx_user')
         .where({
@@ -94,7 +150,7 @@ Page({
           success: function (res) {
             for (var i = 0; i < res.data.length;i++) {
               selectedusers.push(res.data[i].name);
-              if (res.data[i].balance-that.data.price<0){
+              if (res.data[i].balance - that.data.orderprice<0){
                 insufficientlists.push(res.data[i].name);
               }
             }
@@ -113,15 +169,17 @@ Page({
                       submited:true
                     });
                     var selecteduserstr = selectedusers.toString();
-                    var total = that.data.count * that.data.price
+                    var selectedmenustr = that.data.selectedmenu.toString();
+                    var total = that.data.count * that.data.orderprice
 
                     // 1,批量扣除余额
-                    app.modifybatchBalance(that.data.selectedIds, -that.data.price);
+                    app.modifybatchBalance(that.data.selectedIds, -that.data.orderprice);
                     // 2,create batch order
-                    app.createbatchOrder(that.data.count, total, selecteduserstr, that.data.comment);
+                    app.createbatchOrder(that.data.count, total, selecteduserstr, that.data.comment, selectedmenustr);
 
                   } else if (res.cancel) {
                     console.log('用户点击取消')
+                   
                   }
                 }
               })

@@ -60,15 +60,15 @@
 				},
 				{
 					"id": 3,
-					"name": "users/userOrders/userOrders",
-					"pathName": "users/userOrders/userOrders",
+					"name": "manager/deadline/deadline",
+					"pathName": "manager/deadline/deadline",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": 4,
-					"name": "canteen/orderslist/orderslist",
-					"pathName": "canteen/orderslist/orderslist",
+					"name": "管理端",
+					"pathName": "manager/managerindex/managerindex",
 					"query": "",
 					"scene": null
 				},
@@ -81,7 +81,7 @@
 				},
 				{
 					"id": 6,
-					"name": "manager/accountassign/accountassign",
+					"name": "管理端账号分配",
 					"pathName": "manager/accountassign/accountassign",
 					"query": "",
 					"scene": null

@@ -10,7 +10,11 @@ Page({
     total: 0,
     approvedid:0,
     menulists: [],
-    menulist:[]
+    menulist:[],
+    noonquantity:0,
+    dinnerquantity:0,
+    type:null
+
   },
 
   /**
@@ -18,67 +22,117 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    console.log('approvedid:' + options.approvedid);
-    var approvedid = parseInt(options.approvedid)
-    that.setData({
-      approvedid: approvedid
-    })
-    var menulists = [];
     const _ = db.command;
-    //1，获取菜单名
-    var menus = wx.getStorageSync('menus');
+    console.log('approvedid:' + options.approvedid);
+    console.log('type:' + options.type);
+    var approvedid = parseInt(options.approvedid);
+    var type = parseInt(options.type);
+    that.setData({
+      approvedid: approvedid,
+      type: type
+    });
 
-    for (var i = 0; i < menus.length; i++) {
-      menulists.push({
-        name: menus[i].name,
-        count: 0
+    if (type==1){ //站点
+      wx.cloud.callFunction({
+        // 要调用的云函数名称
+        name: 'getorderbyid',
+        data: {
+          approvedid: approvedid,
+          type: 1
+        }
+      }).then(res => {
+        console.log(res.result.data);
+        var menulist = res.result.data;
+        var ordercount = res.result.data.length;
+        console.log('ordercount',ordercount);
+        var total = 0;
+        var noonquantity = 0;
+        var dinnerquantity = 0;
+        if (ordercount > 0) {
+          for (var i = 0; i < ordercount; i++) {
+            total += parseInt(menulist[i].total);
+            var items = menulist[i].selectedmenustr;
+
+            if (items.indexOf("午饭") > 0) {
+              noonquantity += menulist[i].count;
+            }
+            if (items.indexOf("晚饭") > 0) {
+              dinnerquantity += menulist[i].count;
+            }
+            
+
+          }
+          that.setData({
+            total: total,
+            isempty: false,
+            ordercount: ordercount,
+            menulist: menulist,
+            noonquantity: noonquantity,
+            dinnerquantity: dinnerquantity
+
+          })
+        } else {
+          that.setData({
+            isempty: true
+          })
+        }
+      }).catch(err => {
+        // handle error
       })
-    }
-    wx.cloud.callFunction({
-      // 要调用的云函数名称
-      name: 'getorderbyid',
-      data: {
-        approvedid: approvedid
+
+    }else if(type==0){//个人
+      var menulists = [];
+      //1，获取菜单名
+      var menus = wx.getStorageSync('menus');
+
+      for (var i = 0; i < menus.length; i++) {
+        menulists.push({
+          name: menus[i].name,
+          count: 0
+        })
       }
-    }).then(res => {
-      // 返回所有还没通过的新订单
-      var menulist = res.result.data;
-      var ordercount = res.result.data.length;
-      var total = 0;
-      if (ordercount > 0) {
-        for (var i = 0; i < ordercount; i++) {
-          total += parseInt(menulist[i].total);
-          //处理每一条订单的菜品字段
-          var items = menulist[i].menus.split(";");
-          for (var j = 0; j < items.length - 1; j++) {
-            var item = items[j].split("-");
-            for (var k = 0; k < menulists.length; k++) {
-              if (item[0] == menulists[k].name) {
-                menulists[k].count += parseInt(item[2]);
+      wx.cloud.callFunction({
+        // 要调用的云函数名称
+        name: 'getorderbyid',
+        data: {
+          approvedid: approvedid,
+          type:0
+        }
+      }).then(res => {
+        var menulist = res.result.data;
+        var ordercount = res.result.data.length;
+        var total = 0;
+        if (ordercount > 0) {
+          for (var i = 0; i < ordercount; i++) {
+            total += parseInt(menulist[i].total);
+            //处理每一条订单的菜品字段
+            var items = menulist[i].menus.split(";");
+            for (var j = 0; j < items.length - 1; j++) {
+              var item = items[j].split("-");
+              for (var k = 0; k < menulists.length; k++) {
+                if (item[0] == menulists[k].name) {
+                  menulists[k].count += parseInt(item[2]);
+                }
               }
             }
           }
+          that.setData({
+            total: total,
+            isempty: false,
+            ordercount: ordercount,
+            menulists: menulists,
+            menulist: menulist
+          })
+        } else {
+          that.setData({
+            isempty: true
+          })
         }
-        that.setData({
-          total: total,
-          isempty: false,
-          ordercount: ordercount,
-          menulists: menulists,
-          menulist: menulist
-        })
+      }).catch(err => {
+        // handle error
+      })
 
-      } else {
-        that.setData({
-          isempty: true
-        })
-      }
-
-
-    }).catch(err => {
-      // handle error
-    })
-
-
+    }
   },
 
   /**

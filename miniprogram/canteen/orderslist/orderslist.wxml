@@ -1,15 +1,34 @@
-<view class="title_a" style="background-color: #5579ED;">
-<text>订单号</text>
-<text>审批时间</text>
-<text>营业额</text>
-</view>
-<view wx:for="{{completedorders}}" wx:key="index">
-<navigator url="../orderslistdetail/orderslistdetail?approvedid={{item.approvedid}}">
-<view class="list">
-<text>{{item.approvedid}}</text>
-<text>{{item.ctime}}</text>
-<text style="color:red;">￥ {{item.total}}</text>
-</view>
-</navigator>
-</view>
-
+<van-tabs active="0">
+  <van-tab title="站点订单" name="0">
+    <view class="title_a" style="background-color: #F4CB20;">
+      <text>订单号</text>
+      <text>审批时间</text>
+      <text>营业额</text>
+    </view>
+    <view wx:for="{{completedtcorders}}" wx:key="index">
+      <navigator url="../orderslistdetail/orderslistdetail?approvedid={{item.approvedid}}&type=1">
+        <view class="list">
+          <text>{{item.approvedid}}</text>
+          <text>{{item.ctime}}</text>
+          <text style="color:red;">￥ {{item.total}}</text>
+        </view>
+      </navigator>
+    </view>
+  </van-tab>
+  <van-tab title="个人订单" name="1">
+    <view class="title_a" style="background-color: #5579ED;">
+      <text>订单号</text>
+      <text>审批时间</text>
+      <text>营业额</text>
+    </view>
+    <view wx:for="{{completedorders}}" wx:key="index">
+      <navigator url="../orderslistdetail/orderslistdetail?approvedid={{item.approvedid}}&type=0">
+        <view class="list">
+          <text>{{item.approvedid}}</text>
+          <text>{{item.ctime}}</text>
+          <text style="color:red;">￥ {{item.total}}</text>
+        </view>
+      </navigator>
+    </view>
+  </van-tab>
+</van-tabs>

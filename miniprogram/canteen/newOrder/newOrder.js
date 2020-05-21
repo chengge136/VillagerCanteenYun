@@ -9,7 +9,14 @@ Page({
     ordercount:0,
     total:0,
     menulists:[],
-    isempty: null
+    isempty: null,
+    istcempty: null,
+    noonquantity: 0,
+    dinnerquantity: 0,
+    tcquantity: 0,
+    tctotal: 0,
+    tcuser: 0,
+    timedate:''
   },
 
   /**
@@ -27,7 +34,7 @@ Page({
         name: menus[i].name,
         count: 0
       })
-    }
+    };
     wx.cloud.callFunction({
       // 要调用的云函数名称
       name: 'getneworder',
@@ -59,14 +66,60 @@ Page({
           ordercount: ordercount,
           menulists: menulists
         })
-
       } else {
         that.setData({
           isempty: true
         })
       }
+    }).catch(err => {
+      // handle error
+    })
 
+    wx.cloud.callFunction({
+      // 要调用的云函数名称
+      name: 'getnewbatchorder',
+      data: {
+        isapproved: false
+      }
+    }).then(res => {
+      // 返回所有还没通过的新订单
+      var tclist = res.result.data;
+      console.log(tclist);
+      var tcquantity = res.result.data.length;
+      var tctotal = 0;
+      var tcuser = 0;
+      var noonquantity=0;
+      var dinnerquantity=0;
 
+      if (tcquantity > 0) {
+        console.log('tcquantity', tcquantity);
+        //处理每一条订单的菜品字段、
+        for (var i = 0; i < tcquantity; i++) {
+          tctotal += parseInt(tclist[i].total);
+          tcuser += parseInt(tclist[i].count);
+          var items = tclist[i].selectedmenustr;
+          if (items.indexOf("午饭") > 0) {
+            noonquantity += tclist[i].count;
+          }
+          if (items.indexOf("晚饭") > 0) {
+            dinnerquantity += tclist[i].count;
+          }
+        }
+        that.setData({
+          istcempty: false,
+          noonquantity: noonquantity,
+          dinnerquantity: dinnerquantity,
+          tcquantity: tcquantity,
+          tctotal: tctotal,
+          tcuser: tcuser
+        })
+        
+        
+      } else {
+        that.setData({
+          istcempty: true
+        })
+      }
     }).catch(err => {
       // handle error
     })
@@ -89,6 +142,20 @@ Page({
     })
     
   },
+  tcapprove(){
+    var that = this;
+    wx.showModal({
+      title: '提示',
+      content: '确认通过审核？',
+      success(res) {
+        if (res.confirm) {
+          that.tcapprovefunction();
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
 
   approvefunction(){
     var that = this;
@@ -99,9 +166,11 @@ Page({
       data: {
         approvedid: approvedtime,
         ordercount: that.data.ordercount,
+        usercount: that.data.ordercount,
         total: that.data.total,
         menulists: that.data.menulists,
-        ctime: approvedtime
+        ctime: approvedtime,
+        type:0
       },
       success: res => {
         console.log(res)
@@ -111,7 +180,6 @@ Page({
         console.log(err)
       }
     })
-
     //审批订单
     wx.cloud.callFunction({
       name: 'approve',
@@ -139,11 +207,79 @@ Page({
       }
     })
   },
+  tcapprovefunction(){
+    var that = this;
+    var approvedtime = new Date().getTime();
+    //生成审批订单 approvedlists
+    var tcmenulists=[];
+    tcmenulists.push({ "count": that.data.noonquantity, "name": "套餐饭午餐" });
+    tcmenulists.push({ "count": that.data.dinnerquantity, "name": "套餐饭晚餐" });
+
+    //console.log(tcmenulists)
+
+    wx.cloud.callFunction({
+      name: 'createapprovedlists',
+      data: {
+        approvedid: approvedtime,
+        ordercount: that.data.tcquantity,
+        total: that.data.tctotal,
+        usercount: that.data.tcuser,
+        menulists: tcmenulists,
+        ctime: approvedtime,
+        type: 1
+      },
+      success: res => {
+        console.log(res)
+      },
+      fail: err => {
+        // handle error
+        console.log(err)
+      }
+    })
+    //审批订单
+    wx.cloud.callFunction({
+      name: 'tcapprove',
+      data: {
+        approvedid: approvedtime
+      },
+      success: res => {
+        wx.showToast({
+          title: '审批通过',
+          icon: 'success',
+          duration: 2000,
+          success: function () {
+            setTimeout(function () {
+              //要延时执行的代码
+              wx.redirectTo({
+                url: '../orderslist/orderslist'
+              })
+            }, 1000) //延迟时间
+          }
+        })
+      },
+      fail: err => {
+        console.log(err)
+      }
+    })
+
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    var that = this;
 
+    var timestamp = Date.parse(new Date());
+    var date = new Date(timestamp);
+    //获取年份  
+    var Y = date.getFullYear();
+    //获取月份  
+    var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
+    //获取当日日期 
+    var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+    that.setData({
+      timedate: Y + '年' + M + '月' + D + '日'
+    })
   },
 
   /**

@@ -14,7 +14,8 @@ Page({
     //首页导航栏数据
     navList: ['点餐','购物车','订单','个人中心'],
     currentIndexNav:0,
-    menulists: []
+    menulists: [],
+    tclists:[]
 
   },
 
@@ -33,6 +34,18 @@ Page({
         console.log(res.data)
         that.setData({
           menulists: res.data
+        })
+      }
+    })
+
+    db.collection('menu').where(
+      {
+        type: _.eq(1)
+      }
+    ).get({
+      success: function (res) {
+        that.setData({
+          tclists: res.data
         })
       }
     })

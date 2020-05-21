@@ -3,6 +3,7 @@ page{
 }
 .line_1{
   display: flex;
+  flex-direction: column;
   background-color:#FFFFFE;
   padding: 10rpx;
   margin: 20rpx;
@@ -21,7 +22,21 @@ textarea {
   padding: 20rpx;
   font-size: 30rpx;
 }
-.weui-check__label{
+.check_label{
   display: flex;
   padding: 10rpx;
+}
+
+.weui-check__label{
+  display: flex;
+  flex-direction:column;
+  padding: 10rpx;
+  margin-bottom:20rpx; 
+}
+.desc{
+  font-size: 30rpx;
+  color:#A6A4A4;
+}
+.desc text{
+  color:skyblue;
 }

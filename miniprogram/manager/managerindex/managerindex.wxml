@@ -1,0 +1,18 @@
+<view class="header">
+<text style="font-size:40rpx;font-weight:bold;">您好！管理员！</text>
+<text>今天是：{{timedate}}</text>
+</view>
+
+<view class="action">
+
+<view class="item" bindtap="accountassign">
+<view><text>账号分配</text></view>
+<view class="logo"><i class="fa fa-address-card-o fa-3x" style="color:#3175FF;"></i></view>
+</view>
+<view class="item" bindtap="setting">
+<view><text>下单设置</text></view>
+<view class="logo"><i class="fa fa-gear fa-3x" style="color:#00B79E;"></i></view>
+</view>
+
+
+</view>
