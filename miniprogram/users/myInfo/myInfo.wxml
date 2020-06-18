@@ -2,7 +2,6 @@
 <view class="left">
 <text style="font-size:40rpx;font-weight:bold;">{{name}}</text>
 <text style="font-size:30rpx;color:#A6A4A4">{{address}}</text>
-<text style="font-size:30rpx;color:#A6A4A4" wx:if="{{age!=''}}">{{age}}岁</text>
 </view>
 
 <view class="right">

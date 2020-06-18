@@ -8,8 +8,23 @@
   color:#1989FA;
   align-items:center;
 }
-
+.section{
+  margin: 20rpx;
+}
+.section_title text{
+  font-size: 28rpx;
+}
+.picker{
+  margin-top: 20rpx;
+}
 
 .button{
   margin-top: 200rpx;
+}
+.condition{
+  margin: 20rpx;
+}
+.condition text{
+  font-size: 35rpx;
+  color:#1989FA;
 }

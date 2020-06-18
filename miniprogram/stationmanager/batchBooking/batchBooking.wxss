@@ -1,27 +1,14 @@
 page{
   background-color:#F8F8F8; 
 }
-.line_1{
-  display: flex;
-  flex-direction: column;
-  background-color:#FFFFFE;
-  padding: 10rpx;
-  margin: 20rpx;
-}
+
 .notlink{
   background-color:#FFFFFE;
-  height: 260rpx;
+  height: 300rpx;
   padding: 10rpx;
   margin: 20rpx;
 }
-textarea {
-  border: 3rpx solid #A6A4A4;
-  width: 700rpx;
-  height: 120rpx;
-  margin-top: 10rpx;
-  padding: 20rpx;
-  font-size: 30rpx;
-}
+
 .check_label{
   display: flex;
   padding: 10rpx;
@@ -33,10 +20,49 @@ textarea {
   padding: 10rpx;
   margin-bottom:20rpx; 
 }
+.line_t{
+  display: flex;
+  flex-direction: column;
+  background-color:#FFFFFE;
+  padding: 10rpx;
+  margin: 20rpx;
+}
 .desc{
   font-size: 30rpx;
   color:#A6A4A4;
 }
 .desc text{
   color:skyblue;
+}
+.title_a{
+  height: 50rpx;
+  display:flex;
+  justify-content: space-between;
+  padding:20rpx;
+  margin: 0rpx 10rpx 0rpx 10rpx;
+  border-top-left-radius:15rpx;
+  border-top-right-radius:15rpx;
+}
+.title_a text{
+  font-size:35rpx;
+  font-weight:bold;
+  color:#FFFFFE;
+}
+.line_1{
+  display: flex;
+  justify-content: space-between;
+  background-color:#FFF8E7;
+  padding:10rpx;
+  margin: 0rpx 10rpx 0rpx 10rpx;
+}
+.line_2{
+  display: flex;
+  background-color:#FFFFFE;
+  padding:10rpx;
+  margin: 0rpx 10rpx 20rpx 10rpx;
+  height: 50rpx;
+}
+.line_2 text{
+  font-size: 30rpx;
+  color:#888888;
 }

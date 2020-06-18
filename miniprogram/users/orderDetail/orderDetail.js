@@ -76,14 +76,30 @@ Page({
   },
   cancelorder: function () {
     var that=this;
+    var total = that.data.total;
+   
+
     console.log('cancel')
     wx.showModal({
       title: '提示',
       content: '确认取消订单？',
       success(res) {
         if (res.confirm) {
-          console.log('用户点击确定')
-          app.cancel(that.data._id);
+          var userDetail = wx.getStorageSync('userDetail');
+          userDetail.balance = userDetail.balance+that.data.total;
+          wx.setStorage({
+            key: 'userDetail',
+            data: userDetail,
+            success: function (res) {
+              var userDetail = wx.getStorageSync('userDetail');
+              console.log('userDetail:', userDetail);
+              //2，更改数据库 --> a：修改账户余额，b：更改订单为取消订单
+              app.modifyBalance(total); //返回余额
+              app.cancel(that.data._id);
+            }
+          })
+
+          
         } else if (res.cancel) {
           console.log('用户点击取消')
         }

@@ -4,14 +4,28 @@
 	"setting": {
 		"urlCheck": true,
 		"es6": true,
+		"enhance": true,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
-		"enhance": true
+		"coverView": true,
+		"autoAudits": false,
+		"showShadowRootInWxmlPanel": true,
+		"scopeDataCheck": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		},
+		"useCompilerModule": true,
+		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"appid": "wx0596103febd1cc45",
 	"projectname": "VillagerCanteenYun",
-	"libVersion": "2.11.0",
+	"libVersion": "2.10.4",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {
@@ -60,8 +74,8 @@
 				},
 				{
 					"id": 3,
-					"name": "manager/deadline/deadline",
-					"pathName": "manager/deadline/deadline",
+					"name": "finance/financeIndex/financeIndex",
+					"pathName": "finance/financeIndex/financeIndex",
 					"query": "",
 					"scene": null
 				},
@@ -83,6 +97,13 @@
 					"id": 6,
 					"name": "管理端账号分配",
 					"pathName": "manager/accountassign/accountassign",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "users/recharge/recharge",
+					"pathName": "users/recharge/recharge",
 					"query": "",
 					"scene": null
 				}

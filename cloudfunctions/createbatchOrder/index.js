@@ -16,11 +16,10 @@ exports.main = async (event, context) => {
       count: event.count,
       total: event.total,
       selecteduserstr: event.selecteduserstr,
-      selectedmenustr: event.selectedmenustr,
-      comment: event.comment,
+      tctype: event.tctype,
       ctime: event.ctime,
       isapproved: event.isapproved,
-      subtype: event.subtype
+      status:0
     }
   })
     .then(console.log)

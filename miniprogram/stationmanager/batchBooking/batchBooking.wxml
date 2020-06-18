@@ -1,40 +1,106 @@
 <view wx:if="{{noticenumber>0}}">
-<van-notice-bar
-  mode="closeable"
-  text="有 {{noticenumber}} 个用户余额已不足 20 元，无法完成正常下单，请检查提醒用户充值。"
-/>
+	<van-notice-bar mode="closeable" text="有 {{noticenumber}} 个用户余额已不足 20 元，无法完成正常下单，请检查提醒用户充值。" />
 </view>
-<view>
-  <view class="line_1">
-  <view style="height:50rpx;margin:10rpx;">勾选需要明天配送的套餐</view>
-      <checkbox-group bindchange="selectmune">
-      <label class="weui-check__label" wx:for="{{menulists}}" wx:key="index">
-      <view style="display: flex;flex-direction:row;">
-        <view><checkbox value="{{item.value}}" checked="{{item.checked}}" /></view>
-        <view>{{item.name}}( ￥<text style="color:red;">{{item.price}}</text>)</view>
-      </view>
-      <view class="desc">套餐描述：<text>{{item.desc}}</text></view>
-      </label>
-    </checkbox-group>
-  </view>
-  <view class="line_1">
-  <view style="height:50rpx;margin:10rpx;">勾选需要老年套餐的用户</view>
-    <checkbox-group bindchange="checkboxChange">
-      <label class="check_label" wx:for="{{userlists}}" wx:key="index">
-        <view><checkbox value="{{item.value}}" checked="{{item.checked}}" /></view>
-        <view>{{item.name}},  余额：￥<text style="color:red;">{{item.balance}}</text></view>
-      </label>
-    </checkbox-group>
-  </view>
-   <view class="notlink">
-    <view>
-      <text>配送地点：{{addr}}</text>
-    </view>
-    <view>
-      <text>备注（选填）</text>
-    </view>
-    <textarea maxlength="150" placeholder="可以在此填写额外的忌口信息" bindblur="inputComment" />
-   </view>
-   <button type="primary" size="{{default}}" disabled="{{submited}}" bindtap="bacthbooking"> 批量预订 </button>
-   <van-notify id="van-notify" />
-</view>
+<van-notify id="van-notify" />
+<van-tabs active="1">
+	<van-tab title="明日午饭预订" name="1">
+
+		<view>
+			<view class="line_t">
+				<view>{{menulists[0].name}}( ￥<text style="color:red;">{{menulists[0].price}}</text>)</view>
+				<view class="desc">套餐描述：<text>{{menulists[0].desc}}</text></view>
+			</view>
+
+			<view class="line_2">勾选需要预订午餐套餐的老年的用户</view>
+
+			<view class="title_a" style="background-color: #8FB5C9;">
+				<view><text>用户名</text></view>
+				<view><text>年龄</text></view>
+				<view><text>余额</text></view>
+			</view>
+			<view wx:for="{{userlists}}" wx:key="index">
+				<view class="line_1">
+					<checkbox-group bindchange="checkbox" data-name="{{item.name}}">
+						<label>
+							<view>
+								<checkbox value="{{item.value}}" checked="{{item.checked}}" />{{item.name}}
+							</view>
+						</label>
+					</checkbox-group>
+					<view><text style="color:#888888;">{{item.age}}岁</text></view>
+					<view><text style="color:red;">￥{{item.balance}}</text></view>
+				</view>
+				<view class="line_2"><text>本单扣除金额：{{item.lunchspend}} 元</text></view>
+			</view>
+			<view class="notlink">
+				<view>
+					<text>下单人：{{name}}</text>
+				</view>
+				<view>
+					<text>联系电话：{{phone}}</text>
+				</view>
+				<view class="desc">
+					不同年龄段的老人，扣费标准不一样
+				</view>
+			</view>
+			<van-submit-bar price="{{ lunchamount }}" label="订单总价" button-text="提交订单" disabled="{{submitlunch}}" bind:submit="submitlunch" tip="{{ true }}">
+
+				<van-tag type="primary">
+					<checkbox-group bindchange="checkAll">
+						<checkbox value="lunch" />全选</checkbox-group>
+				</van-tag>
+				<view slot="tip">收货地址：{{addr}}</view>
+			</van-submit-bar>
+		</view>
+	</van-tab>
+	<van-tab title="明日晚饭预订" name="2">
+
+		<view>
+			<view class="line_t">
+				<view>{{menulists[1].name}}( ￥<text style="color:red;">{{menulists[1].price}}</text>)</view>
+				<view class="desc">套餐描述：<text>{{menulists[1].desc}}</text></view>
+			</view>
+
+			<view class="line_2">勾选需要预订晚餐套餐的老年的用户</view>
+
+			<view class="title_a" style="background-color: #1DB0B8;">
+				<view><text>用户名</text></view>
+				<view><text>年龄</text></view>
+				<view><text>余额</text></view>
+			</view>
+			<view wx:for="{{userlists}}" wx:key="index">
+				<view class="line_1">
+					<checkbox-group bindchange="checkbox" data-name="{{item.name}}">
+						<label>
+							<view>
+								<checkbox value="{{item.value}}" checked="{{item.checked}}" />{{item.name}}
+							</view>
+						</label>
+					</checkbox-group>
+					<view><text style="color:#888888;">{{item.age}}岁</text></view>
+					<view><text style="color:red;">￥{{item.balance}}</text></view>
+				</view>
+				<view class="line_2"><text>本单扣除金额：{{item.dinnerspend}} 元</text></view>
+			</view>
+			<view class="notlink">
+				<view>
+					<text>下单人：{{name}}</text>
+				</view>
+				<view>
+					<text>联系电话：{{phone}}</text>
+				</view>
+				<view class="desc">
+					不同年龄段的老人，扣费标准不一样
+				</view>
+			</view>
+			<van-submit-bar price="{{ dinneramount }}" button-text="提交订单" disabled="{{submitdinner}}" bind:submit="submitdinner" tip="{{ true }}">
+
+				<van-tag type="primary">
+					<checkbox-group bindchange="checkAll">
+						<checkbox value="dinner" />全选</checkbox-group>
+				</van-tag>
+				<view slot="tip">收货地址：{{addr}}</view>
+			</van-submit-bar>
+		</view>
+	</van-tab>
+</van-tabs>

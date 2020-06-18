@@ -60,47 +60,92 @@ App({
 
     return Y + '年' + M + '月' + D + '日'  
   },
-  modifyBalance: function (newbalance) {
-    var userInfo = wx.getStorageSync('userInfo');
-    console.log('modifyBalance - openid', userInfo.openid)
-    console.log('modifyBalance - newbalance', newbalance)
+  modifyBalance: function (sum) {
+    var userDetail = wx.getStorageSync('userDetail');
+    console.log('modifyBalance - phone', userDetail.phone)
+    console.log('本次增加的余额', sum)
     wx.cloud.callFunction({
       name: 'modifyBalance',
       data: {
-        openid: userInfo.openid,
-        newbalance: newbalance
+        phone: userDetail.phone,
+        sum: sum
       },
       complete: res => {
         console.log('update balance success: ', res);
       }
     })
   },
-  modifybatchBalance: function (selectedIds, sum) {
+  modifybatchBalance: function (userlists) {
+    for (let i = 0;i < userlists.length; i++) {
+      if(userlists[i].checked){
+        
+        wx.cloud.callFunction({
+          name: 'modifybatchBalance',
+          data: {
+            id: userlists[i].value,
+            sum: userlists[i].money
+          },
+          complete: res => {
+            console.log('update balance success: ', res);
+          }
+        })
+      }
+    }
+  },
+  deletelunchBalance: function (userlists) {
+    for (let i = 0;i < userlists.length; i++) {
+      if(userlists[i].checked){
+        
+        wx.cloud.callFunction({
+          name: 'modifybatchBalance',
+          data: {
+            id: userlists[i].value,
+            sum: -userlists[i].lunchspend
+          },
+          complete: res => {
+            console.log('delete lunch balance success: ', res);
+          }
+        })
+      }
+    }
+  },
+  returnbatchBalance: function (addr, selecteduserstr, sum) {
+    var usernames = selecteduserstr.split(",");
     wx.cloud.callFunction({
-      name: 'modifybatchBalance',
+      name: 'returnbatchBalance',
       data: {
-        selectedIds: selectedIds,
+        addr: addr,
+        usernames: usernames,
         sum: sum
       },
       complete: res => {
-        console.log('batch update balance success: ', res);
+        console.log('returnbatchBalance success: ', res);
       }
     })
   },
-  createbatchpayrecord: function (selectedIds, selectednamestr, income, count) {
+  createbatchpayrecord: function (userlists) {
     var userDetail = wx.getStorageSync('userDetail');
+    var income=0;
+    var count=0;
+    var paydetails='';
+    for (let i = 0;i < userlists.length; i++) {
+      if(userlists[i].checked){
+        income+=parseInt(userlists[i].money);
+        count+=1;
+        paydetails+=userlists[i].name+'-'+userlists[i].money.toString()+'元;  '
+      }
+    }
+    
     wx.cloud.callFunction({
       name: 'createbatchpayrecord',
       data: {
-        user_ids : selectedIds,
-        user_names: selectednamestr,
-        updatedby: userDetail.name,
-        addr: userDetail.address,
-        phone: userDetail.phone,
-        ctime: new Date().getTime(),
-        type:1,
-        income: income,
-        count:count
+	      income: income,
+	      ctime: new Date().getTime(),
+	      updatedby: userDetail.name,
+	      addr: userDetail.address,
+	      phone: userDetail.phone,
+	      count: count,
+	      paydetails: paydetails
       },
       complete: res => {
         console.log('batch update balance success: ', res);
@@ -131,9 +176,40 @@ App({
       },
       complete: res => {
         console.log('cancel success: ', res);
-        wx.navigateBack({
-          delta: 1
+        wx.showLoading({
+          title: '取消订单',
         })
+
+        setTimeout(function () {
+          wx.hideLoading();
+          wx.navigateBack({
+            delta: 2
+          })
+        }, 2000)
+       
+
+      }
+    })
+  },
+  cancelbatch: function (_id) {
+    wx.cloud.callFunction({
+      name: 'cancelbatch',
+      data: {
+        _id: _id
+      },
+      complete: res => {
+        console.log('cancelbatch success: ', res);
+        wx.showLoading({
+          title: '取消订单',
+        })
+
+        setTimeout(function () {
+          wx.hideLoading();
+          wx.navigateBack({
+            delta: 2
+          })
+        }, 2000)
+
 
       }
     })
@@ -164,30 +240,74 @@ App({
       }
     })
   },
-  createbatchOrder: function (count, total, selecteduserstr, comment, selectedmenustr) {
+  createbatchOrder: function (userlists,tctype) {
+    var lunchsum=0;
+    var dinnersum=0;
+    var count=0;
+    var selecteduserstr='';
     var userDetail = wx.getStorageSync('userDetail');
-    wx.cloud.callFunction({
-      name: 'createbatchOrder',
-      data: {
-        approvedid: '',
-        username: userDetail.name,
-        phone: userDetail.phone,
-        addr: userDetail.address,
-        count: count,
-        total: total,
-        selecteduserstr: selecteduserstr,
-        selectedmenustr: selectedmenustr,
-        comment: comment,
-        ctime: new Date().getTime(),
-        isapproved: false,
-        subtype: 0
-      },
-      complete: res => {
-        console.log('createbatchOrder success: ', res);
-        wx.redirectTo({
-          url: '../orderslist/orderslist'
-        })
+    if(tctype==0){//午饭
+      for (let i = 0;i < userlists.length; i++) {
+        if(userlists[i].checked){
+          count+=1;
+          lunchsum+=parseFloat(userlists[i].lunchspend);
+          selecteduserstr+=userlists[i].name+'-'+userlists[i].lunchspend.toString()+'元;  '
+       }
       }
-    })
+
+      wx.cloud.callFunction({
+        name: 'createbatchOrder',
+        data: {
+          approvedid: '',
+          username: userDetail.name,
+          phone: userDetail.phone,
+          addr: userDetail.address,
+          count: count,
+          total: lunchsum,
+          selecteduserstr: selecteduserstr,
+          tctype: tctype,
+          ctime: new Date().getTime(),
+          isapproved: false,
+        },
+        complete: res => {
+          console.log('createbatchOrder success: ', res);
+          wx.redirectTo({
+            url: '../orderslist/orderslist'
+          })
+        }
+      })
+
+    }else{ //晚饭
+      for (let i = 0;i < userlists.length; i++) {
+        if(userlists[i].checked){
+          count+=1;
+          dinnersum+=parseFloat(userlists[i].dinnerspend);
+          selecteduserstr+=userlists[i].name+'-'+userlists[i].dinnerspend.toString()+'元;  '
+       }
+      }
+
+      wx.cloud.callFunction({
+        name: 'createbatchOrder',
+        data: {
+          approvedid: '',
+          username: userDetail.name,
+          phone: userDetail.phone,
+          addr: userDetail.address,
+          count: count,
+          total: dinnersum,
+          selecteduserstr: selecteduserstr,
+          tctype: tctype,
+          ctime: new Date().getTime(),
+          isapproved: false,
+        },
+        complete: res => {
+          console.log('createbatchOrder success: ', res);
+          wx.redirectTo({
+            url: '../orderslist/orderslist'
+          })
+        }
+      })
+    }
+   
   }
 })

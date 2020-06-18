@@ -1,17 +1,42 @@
-<view class="select">
-<text style="color:#F2571C;font-size: 35rpx;">设置前须知：</text>
-<text>1，填写各年龄段老人的套餐优惠减免程度</text>
-<text>2，站点批量提交的时间</text>
-<text>3，若无优惠填入0，没有时间限制填入0</text>
-</view>
+<van-tabs active="a">
+  <van-tab title="站点下单设置" name="a">
+    
 <van-cell-group	>
-  <van-field required clearable input-align="center" value="{{ cut_50 }}" placeholder="输入减免的金额（元）" label="50岁以上减免" bind:change="inputcut_50" maxlength="1"/>
-  <van-field required clearable input-align="center" value="{{ cut_60 }}" placeholder="输入减免的金额（元）" label="60岁以上减免" bind:change="inputcut_60" maxlength="1"/>
-  <van-field required clearable input-align="center" value="{{ cut_70 }}" placeholder="输入减免的金额（元）" label="70岁以上减免" bind:change="inputcut_70" maxlength="1"/>
-  <van-field required clearable input-align="center" value="{{ cut_80 }}" placeholder="输入减免的金额（元）" label="80岁以上减免" bind:change="inputcut_80" maxlength="1"/>
-  <van-field title-width="100" required clearable value="{{ deadline }}" placeholder="例如20，晚上八点后不可提交" label="站点下单截止时间" bind:change="deadlineset" maxlength="2"/>
+  <van-field required clearable input-align="center" type="digit" value="{{ cut_60 }}" placeholder="输入每单减免的金额（元）" label="60岁以上每单减免" bind:change="inputcut_60" maxlength="3"/>
+  <van-field required clearable input-align="center" type="digit" value="{{ cut_70 }}" placeholder="输入每单减免的金额（元）" label="70岁以上每单减免" bind:change="inputcut_70" maxlength="3"/>
+  <van-field required clearable input-align="center" type="digit" value="{{ cut_80 }}" placeholder="输入每单减免的金额（元）" label="80岁以上每单减免" bind:change="inputcut_80" maxlength="3"/>
 </van-cell-group>
+<view class="section">
+  <view class="section_title"><text>设置站点预订的截止时间，24小时制</text></view>
+  <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+    <view class="picker">
+      当前截止时间为，晚上：<text style="color:red;">{{array[index]}}</text> 点
+    </view>
+  </picker>
+</view>
 
 <view class="button">
   <van-button type="info" block bind:click="save" disabled='{{disabled}}'>保存设置</van-button>
 </view>
+  </van-tab>
+  <van-tab title="会员充值设置" name="b">
+  <view class="condition">
+    <view><text>是否开启会员卡充值赠送金额活动</text></view>
+    <van-switch checked="{{ active }}" bind:change="onChange" />
+  </view>
+
+<view wx:if='{{active}}'>
+  <van-cell-group	>
+  <van-field required clearable input-align="center" type="digit" value="{{ ret_50 }}" placeholder="输入充值50元赠送金额（元）" label="50元充值赠送" bind:change="inputret_50" maxlength="3"/>
+  <van-field required clearable input-align="center" type="digit" value="{{ ret_100 }}" placeholder="输入充值100元赠送金额（元）" label="100元充值赠送" bind:change="inputret_100" maxlength="3"/>
+  <van-field required clearable input-align="center" type="digit" value="{{ ret_200 }}" placeholder="输入充值200元赠送金额（元）" label="200元充值赠送" bind:change="inputret_200" maxlength="3"/>
+  <van-field required clearable input-align="center" type="digit" value="{{ ret_500 }}" placeholder="输入充值500元赠送金额（元）" label="500元充值赠送" bind:change="inputret_500" maxlength="3"/>
+  <van-field required clearable input-align="center" type="digit" value="{{ ret_1000 }}" placeholder="输入充值1000元赠送金额（元）" label="1000元充值赠送" bind:change="inputret_1000" maxlength="3"/>
+ </van-cell-group>
+</view>
+<view class="button">
+  <van-button type="info" block bind:click="saveret" disabled='{{disabled}}'>保存设置</van-button>
+</view>
+  
+  </van-tab>
+</van-tabs>

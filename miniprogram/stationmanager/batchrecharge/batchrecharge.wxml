@@ -1,65 +1,63 @@
 <van-tabs active="1">
-  <van-tab title="批量充值" name="1">
-    <view class="line_1">勾选需要充值的用户，并选择充值金额</view>
-    <view class="line_1">
-      <checkbox-group bindchange="checkboxChange">
-        <label class="weui-check__label" wx:for="{{userlists}}" wx:key="index">
-          <view class="weui-cell__hd">
-            <checkbox value="{{item.value}}" checked="{{item.checked}}" />
-          </view>
-          <view class="weui-cell__bd">{{item.name}}, 余额：￥
-            <text style="color:red;">{{item.balance}}</text>
-          </view>
-        </label>
-      </checkbox-group>
-    </view>
-    <van-divider textColor="#1989FA" contentPosition="center">选择充值金额</van-divider>
-    <view class="nav_wrap_1">
-      <view>
-        <van-button bind:click="select_a" plain color="{{color_a}}" type="default" size="normal">10 元</van-button>
-      </view>
-      <view>
-        <van-button bind:click="select_b" plain color="{{color_b}}" type="default" size="normal">20 元</van-button>
-      </view>
-      <view>
-        <van-button bind:click="select_c" plain color="{{color_c}}" type="default" size="normal">50 元</van-button>
-      </view>
-      <view>
-        <van-button bind:click="select_d" plain color="{{color_d}}" type="default" size="normal">100元</van-button>
-      </view>
-      <view>
-        <van-button bind:click="select_e" plain color="{{color_e}}" type="default" size="normal">200元</van-button>
-      </view>
-    </view>
+	<van-tab title="批量充值" name="1">
 
-    <view class="pay">
-      <text>支付金额（元）:</text>
-      <text style="font-size:35rpx;color:red;">{{amount}}</text>
-    </view>
-    <view class="pay">
-      <text>支付方式:</text>
-      <text>微信</text>
-    </view>
-    <button type="primary" size="{{default}}" disabled="{{submited}}" bindtap="bacthrecharge"> 立即充值 </button>
-  </van-tab>
-  <van-tab title="充值记录" name="2">
-  <van-notice-bar
+    <van-notice-bar
   left-icon="volume-o"
-  color="#FFFFFF"
-  backgroundColor="#78B6F1"
-  scrollable="false"
-  text="仅可查询批量充值的最近20条充值记录"
+  text="全选或勾选需要充值的用户，默认充值金额已经依照年龄录入，可修改为你需要的充值额度"
 />
-<view class="record"  wx:for="{{batchpaylist}}" wx:key="index">
-<view class="re_item"><text>充值总金额（元）</text></view>
-<view class="re_item_1"><text>{{item.income*item.count}}</text></view>
-<view class="re_item"><van-divider /></view>
-<view><text>充值站点：{{item.addr}}</text></view>
-<view><text>操作员：{{item.updatedby}}</text></view>
-<view class="re_item"><text>充值时间：{{item.ctime}}</text></view>
-<view class="re_item"><text>充值人数：{{item.count}} 人</text></view>
-<view class="re_item"><text>充值名单</text></view>
-<view><textarea auto-height="true" disabled="true" maxlength="-1" value="{{item.user_names}}" /></view>
+		<view class="title_a" style="background-color: #5579ED;">
+			<view><text>用户名</text></view>
+			<view><text>年龄</text></view>
+			<view><text>余额</text></view>
+		</view>
+		<view class="chooseAll">
+		 <checkbox-group bindchange="checkAll">
+ 		 <label>
+   		 <checkbox value="cb"/>全选
+ 		 </label>
+			</checkbox-group>
+		</view>
+		
+		<view wx:for="{{userlists}}" wx:key="index">
+			<view class="line_1">
+				<checkbox-group bindchange="checkboxChange" data-name="{{item.name}}">
+					<label>
+						<view>
+							<checkbox value="{{item.value}}" checked="{{item.checked}}" />{{item.name}}
+						</view>
+					</label>
+				</checkbox-group>
+				<view><text style="color:#888888;">{{item.age}}岁</text></view>
+				<view><text style="color:red;">￥{{item.balance}}</text></view>
+			</view>
+			<view class="line_2"><text>默认充值额度(元)：</text><input value="{{item.money}}" bindinput="bindKeyInput" data-name="{{item.name}}" class="weui-input" maxlength="4" type="number" placeholder="{{item.name}} 的充值金额" /></view>
+		</view>
+
+		<view class="pay">
+			<text>支付总金额（元）:</text>
+			<text style="font-size:35rpx;color:red;">{{amount}}</text>
+		</view>
+		<view class="pay">
+			<text>支付方式:</text>
+			<text>微信</text>
+		</view>
+		<button type="primary" size="{{default}}" disabled="{{submited}}" bindtap="bacthrecharge"> 立即充值 </button>
+		<van-notify id="van-notify" />
+	</van-tab>
+	<van-tab title="充值记录" name="2">
+		<van-notice-bar left-icon="volume-o" color="#FFFFFF" backgroundColor="#78B6F1" scrollable="false" text="仅可查询批量充值的最近20条充值记录" />
+		<view class="record" wx:for="{{batchpaylist}}" wx:key="index">
+			<view class="re_item"><text>充值总金额（元）</text></view>
+			<view class="re_item_1"><text>{{item.income}}</text></view>
+			<view class="re_item">
+				<van-divider />
+			</view>
+			<view class="re_item"><text>充值时间：{{item.ctime}}</text></view>
+			<view><text>充值站点：{{item.addr}}</text></view>
+			<view><text>操作员：{{item.updatedby}}</text></view>
+			<view class="re_item"><text>充值人数：{{item.count}} 人</text></view>
+			<view class="re_item"><text>充值人员与金额</text></view>
+			<view><textarea auto-height="true" disabled="true" maxlength="-1" value="{{item.paydetails}}" /></view>
 </view>
 
   </van-tab>

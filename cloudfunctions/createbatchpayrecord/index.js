@@ -9,15 +9,14 @@ const _ = db.command
 exports.main = async (event, context) => {
   return await db.collection('user_batchpay_record').add({
     data: {
-      user_ids: event.user_ids ,
-      user_names: event.user_names,
-      ctime: event.ctime,
       income: event.income,
-      type: event.type,
+      ctime: event.ctime,
       updatedby: event.updatedby,
-      phone: event.phone,
       addr: event.addr,
-      count: event.count
+      phone: event.phone,
+      count: event.count,
+      paydetails: event.paydetails
+
     }
   })
     .then(console.log)

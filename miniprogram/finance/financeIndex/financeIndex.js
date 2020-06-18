@@ -1,4 +1,4 @@
-// users/myInfo/myInfo.js
+// canteen/canteenIndex/canteenIndex.js
 const db = wx.cloud.database();
 Page({
 
@@ -6,50 +6,32 @@ Page({
    * 页面的初始数据
    */
   data: {
-    name:'',
-    address:'',
-    avatarUrl:'',
-    balance:0,
-    completecount:0
-
+    address: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let that = this;
+    var that = this;
     const _ = db.command;
     var userDetail = wx.getStorageSync('userDetail');
-
-    db.collection('order').where({
-      phone: _.eq(userDetail.phone),
-      isapproved: _.eq(true)
-    }).count({
-      success: function (res) {
-        console.log('已经完成订单', res.total)
-        that.setData({
-          completecount: res.total
-        })
-      }
-    })
-
-    var userDetail = wx.getStorageSync('userDetail');
-    console.log('myinfo_userdetial:',userDetail)
     that.setData({
-      name: userDetail.name,
-      address: userDetail.address,
-      avatarUrl: userDetail.avatarUrl,
-      balance: userDetail.balance
+      address: userDetail.address
+    });
+
+  },
+  rechargerecord() {
+    wx.navigateTo({
+      url: '../rechargerecord/rechargerecord',
     })
   },
-  recharge(){
-    wx.navigateTo({ url: '../recharge/recharge' })
+  queryorders() {
+    wx.navigateTo({
+      url: '../queryorders/queryorders',
+    })
   },
-  partner(){
-    wx.navigateTo({ url: '../partner/partner' })
-  },
-
+ 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

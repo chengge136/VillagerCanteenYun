@@ -30,7 +30,7 @@ Page({
         that.setData({
           name: res.data[0].name,
           phone: res.data[0].phone,
-          notlinke: res.data[0].notlinke,
+          notlike: res.data[0].notlike,
         })
       }
     })

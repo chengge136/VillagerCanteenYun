@@ -39,7 +39,8 @@ Page({
       // 要调用的云函数名称
       name: 'getneworder',
       data: {
-        isapproved: false
+        isapproved: false,
+        subtype:0
       }
     }).then(res => {
       // 返回所有还没通过的新订单
@@ -48,7 +49,7 @@ Page({
       var total = 0;
       if (ordercount > 0) {
         for (var i = 0; i < ordercount; i++) {
-          total += parseInt(menulist[i].total);
+          total += menulist[i].total;
           //处理每一条订单的菜品字段
           var items = menulist[i].menus.split(";");
           for (var j = 0; j < items.length - 1; j++) {
@@ -79,7 +80,8 @@ Page({
       // 要调用的云函数名称
       name: 'getnewbatchorder',
       data: {
-        isapproved: false
+        isapproved: false,
+        subtype:0
       }
     }).then(res => {
       // 返回所有还没通过的新订单
@@ -95,7 +97,7 @@ Page({
         console.log('tcquantity', tcquantity);
         //处理每一条订单的菜品字段、
         for (var i = 0; i < tcquantity; i++) {
-          tctotal += parseInt(tclist[i].total);
+          tctotal += tclist[i].total;
           tcuser += parseInt(tclist[i].count);
           var items = tclist[i].selectedmenustr;
           if (items.indexOf("午饭") > 0) {

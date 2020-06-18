@@ -1,6 +1,9 @@
 {
   "usingComponents": {
     "van-notify": "../../vant/notify/index",
-    "van-notice-bar": "../../vant/notice-bar/index"
+    "van-notice-bar": "../../vant/notice-bar/index",
+    "van-tab": "../../vant/tab/index",
+    "van-tabs": "../../vant/tabs/index",
+    "van-submit-bar": "../../vant/submit-bar/index"
   }
 }

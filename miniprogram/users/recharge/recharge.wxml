@@ -1,20 +1,27 @@
+<view wx:if='{{active}}'>
+<van-notice-bar
+  left-icon="volume-o"
+  text="为反馈新老客户，活动期间，会员充值享受金额补贴，充值越多补贴越多，补贴的金额仅限本食堂消费使用，不可提现。"
+/>
+</view>
+
 <view class="div">
 <view class="personalMe">
-<text>张小白</text>
-<text>1822322231</text>
+<text>{{name}}</text>
+<text>{{phone}}</text>
 </view>
 <van-divider contentPosition="center">选择充值金额</van-divider>
 
 <view class="nav_wrap_1">
-<view><van-button bind:click="select_a" plain color="{{color_a}}" type="default" size="normal">10 元</van-button></view>
-<view><van-button bind:click="select_b" plain color="{{color_b}}" type="default" size="normal">20 元</van-button></view>
-<view><van-button bind:click="select_c" plain color="{{color_c}}" type="default" size="normal">50 元</van-button></view>
-<view><van-button bind:click="select_d" plain color="{{color_d}}" type="default" size="normal">100元</van-button></view>
-<view><van-button bind:click="select_e" plain color="{{color_e}}" type="default" size="normal">200元</van-button></view>
+<view><van-button bind:click="select_a" plain color="{{color_a}}" type="default" size="normal">50 元</van-button></view>
+<view><van-button bind:click="select_b" plain color="{{color_b}}" type="default" size="normal">100 元</van-button></view>
+<view><van-button bind:click="select_c" plain color="{{color_c}}" type="default" size="normal">200 元</van-button></view>
+<view><van-button bind:click="select_d" plain color="{{color_d}}" type="default" size="normal">500元</van-button></view>
+<view><van-button bind:click="select_e" plain color="{{color_e}}" type="default" size="normal">1000元</van-button></view>
 </view>
 <view class="pay">
-<text>支付金额（元）:</text>
-<text style="font-size:35rpx;color:red;">{{amount}}</text>
+<view>支付金额：<text style="font-size:38rpx;color:red;">{{amount}}</text> 元</view>
+<view>到账金额：<text style="font-size:38rpx;color:red;">{{arrivalamount}}</text> 元</view>
 </view>
 
 </view>
@@ -23,6 +30,9 @@
 <view class="pay">
 <text>支付方式:</text>
 <text>微信</text>
+</view>
+<view class="desc">
+<text>会员卡余额充值仅限本食堂使用，原则上不予退款</text>
 </view>
 
 <view class="submit">

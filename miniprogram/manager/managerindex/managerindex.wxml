@@ -10,7 +10,7 @@
 <view class="logo"><i class="fa fa-address-card-o fa-3x" style="color:#3175FF;"></i></view>
 </view>
 <view class="item" bindtap="setting">
-<view><text>下单设置</text></view>
+<view><text>优惠设置</text></view>
 <view class="logo"><i class="fa fa-gear fa-3x" style="color:#00B79E;"></i></view>
 </view>
 

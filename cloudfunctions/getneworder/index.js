@@ -7,6 +7,7 @@ const _ = db.command
 
 exports.main = async (event, context) => {
   return await db.collection('order').where({
-    isapproved: event.isapproved
+    isapproved: event.isapproved,
+    subtype: event.subtype
   }).get()
 }

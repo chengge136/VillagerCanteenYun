@@ -29,8 +29,8 @@
     "stationmanager/batchpaydetail/batchpaydetail",
     "manager/managerindex/managerindex",
     "manager/accountassign/accountassign",
-    "manager/deadline/deadline"
-    
+    "manager/deadline/deadline",
+    "finance/financeIndex/financeIndex"
     
     
   ],

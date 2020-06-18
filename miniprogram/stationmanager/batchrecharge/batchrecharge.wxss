@@ -1,11 +1,26 @@
 page{
   background-color:#F8F8F8; 
 }
+.chooseAll{
+  margin: 20rpx;
+}
 .line_1{
   display: flex;
+  justify-content: space-between;
+  background-color:#FFF8E7;
+  padding:10rpx;
+  margin: 0rpx 10rpx 0rpx 10rpx;
+}
+.line_2{
+  display: flex;
   background-color:#FFFFFE;
-  padding: 10rpx;
-  margin: 20rpx;
+  padding:10rpx;
+  margin: 0rpx 10rpx 20rpx 10rpx;
+  height: 50rpx;
+}
+.line_2 text{
+  font-size: 30rpx;
+  color:#888888;
 }
 .notlink{
   background-color:#FFFFFE;
@@ -21,10 +36,7 @@ textarea {
   padding: 20rpx;
   font-size: 30rpx;
 }
-.weui-check__label{
-  display: flex;
-  padding: 10rpx;
-}
+
 
 .nav_wrap_1{
   display: flex;

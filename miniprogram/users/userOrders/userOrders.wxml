@@ -3,7 +3,7 @@
 <view wx:if="{{neworderLength>0}}">
 <navigator url="../orderDetail/orderDetail?_id={{neworder._id}}&source=0">
 <view class="title_a">
-<view><text>村民食堂（碧湖镇）</text></view>
+<view><text>{{neworder.addr}}</text></view>
 <view><text>新订单</text></view>
 </view>
 <view class="neworder">
@@ -19,7 +19,7 @@
 <view  wx:for="{{completedorders}}" wx:key="index">
 <navigator url="../orderDetail/orderDetail?_id={{item._id}}">
 <view class="title_a" style="background-color: #5579ED;">
-<view><text>村民食堂（碧湖镇）</text></view>
+<view><text>{{item.addr}}</text></view>
 <view wx:if="{{item.subtype==0}}"><text>已完成</text></view>
 <view wx:if="{{item.subtype==1}}"><text>申请退款</text></view>
 </view>
@@ -38,11 +38,11 @@
 <view wx:if="{{cancelorderLength>0}}">
 <view  wx:for="{{cancelorder}}" wx:key="index">
 <navigator url="../orderDetail/orderDetail?_id={{item._id}}">
-<view class="title_a">
-<view><text>村民食堂（碧湖镇）</text></view>
+<view class="title_a" style="background-color: #FFB1C2;">
+<view><text>{{item.addr}}</text></view>
 <view><text>取消的订单</text></view>
 </view>
-<view class="neworder">
+<view class="neworder" style="background-color: #FEF4E9;">
 <view class="left" style="font-size:30rpx;color:#A6A4A4">
 <text>{{item.ctime}}</text>
 <text>{{item.about}}等</text>

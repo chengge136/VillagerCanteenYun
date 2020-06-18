@@ -183,64 +183,43 @@ Page({
     var total = that.data.totalMoney * 0.01;
     var newbalance = that.data.balance - total;
 
-    const _ = db.command;
-    db.collection('order').where({
-      phone: _.eq(that.data.phone),
-      isapproved: _.eq(false)
-    }).count({
-      success: function (res) {
-        if (res.total > 0) {
-          wx.showModal({
-            title: '提示',
-            content: '已经提交了订单，请勿重复提交',
-            showCancel: false,
-            success(res) {
-              if (res.confirm) {
-                wx.navigateBack({
-                  delta: 1
-                })
-              }
-            }
-          })
-        } else if (newbalance < 0) {
-          console.log("账户余额不足，请先充值！")
-          that.setData({ disabled: true });
-          wx.showToast({
-            title: '账户余额不足，请先充值！',
-            icon: 'none',
-            duration: 2000
-          })
-        } else {
-          wx.showModal({
-            title: '提示',
-            content: '确认提交订单了吗？',
-            success(res) {
-              if (res.confirm) {
-                that.setData({ disabled: true });
-                console.log("生成订单，还剩下余额：", newbalance)
-                // 1,扣款,存入新的余额信息，更改缓存
+    if (newbalance < 0) {
+      console.log("账户余额不足，请先充值！")
+      that.setData({ disabled: true });
+      wx.showToast({
+        title: '账户余额不足，请先充值！',
+        icon: 'none',
+        duration: 2000
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '确认提交订单了吗？',
+        success(res) {
+          if (res.confirm) {
+            that.setData({ disabled: true });
+            wx.removeStorageSync('cartItems'); //下单后清空购物车
+            // 1,扣款,存入新的余额信息，更改缓存
+            var userDetail = wx.getStorageSync('userDetail');
+            console.log('当前余额：', userDetail.balance)
+            userDetail.balance = newbalance;
+            wx.setStorage({
+              key: 'userDetail',
+              data: userDetail,
+              success: function (res) {
                 var userDetail = wx.getStorageSync('userDetail');
-                console.log('当前余额：', userDetail.balance)
-                userDetail.balance = newbalance;
-                wx.setStorage({
-                  key: 'userDetail',
-                  data: userDetail,
-                  success: function (res) {
-                    var userDetail = wx.getStorageSync('userDetail');
-                    console.log('userDetail:', userDetail);
-                    //2，更改数据库 --> a：修改账户余额，b：新增订单数据
-                    app.modifyBalance(newbalance);
-                    app.createOrder(that.data.about, that.data.menus, that.data.comment, total);
-                  }
-                })
-              } else if (res.cancel) {
-                console.log('用户点击取消')
+                console.log('userDetail:', userDetail);
+                //2，更改数据库 --> a：修改账户余额，b：新增订单数据
+                app.modifyBalance(-total);
+                app.createOrder(that.data.about, that.data.menus, that.data.comment, total);
               }
-            }
-          })
+            })
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
         }
-      }
-    })
+      })
+    }
 
   },
   /**

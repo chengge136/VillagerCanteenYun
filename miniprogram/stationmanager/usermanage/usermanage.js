@@ -11,13 +11,18 @@ Page({
     //注册
     name: '',
     sfzid:'',
-    age:'',
     phone: '',
     managerph:'',
     address: '',
     notlike: '',
     disabled: false,
-    userlists: []
+    userlists: [],
+    items: [
+      {value: '少盐', name: '少盐',checked: false},
+      {value: '少糖', name: '少糖',checked: false},
+      {value: '少油', name: '少油',checked: false},
+      {value: '不吃辣', name: '不吃辣',checked: false}
+    ]
 
   },
 
@@ -27,10 +32,13 @@ Page({
   onLoad: function (options) {
     let that = this;
     const _ = db.command;
-    
+    var userDetail = wx.getStorageSync('userDetail');
+
     db.collection('wx_user').orderBy('ctime', 'desc').where(
       {
-        usertype: _.eq('0')
+        usertype: _.eq('0'),
+        address: _.eq(userDetail.address)
+
       }
     ).get({
       success: function (res) {
@@ -49,17 +57,46 @@ Page({
       managerph: userDetail.phone
     })
   },
-  register() {
+  checkboxChange(e) {
+    var that = this;
+    var items=that.data.items;
+    var name=e.currentTarget.dataset.name;
+    console.log('checkbox携带value值为：', name);
+    for (let i = 0;i < items.length; i++) {
+      if(items[i].name==name){
+        console.log('点击的是第'+i+'个，姓名是'+name);
+        items[i].checked=!items[i].checked;
+      }
+    }
+    that.setData({
+      items: items
+    });
 
+    //更新忌口字段
+    var notlike='';
+    for (let i = 0;i < items.length; i++) {
+      if(items[i].checked){
+        notlike+=items[i].name+','
+      }
+    }
+    that.setData({
+      notlike:notlike
+    });
+    
+  },
+  register() {
+      
+    
     var that = this;
     const _ = db.command;
-    if ((that.data.sfzid == '' && that.data.age == '') || that.data.name == '' || that.data.phone == '') {
+
+    if (that.data.sfzid == '' || that.data.name == '' || that.data.phone == '') {
       console.log('请填写完信息在提交！')
       Notify({ type: 'warning', duration: 3000, message: '信息不全\n请填写完再提交！' });
     }else {
-      if ((that.data.sfzid.length != 18 && that.data.sfzid.length != 0) || (that.data.age.length > 2 && that.data.age.length != 0) || that.data.phone.length != 11){
-        console.log('手机号、身份证、年龄格式不对')
-        Notify({ type: 'warning', duration: 4000, message: '手机号、身份证、年龄中有格式不对\n身份证和年龄二选一必填\n身份证18位\n手机号11位' });
+      if ((that.data.sfzid.length != 18 && that.data.sfzid.length != 0) || that.data.phone.length != 11){
+        console.log('手机号、身份证、格式不对')
+        Notify({ type: 'warning', duration: 4000, message: '手机号、身份证有格式不对\n身份证18位长度\n手机号11位长度' });
       }else{
       
         console.log(that.data.phone.substr(7, 4))
@@ -95,7 +132,6 @@ Page({
         avatarUrl: '',
         name: that.data.name,
         sfzid: that.data.sfzid,
-        age: that.data.age,
         phone: that.data.phone,
         address: that.data.address,  
         notlike: that.data.notlike,
@@ -177,22 +213,10 @@ Page({
       sfzid: event.detail
     })
   },
-  inputAge: function (event) {
-    var that = this;
-    that.setData({
-      age: event.detail
-    })
-  },
   inputPhone: function (event) {
     var that = this;
     that.setData({
       phone: event.detail
-    })
-  },
-  inputNotlike: function (event) {
-    var that = this;
-    that.setData({
-      notlike: event.detail
     })
   },
 

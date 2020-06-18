@@ -18,7 +18,8 @@ Page({
     ctime: '',
     isapproved: false,
     id: '',
-    subtype: 0
+    subtype: 0,
+    _id:''
   },
 
   /**
@@ -56,14 +57,15 @@ Page({
   },
   cancelorder: function () {
     var that = this;
-    console.log('cancel')
     wx.showModal({
       title: '提示',
       content: '确认取消订单？',
       success(res) {
         if (res.confirm) {
-          console.log('用户点击确定')
-          // app.cancel(that.data._id);
+          
+          app.returnbatchBalance(that.data.addr, that.data.selecteduserstr, that.data.total) ;
+          app.cancelbatch(that.data._id);
+
         } else if (res.cancel) {
           console.log('用户点击取消')
         }

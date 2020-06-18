@@ -7,12 +7,12 @@ const _ = db.command
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  return await db.collection('wx_user').where({
-    _id:  _.eq(event.id)
+  return await db.collection('batchorders').where({
+    _id: _.eq(event._id)
   }).update({
     // data 传入需要局部更新的数据
     data: {
-      balance: _.inc(event.sum)
+      subtype: -1
     }
   })
     .then(console.log)

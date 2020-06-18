@@ -1,0 +1,16 @@
+<view class="header">
+<text style="font-size:40rpx;font-weight:bold;">{{address}}财务管理员</text>
+<text>欢迎您</text>
+</view>
+
+<view class="action">
+
+<view class="item" bindtap="rechargerecord">
+<view><text>用户充值报表</text></view>
+<view class="logo"><i class="fa fa-money fa-3x" style="color:#D41650;"></i></view>
+</view>
+<view class="item" bindtap="queryorders">
+<view><text>历史订单报表</text></view>
+<view class="logo"><i class="fa fa-bar-chart fa-3x" style="color:#00B79E;"></i></view>
+</view>
+</view>

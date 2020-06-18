@@ -33,6 +33,13 @@ page{
   justify-content: space-between;
   margin-right:20rpx; 
 }
+.desc{
+  margin-top:40rpx;
+}
+.desc text{
+  font-size: 30rpx;
+  color:#576B95;
+}
 .submit{
   margin-top:100rpx;
   margin-bottom:100rpx;

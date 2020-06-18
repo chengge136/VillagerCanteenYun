@@ -28,3 +28,10 @@
   padding:20rpx;
   margin: 0rpx 10rpx 10rpx 10rpx;
 }
+.line_1{
+  display: flex;
+  justify-content: space-between;
+  background-color:#FFFFFE;
+  padding:10rpx;
+  margin: 10rpx;
+}

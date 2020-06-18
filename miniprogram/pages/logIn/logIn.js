@@ -74,10 +74,12 @@ Page({
                     url: '../../canteen/canteenIndex/canteenIndex'
                   })
                 } else if (userDetail.usertype == '3'){
-                  Notify({ type: 'warning', duration: 4000, message: '页面维护中...' });
+                  wx.redirectTo({
+                    url: '../../finance/financeIndex/financeIndex'
+                  })
                 } else if (userDetail.usertype == '4') {
                   wx.redirectTo({
-                    url: '../../manager/accountassign/accountassign'
+                    url: '../../manager/managerindex/managerindex'
                   })
                 }
                 
