@@ -1,5 +1,6 @@
-// canteen/orderslist/orderslist.js
+// finance/finance/finance.js
 const db = wx.cloud.database();
+import Notify from '../../vant/notify/notify';
 var app = getApp();
 Page({
 
@@ -7,8 +8,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-    lunchorders: [],
-    dinnerorders:[]
+
+    activedinner: '',
+    financeorders:[],
+    orders:[{"name":"lucas",age:11},{"name":"tom",age:11}],
+
+    balancerecords:[],
+    activeorders:'',
+    activebalance:''
+    
+
   },
 
   /**
@@ -17,44 +26,49 @@ Page({
   onLoad: function (options) {
     var that = this;
     const _ = db.command;
-    var userDetail = wx.getStorageSync('userDetail');
 
-    db.collection('batchorders').where(
+    db.collection('order').where(
       {
-        addr: _.eq(userDetail.address),
-        tctype: _.eq(0)
+        subtype: _.eq(2)
       }
     ).orderBy('ctime', 'desc').get({
       success: function (res) {
-        console.log(res.data)
         for (var index in res.data) {
-          res.data[index].ctime = app.formatDate(new Date(res.data[index].ctime));
-        }
-
+          res.data[index].approvedid = app.formatDate(new Date(res.data[index].ctime));
+        }  
         that.setData({
-          lunchorders: res.data
+          financeorders: res.data
         })
       }
     })
 
-    db.collection('batchorders').where(
+
+    db.collection('user_pay_record').where(
       {
-        addr: _.eq(userDetail.address),
-        tctype: _.eq(1)
+        type: _.eq(1)
       }
     ).orderBy('ctime', 'desc').get({
       success: function (res) {
-        console.log(res.data)
         for (var index in res.data) {
           res.data[index].ctime = app.formatDate(new Date(res.data[index].ctime));
-        }
-
+        } 
         that.setData({
-          dinnerorders: res.data
+          balancerecords: res.data
         })
       }
     })
   },
+  activeOrders(event) {
+    this.setData({
+      activeorders: event.detail,
+    });
+  },
+  activeBalance(event) {
+    this.setData({
+      activebalance: event.detail,
+    });
+  },
+  
 
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -2,13 +2,14 @@
 	"miniprogramRoot": "miniprogram/",
 	"cloudfunctionRoot": "cloudfunctions/",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"enhance": true,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
 		"coverView": true,
+		"nodeModules": true,
 		"autoAudits": false,
 		"showShadowRootInWxmlPanel": true,
 		"scopeDataCheck": false,
@@ -20,12 +21,12 @@
 			"disablePlugins": [],
 			"outputPath": ""
 		},
-		"useCompilerModule": true,
+		"useCompilerModule": false,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
-	"appid": "wx0596103febd1cc45",
+	"appid": "wx7060b69859d0b45b",
 	"projectname": "VillagerCanteenYun",
-	"libVersion": "2.10.4",
+	"libVersion": "2.12.2",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {
@@ -60,7 +61,7 @@
 				},
 				{
 					"id": 1,
-					"name": "pages/logIn/logIn",
+					"name": "登录页面",
 					"pathName": "pages/logIn/logIn",
 					"query": "",
 					"scene": null
@@ -74,7 +75,7 @@
 				},
 				{
 					"id": 3,
-					"name": "finance/financeIndex/financeIndex",
+					"name": "财务管理员首页",
 					"pathName": "finance/financeIndex/financeIndex",
 					"query": "",
 					"scene": null
@@ -101,9 +102,9 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "users/recharge/recharge",
-					"pathName": "users/recharge/recharge",
+					"id": 7,
+					"name": "finance/consumestatis/consumestatis",
+					"pathName": "finance/consumestatis/consumestatis",
 					"query": "",
 					"scene": null
 				}

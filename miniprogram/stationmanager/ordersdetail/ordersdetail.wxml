@@ -1,8 +1,8 @@
-<view class="title" wx:if="{{subtype==0}}">
+<view class="title" wx:if="{{status==0}}">
 
 <view wx:if="{{!isapproved}}">
 <view><text style="font-size:40rpx;font-weight:bold">等待商家接单</text></view>
-<view><van-button bind:click="cancelorder" type="default" size="small">取消订单</van-button></view>
+<!--view><van-button bind:click="cancelorder" type="default" size="small">取消订单</van-button></view-->
 </view>
 
 <view wx:if="{{isapproved}}">
@@ -12,14 +12,13 @@
 
 <view class="title_a">
 <view>订单号: <text>{{id}}</text></view>
-<view>支付方式: <text>余额扣除</text></view>
+<view>支付方式: <text>用户余额扣除</text></view>
 <view>联系人: <text>{{username}}</text></view>
 <view>电话：<text>{{phone}}</text></view>
 <view>配送地点:<text> {{addr}}</text></view>
-<view>所定套餐:<text> {{selectedmenustr}}</text></view>
-</view>
-<view class="title_a">
-<view>备注：<text>{{comment}}</text></view>
+<view wx:if="{{tctype==0}}">所定套餐:<text> 套餐饭午饭</text></view>
+<view wx:if="{{tctype==1}}">所定套餐:<text> 套餐饭晚饭</text></view>
+
 </view>
 <view class="other">
 <view>份数：<text>{{count}}</text></view>
@@ -27,7 +26,7 @@
 </view>
 
 <view class="userlist">
-<van-divider contentPosition="center">订餐名单</van-divider>
+<van-divider contentPosition="center">订餐名单及费用</van-divider>
 <view>
   <textarea auto-height="true" disabled="true" maxlength="-1" value="{{selecteduserstr}}" />
 </view>

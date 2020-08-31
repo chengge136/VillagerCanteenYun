@@ -9,17 +9,6 @@ page{
   margin: 20rpx;
 }
 
-.check_label{
-  display: flex;
-  padding: 10rpx;
-}
-
-.weui-check__label{
-  display: flex;
-  flex-direction:column;
-  padding: 10rpx;
-  margin-bottom:20rpx; 
-}
 .line_t{
   display: flex;
   flex-direction: column;

@@ -1,0 +1,14 @@
+<view>
+<van-cell title="选择日期区间" value="{{ date }}" bind:click="onDisplay" />
+<van-calendar
+  show="{{ show }}"
+  type="range"
+  title="选择你要统计的日期"
+  bind:close="onClose"
+  bind:confirm="onConfirm"
+   min-date="{{ minDate }}"
+  max-date="{{ maxDate }}"
+  confirm-text="完成"
+  confirm-disabled-text="请选择结束时间"
+/>
+</view>

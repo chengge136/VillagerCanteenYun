@@ -59,7 +59,7 @@
 <view class="div">
 <view class="title_a">
 <view><text>订单号: {{id}}</text></view>
-<view><text>支付方式: 余额扣除</text></view>
+<view><text>支付方式: 微信支付</text></view>
 <view><text>配送方式: 站点自提</text></view>
 </view>
 <van-divider contentPosition="center">菜单</van-divider>

@@ -1,81 +1,103 @@
 <van-tabs active="0">
-  <van-tab title="站点套餐 {{tcquantity}}" name="0">
+	<van-tab title="站点套餐 {{tcquantity}}" name="0">
 
-    <view class="J-shopping-cart-empty" hidden="{{!istcempty}}">
-      <i class="fa fa-shopping-cart fa-5x"></i>
-      <text style='color:black'>暂无新订单</text>
-    </view>
+		<view class="J-shopping-cart-empty" hidden="{{!istcempty}}">
+			<i class="fa fa-shopping-cart fa-5x"></i>
+			<text style='color:black'>暂无新订单</text>
+		</view>
 
-    <view hidden="{{istcempty}}">
-     <view class="tc">
-        <view>
-          <text>今天是：{{timedate}}</text>
-        </view>
-    </view> 
-      <view class="line_y">
-        <view class="text1">
-          <text>今日有效订单</text>
-           <text>订购套餐人数</text>
-          <text>套餐营业额(元)</text>
-        </view>
-        <view class="text2">
-          <text>{{tcquantity}}</text>
-          <text>{{tcuser}}</text>
-          <text>{{tctotal}}</text>
-        </view>
-      </view>
+		<view hidden="{{istcempty}}">
+			<view class="tc">
+				<view>
+					<text>今天是：{{timedate}}</text>
+				</view>
+			</view>
+			<view class="line_y">
+				<view class="text1">
+					<text>今日有效订单</text>
+					<text>订购套餐份数</text>
+					<text>套餐营业额(元)</text>
+				</view>
+				<view class="text2">
+					<text>{{tcquantity}}</text>
+					<text>{{tcuser}}</text>
+					<text>{{tctotal}}</text>
+				</view>
+			</view>
 
-      <view class="tc">
-        <view>
-          <text>菜品统计：</text>
-        </view>
-        <view class="item">
-        <view>套餐饭午餐：<text style="color:red;font-size:35rpx;"> {{noonquantity}}</text>份</view>
-          <view>套餐饭晚餐：<text style="color:red;font-size:35rpx;"> {{dinnerquantity}}</text>份</view>
-        </view>
-      </view>
+			<view class="tc">
+				<view>
+					<text>菜品统计：</text>
+				</view>
+				<view class="item">
+					<view>套餐饭午餐：<text style="color:red;font-size:35rpx;"> {{noonquantity}}</text>份</view>
+					<view>套餐饭晚餐：<text style="color:red;font-size:35rpx;"> {{dinnerquantity}}</text>份</view>
+				</view>
+                
+				<van-tabs active="a">
+					<van-tab title="午餐套餐 {{noonquantity}}" name="a">
+						<van-collapse accordion value="{{ activelunch }}" bind:change="activeLunch" >
+              <view wx:for="{{lunchorders}}" wx:key="index">
+							<van-collapse-item title="{{item.addr}}" name="{{item.ctime}}">
+								{{item.selecteduserstr}}
+							</van-collapse-item>
+              </view>
+						</van-collapse>
+					</van-tab>
+					<van-tab title="晚餐套餐 {{dinnerquantity}}" name="b">
+						<van-collapse accordion value="{{ activedinner }}" bind:change="activeDinner" >
+              <view wx:for="{{dinnerorders}}" wx:key="index">
+							<van-collapse-item title="{{item.addr}}" name="{{item.ctime}}">
+								{{item.selecteduserstr}}
+							</van-collapse-item>
+              </view>
+						</van-collapse>
+					</van-tab>
+				</van-tabs>
+			</view>
 
-      <view class="button">
-        <van-button type="info" block bind:click="tcapprove" disabled='{{disabled}}'>审核通过</van-button>
-      </view>
-    </view>
-  </van-tab>
-  <van-tab title="个人点餐 {{ordercount}}" name="1">
-    <view class="J-shopping-cart-empty" hidden="{{!isempty}}">
-      <i class="fa fa-shopping-cart fa-5x"></i>
-      <text style='color:black'>暂无新订单</text>
-    </view>
 
-    <view hidden="{{isempty}}">
-      <view class="tc">
-          <view>
-            <text>今天是：{{timedate}}</text>
-          </view>
-      </view> 
-      <view class="line_y">
-        <view class="text1">
-          <text>今日个人订单</text>
-          <text>个人订单营业额(元)</text>
-        </view>
-        <view class="text2">
-          <text>{{ordercount}}</text>
-          <text>{{total}}</text>
-        </view>
-      </view>
+			<view class="button">
+				<van-button type="info" block bind:click="tcapprove" disabled='{{disabled}}'>审核通过</van-button>
+			</view>
+		</view>
+	</van-tab>
+	<van-tab title="个人点餐 {{ordercount}}" name="1">
+		<view class="J-shopping-cart-empty" hidden="{{!isempty}}">
+			<i class="fa fa-shopping-cart fa-5x"></i>
+			<text style='color:black'>暂无新订单</text>
+		</view>
 
-      <view class="tc">
-        <view>
-          <text>菜品统计：</text>
-        </view>
-        <view class="item" wx:for="{{menulists}}" wx:key="index">
-          {{item.name}}：
-          <text style="color:red;font-size:35rpx;"> {{item.count}} </text>份
-        </view>
-      </view>
+		<view hidden="{{isempty}}">
+			<view class="tc">
+				<view>
+					<text>今天是：{{timedate}}</text>
+				</view>
+			</view>
+			<view class="line_y">
+				<view class="text1">
+					<text>今日个人订单</text>
+					<text>个人订单营业额(元)</text>
+				</view>
+				<view class="text2">
+					<text>{{ordercount}}</text>
+					<text>{{total}}</text>
+				</view>
+			</view>
 
-      <view class="button">
-        <van-button type="info" block bind:click="approve" disabled='{{disabled}}'>审核通过</van-button>
-      </view>
-    </view>
-  </van-tab>
+			<view class="tc">
+				<view>
+					<text>菜品统计：</text>
+				</view>
+				<view class="item" wx:for="{{menulists}}" wx:key="index">
+					{{item.name}}：
+					<text style="color:red;font-size:35rpx;"> {{item.count}} </text>份
+				</view>
+			</view>
+
+			<view class="button">
+				<van-button type="info" block bind:click="approve" disabled='{{disabled}}'>审核通过</van-button>
+			</view>
+		</view>
+	</van-tab>
 </van-tabs>

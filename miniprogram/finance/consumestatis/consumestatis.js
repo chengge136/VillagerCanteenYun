@@ -1,38 +1,41 @@
-// canteen/canteenIndex/canteenIndex.js
-const db = wx.cloud.database();
+// finance/consumestatis/consumestatis.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    date: '',
+    show: false,
+    minDate: new Date(2020, 0, 1).getTime(),
+    maxDate: new Date().getTime(),
+    currentDate: new Date().getTime()
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
+
   },
-  finance() {
-    wx.navigateTo({
-      url: '../finance/finance',
-    })
+  onDisplay() {
+    this.setData({ show: true });
   },
-  consumptioninfo() {
-    wx.navigateTo({
-      url: '../consumptioninfo/consumptioninfo',
-    })
+  onClose() {
+    this.setData({ show: false });
   },
-  rechargestatis() {
-    wx.navigateTo({
-      url: '../rechargestatis/rechargestatis',
-    })
+  formatDate(date) {
+    date = new Date(date);
+    return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
   },
-  actionrecord() {
-    wx.navigateTo({
-      url: '../actionrecords/actionrecords',
-    })
+  onConfirm(event) {
+    const [start, end] = event.detail;
+    this.setData({
+      show: false,
+      date: `${this.formatDate(start)} - ${this.formatDate(end)}`,
+    });
+    console.log('event.detail',event.detail)
+    console.log('date',this.data.date)
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

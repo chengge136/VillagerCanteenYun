@@ -9,6 +9,7 @@ Page({
     ordercount:0,
     total:0,
     menulists:[],
+    tclist:[],
     isempty: null,
     istcempty: null,
     noonquantity: 0,
@@ -16,7 +17,11 @@ Page({
     tcquantity: 0,
     tctotal: 0,
     tcuser: 0,
-    timedate:''
+    timedate:'',
+    activelunch: '',
+    activedinner: '',
+    lunchorders: [],
+    dinnerorders:[]
   },
 
   /**
@@ -81,13 +86,13 @@ Page({
       name: 'getnewbatchorder',
       data: {
         isapproved: false,
-        subtype:0
+        status:0
       }
     }).then(res => {
       // 返回所有还没通过的新订单
       var tclist = res.result.data;
-      console.log(tclist);
-      var tcquantity = res.result.data.length;
+      console.log('tclist',tclist);
+      var tcquantity = tclist.length;
       var tctotal = 0;
       var tcuser = 0;
       var noonquantity=0;
@@ -99,22 +104,37 @@ Page({
         for (var i = 0; i < tcquantity; i++) {
           tctotal += tclist[i].total;
           tcuser += parseInt(tclist[i].count);
-          var items = tclist[i].selectedmenustr;
-          if (items.indexOf("午饭") > 0) {
+          if(tclist[i].tctype==0){
             noonquantity += tclist[i].count;
-          }
-          if (items.indexOf("晚饭") > 0) {
+          }else{
             dinnerquantity += tclist[i].count;
           }
         }
         that.setData({
           istcempty: false,
+          tclist:tclist,
           noonquantity: noonquantity,
           dinnerquantity: dinnerquantity,
           tcquantity: tcquantity,
           tctotal: tctotal,
           tcuser: tcuser
         })
+        var lunchorders=[];
+        var dinnerorders=[];
+        for (var index in tclist) {
+          if(tclist[index].tctype==0){
+            lunchorders.push(tclist[index]);   
+          }else{
+            dinnerorders.push(tclist[index]);   
+          }
+        }
+        console.log('lunchorders',lunchorders);
+        console.log('dinnerorders',dinnerorders);
+
+        that.setData({
+          lunchorders:lunchorders,
+          dinnerorders:dinnerorders
+        });
         
         
       } else {
@@ -125,10 +145,22 @@ Page({
     }).catch(err => {
       // handle error
     })
-                
-        
-  },
 
+
+
+
+                 
+  },
+  activeLunch(event) {
+    this.setData({
+      activelunch: event.detail,
+    });
+  },
+  activeDinner(event) {
+    this.setData({
+      activedinner: event.detail,
+    });
+  },
   approve: function () {
     var that=this;
     wx.showModal({
@@ -270,7 +302,6 @@ Page({
    */
   onReady: function () {
     var that = this;
-
     var timestamp = Date.parse(new Date());
     var date = new Date(timestamp);
     //获取年份  
@@ -282,6 +313,8 @@ Page({
     that.setData({
       timedate: Y + '年' + M + '月' + D + '日'
     })
+
+   
   },
 
   /**

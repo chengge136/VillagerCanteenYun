@@ -35,6 +35,7 @@ Page({
     var that = this;
     that.setData({ disabled: true });
     const _ = db.command;
+    console.log(that.data.phone);
     db.collection('wx_user').where({
       phone: _.eq(that.data.phone)
     })

@@ -13,12 +13,11 @@ Page({
     count: '',
     total: '',
     selecteduserstr: '',
-    selectedmenustr: '',
-    comment: '',
     ctime: '',
-    isapproved: false,
-    id: '',
-    subtype: 0,
+    isapproved:false,
+    tctype: 0,
+    status:0,
+    id:'',
     _id:''
   },
 
@@ -43,13 +42,12 @@ Page({
           addr: res.data[0].addr,
           count: res.data[0].count,
           total: res.data[0].total,
+          status:res.data[0].status,
           selecteduserstr: res.data[0].selecteduserstr,
-          selectedmenustr: res.data[0].selectedmenustr,
-          comment: res.data[0].comment,  
           ctime: app.formatDate(new Date(res.data[0].ctime)),
+          id:res.data[0].ctime,
           isapproved: res.data[0].isapproved,
-          id: res.data[0].ctime,
-          subtype: res.data[0].subtype
+          tctype:res.data[0].tctype
         })
 
       })

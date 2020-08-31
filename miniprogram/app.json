@@ -30,7 +30,12 @@
     "manager/managerindex/managerindex",
     "manager/accountassign/accountassign",
     "manager/deadline/deadline",
-    "finance/financeIndex/financeIndex"
+    "finance/financeIndex/financeIndex",
+    "finance/finance/finance",
+    "finance/rechargestatis/rechargestatis",
+    "finance/consumestatis/consumestatis",
+    "finance/actionrecords/actionrecords"
+
     
     
   ],
@@ -38,7 +43,7 @@
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "村民食堂",
+    "navigationBarTitleText": "蒲园乡村食堂",
     "navigationBarTextStyle": "black"
   },
   "cloud": true,

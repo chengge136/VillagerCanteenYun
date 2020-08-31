@@ -1,16 +1,36 @@
-<view class="title_a" style="background-color: #5579ED;">
-<text>创建时间</text>
-<text>份数</text>
-<text>状态</text>
-</view>
-<view wx:for="{{batchorders}}" wx:key="index">
-<navigator url="../ordersdetail/ordersdetail?_id={{item._id}}">
-<view class="list">
-<text>{{item.ctime}}</text>
-<text>{{item.count}}</text>
-<text style="color:red;" wx:if="{{item.subtype=='待审批'}}">{{item.subtype}}</text>
-<text style="color:green;" wx:if="{{item.subtype=='已完成'}}">{{item.subtype}}</text>
-</view>
-</navigator>
-</view>
-
+<van-tabs active="1">
+	<van-tab title="午餐订单" name="1">
+		<view class="title_a" style="background-color: #9e91c9;">
+			<text>创建时间</text>
+			<text>份数</text>
+			<text>状态</text>
+		</view>
+		<view wx:for="{{lunchorders}}" wx:key="index">
+			<navigator url="../ordersdetail/ordersdetail?_id={{item._id}}">
+				<view class="list">
+					<text>{{item.ctime}}</text>
+					<text>{{item.count}}</text>
+					<text style="color:red;" wx:if="{{!item.isapproved}}">待审批</text>
+					<text style="color:green;" wx:if="{{item.isapproved}}">已完成</text>
+				</view>
+			</navigator>
+		</view>
+	</van-tab>
+	<van-tab title="晚餐订单" name="2">
+				<view class="title_a" style="background-color: #91B7C9;">
+			<text>创建时间</text>
+			<text>份数</text>
+			<text>状态</text>
+		</view>
+		<view wx:for="{{dinnerorders}}" wx:key="index">
+			<navigator url="../ordersdetail/ordersdetail?_id={{item._id}}">
+				<view class="list">
+					<text>{{item.ctime}}</text>
+					<text>{{item.count}}</text>
+					<text style="color:red;" wx:if="{{!item.isapproved}}">待审批</text>
+					<text style="color:green;" wx:if="{{item.isapproved}}">已完成</text>
+				</view>
+			</navigator>
+		</view>
+	</van-tab>
+</van-tabs>

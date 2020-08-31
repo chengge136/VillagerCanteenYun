@@ -1,16 +1,24 @@
 <view class="header">
-<text style="font-size:40rpx;font-weight:bold;">{{address}}财务管理员</text>
+<text style="font-size:40rpx;font-weight:bold;">财务管理员</text>
 <text>欢迎您</text>
 </view>
 
 <view class="action">
 
-<view class="item" bindtap="rechargerecord">
-<view><text>用户充值报表</text></view>
-<view class="logo"><i class="fa fa-money fa-3x" style="color:#D41650;"></i></view>
+<view class="item" bindtap="finance">
+  <view><text>充值与消费</text></view>
+  <view class="logo"><i class="fa fa-money fa-3x" style="color:#D41650;"></i></view>
 </view>
-<view class="item" bindtap="queryorders">
-<view><text>历史订单报表</text></view>
-<view class="logo"><i class="fa fa-bar-chart fa-3x" style="color:#00B79E;"></i></view>
+<view class="item" bindtap="actionrecord">
+  <view><text>操作记录</text></view>
+  <view class="logo"><i class="fa fa-history fa-3x" style="color:#4CB4E7;"></i></view>
+</view>
+<view class="item" bindtap="consumptioninfo">
+  <view><text>消费统计(未完成)</text></view>
+  <view class="logo"><i class="fa fa-bar-chart fa-3x" style="color:#00B79E;"></i></view>
+</view>
+<view class="item" bindtap="rechargestatis">
+  <view><text>充值统计(未完成)</text></view>
+< view class="logo"><i class="fa fa-bar-chart fa-3x" style="color:#F96B36;"></i></view>
 </view>
 </view>

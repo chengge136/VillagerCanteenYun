@@ -7,17 +7,19 @@ const _ = db.command
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  return await db.collection('order').where({
-    isapproved: _.eq(false),
-    subtype: _.eq(0)
-  }).update({
-    // data 传入需要局部更新的数据
+  return await db.collection('user_pay_record').add({
     data: {
-      isapproved: true,
-      approvedid: event.approvedid
+      name:event.name,
+      phone: event.phone,
+      income: event.income,
+      comment:event.comment,
+      updatedby:event.updatedby,
+      type:event.type,
+      ctime:new Date().getTime()
     }
   })
     .then(console.log)
     .catch(console.error)
+
 }
 

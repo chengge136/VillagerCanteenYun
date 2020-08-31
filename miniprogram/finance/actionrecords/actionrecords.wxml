@@ -1,0 +1,23 @@
+<van-tabs active="0">
+	<van-tab title="堂食消费记录" name="0">
+    	<van-collapse accordion value="{{ activeorders }}" bind:change="activeOrders" >
+        <view wx:for="{{financeorders}}" wx:key="index">
+          <van-collapse-item title="{{item.username}}  -  消费 {{item.total}} 元" name="{{item.ctime}}">
+	          备注：{{item.comment}} / 日期：{{item.approvedid}} / 操作员：{{item.about}}
+          </van-collapse-item>
+        </view>
+			</van-collapse>
+	</van-tab>
+
+
+	<van-tab title="账户充值记录" name="1">
+    	<van-collapse accordion value="{{ activebalance }}" bind:change="activeBalance" >
+        <view wx:for="{{balancerecords}}" wx:key="index">
+          <van-collapse-item title="{{item.name}}  -  充值 {{item.income}} 元" name="{{item.ctime}}">
+	          备注：{{item.comment}} / 日期：{{item.ctime}} / 操作员：{{item.updatedby}}
+          </van-collapse-item>
+        </view>
+			</van-collapse>
+	</van-tab>
+</van-tabs>
+

@@ -5,7 +5,7 @@ wx.cloud.init();
 //1、引用数据库
 const db = wx.cloud.database({
   //这个是环境ID,不是环境名称
-  env: 'yxk-kappa-hlb24'
+  env: 'yb445267387-oy2tz'
 })
   
 App({
@@ -19,7 +19,7 @@ App({
         //   env 参数决定接下来小程序发起的云开发调用（wx.cloud.xxx）会默认请求到哪个云环境的资源
         //   此处请填入环境 ID, 环境 ID 可打开云控制台查看
         //   如不填则使用默认环境（第一个创建的环境）
-        env: 'yxk-kappa-hlb24',
+        env: 'yb445267387-oy2tz',
         traceUser: true,
       })
     }
@@ -75,6 +75,7 @@ App({
       }
     })
   },
+
   modifybatchBalance: function (userlists) {
     for (let i = 0;i < userlists.length; i++) {
       if(userlists[i].checked){
@@ -186,7 +187,6 @@ App({
             delta: 2
           })
         }, 2000)
-       
 
       }
     })

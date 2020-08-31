@@ -1,69 +1,74 @@
 <van-tabs active="a">
-<van-tab title="订单概览" name="a" >
-<view class="line_1">
-<view>
-<text>审批编号：</text>
-</view>
-<view style="font-size:30rpx;color:#A6A4A4;">
-<text>{{approvedid}}</text>
-</view>
-</view>
+	<van-tab title="订单概览" name="a">
+		<view class="line_1">
+			<view>
+				<text>审批编号：</text>
+			</view>
+			<view style="font-size:30rpx;color:#A6A4A4;">
+				<text>{{approvedid}}</text>
+			</view>
+		</view>
 
 
-<view class="line_y">
-<view class="text1">
-<text>本单订单总数</text>
-<text>订单总营业额</text>
-</view>
-<view class="text2">
-<text>{{ordercount}}</text>
-<text>{{total}}</text>
-</view>
-</view>
+		<view class="line_y">
+			<view class="text1">
+				<text>本单订单总数</text>
+				<text>订单总营业额</text>
+			</view>
+			<view class="text2">
+				<text>{{ordercount}}</text>
+				<text>{{total}}</text>
+			</view>
+		</view>
 
-<view class="tc">
-<view><text>菜品统计：</text></view>
-<view class="item" wx:if="{{type==0}}" wx:for="{{menulists}}" wx:key="index">
-{{item.name}}：<text style="color:red;font-size:35rpx;"> {{item.count}} </text>份
-</view>
+		<view class="tc">
+			<view><text>菜品统计：</text></view>
+			<view class="item" wx:if="{{type==0}}" wx:for="{{menulists}}" wx:key="index">
+				<view wx:if="{{item.count!=0}}">
+								{{item.name}}：<text style="color:red;font-size:35rpx;"> {{item.count}} </text>份
+				</view>
+			</view>
 
-<view class="item" wx:if="{{type==1}}">
-<view>套餐饭午饭：<text style="color:red;font-size:35rpx;"> {{noonquantity}} </text>份</view>
-<view>套餐饭午饭：<text style="color:red;font-size:35rpx;"> {{dinnerquantity}} </text>份</view>
+			<view class="item" wx:if="{{type==1}}">
+				<view>套餐饭午饭：<text style="color:red;font-size:35rpx;"> {{noonquantity}} </text>份</view>
+				<view>套餐饭午饭：<text style="color:red;font-size:35rpx;"> {{dinnerquantity}} </text>份</view>
+			</view>
+		</view>
+		<view wx:if="{{type==1}}">
+				<button type="primary" size="{{default}}" disabled="{{submited}}" bindtap="stationsprint"> 打印本批次站点订单 </button>
+		</view>
+		<view wx:if="{{type==0}}">
+				<button type="primary" size="{{default}}" disabled="{{submited}}" bindtap="personalprint"> 打印本批次个人订单 </button>
+		</view>
+		
+	</van-tab>
+	<van-tab title="订单列表" name="b">
 
-</view>
+		<view class="line_top">
+			<text>客户名</text>
+			<text>地址</text>
+			<text>订单总价</text>
+		</view>
+		<view wx:for="{{menulist}}" wx:key="index" wx:if="{{type==0}}">
+			<navigator url="../../users/orderDetail/orderDetail?_id={{item._id}}&source=1">
+				<view class="line_2">
+					<text>{{item.username}}</text>
+					<text>{{item.addr}}</text>
+					<text>{{item.total}}</text>
+				</view>
+			</navigator>
+		</view>
 
-</view>
-</van-tab>
-<van-tab title="订单列表" name="b">
-
-<view class="line_top">
-<text>客户名</text>
-<text>地址</text>
-<text>订单总价</text>
-</view>
-<view wx:for="{{menulist}}" wx:key="index" wx:if="{{type==0}}">
-<navigator url="../../users/orderDetail/orderDetail?_id={{item._id}}&source=1">
-<view  class="line_2">
-<text>{{item.username}}</text>
-<text>{{item.addr}}</text>
-<text>{{item.total}}</text>
-</view>
-</navigator>
-</view>
-
-<view wx:for="{{menulist}}" wx:key="index" wx:if="{{type==1}}">
-<navigator url="../../stationmanager/ordersdetail/ordersdetail?_id={{item._id}}&source=1">
-<view  class="line_2">
-<text>{{item.username}}</text>
-<text>{{item.addr}}</text>
-<text>{{item.total}}</text>
-</view>
-</navigator>
-</view>
+		<view wx:for="{{menulist}}" wx:key="index" wx:if="{{type==1}}">
+			<navigator url="../../stationmanager/ordersdetail/ordersdetail?_id={{item._id}}&source=1">
+				<view class="line_2">
+					<text>{{item.username}}</text>
+					<text>{{item.addr}}</text>
+					<text>{{item.total}}</text>
+				</view>
+			</navigator>
+		</view>
 
 
-</van-tab>
+	</van-tab>
 </van-tabs>
-
-

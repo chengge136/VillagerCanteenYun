@@ -1,7 +1,7 @@
 <view class="container" style='width:100%;min-height:100%;background-image:url("https://6c75-lucas-test-5yzdr-1259690751.tcb.qcloud.la/resource/timg.jpg");background-size:100% 100%;'>
 
   <view class="icon">
-    <text>村民食堂</text>
+    <text>蒲园乡村食堂</text>
   </view>
   <view class="button">
     <button type='default' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">开始</button>
